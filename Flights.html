@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./car.css">
+    <style>
+        *{
+            /* background-color: rgb(208, 196, 196); */
+            padding: 0px;
+            margin: 5px;
+        }
+    #w1{
+        color: rgb(17, 17, 55);
+display: flex;
+background-color: rgb(7, 1, 26); height: 400px; gap: 100px;;padding: 5px;
+     border-radius: 5%;}
+    #w2 tr{
+        margin: 15px;
+    }
+ #w2 tr td{
+    border: 2px solid black; width: 190px; font-size: 55px; 
+    font-weight: bold; padding: 13px; margin: 5px;background-color: rgb(177, 234, 215);
+height: 40px; border-radius: 20%; border: 7px solid rgb(174, 170, 170); gap: 23px;
+}
+
+#myacc{
+padding: 8px;
+    display: flex;
+  background-color: rgb(20, 63, 90);
+  border-radius: 90px 90px 90px ;
+  border: 4px solid black ;
+  box-shadow: 13px 14px 15px  #333;
+/* width: 70%; */
+
+ }  
+/* #myacc p {
+    color: rgb(192, 220, 244);
+    font-size: 65px;
+ margin: 4px;
+ padding: 22px;
+ font-family: cursive;
+ text-shadow: 2px 2px 5px red;
+} */
+
+
+ .m1{
+    color: rgb(188, 214, 249);
+    font-size: 65px;
+ margin: 20px;
+ padding: 22px;
+ font-family: cursive;
+ text-shadow: 2px 2px 5px red;
+
+  /* margin-left: 20px;  */
+  font-weight: bold; 
+}
+
+
+nav{
+        border: 7px double  white;
+        height: 55px;
+        width: 96.5% ;
+        padding: 15px;
+        background-color: black;
+       
+        color: bisque;
+        size: 19px;
+    }
+nav ul{
+    float: right;
+    display: inline-flex;
+}
+nav ul li{
+    color: white;
+    font-size: 35px;
+    padding: 10px;       ;
+    margin:  0px 20px;
+    line-height: 30px;
+    /* display: inline-block; */
+ color: bisque;
+}
+
+nav ul li a {
+    color: white;
+}
+
+
+nav ul li a:hover{
+    color: darkblue;
+    border-radius: 60px;
+    background-color: paleturquoise;
+    padding: 20px;
+}
+.service{
+    display:inline-flex;   color: black; }
+
+.service img{
+border: 1px solid black;    padding: 1px; height: 100px;width: 100px;
+}
+.service figcaption{
+    font-size: 30px;padding: 20px;
+}
+ 
+
+
+.road {
+            background-color: #333;
+            height: 316px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .car {
+            width: 120px;
+            height: 60px;
+            background-color: #ff6600;
+            position: absolute;
+            bottom: 10px;
+            animation: moveCar 4s linear infinite;
+        }
+
+        .smoke {
+            width: 10px;
+            height: 10px;
+            background-color: #ccc;
+            position: absolute;
+            bottom: 70px;
+            left: 90px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: smokeAnimation 3s linear infinite;
+        }
+
+        @keyframes moveCar {
+            0% {
+                left: -120px;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes smokeAnimation {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+        }
+ </style>
+        <title>flights </title>
+</head>
+<body>
+    
+  
+    <div id="myacc">
+        <p>  <img src="./img/img15.jpg" style="border-radius: 100%; border: 3px solid black; box-shadow: 22px 32px 29px black;  ">
+        <p class="m1">
+            My <br> TRIP</p>
+            <!-- <img src="./img/aer.gif" style="height: 100px; width: 200px; float: right;"> -->
+            <!-- <div id="w3">
+                <img src="./img/car2.png" style="height: 200px; width: 300px;">
+            </div> -->
+     </p>
+    <p>
+        <img src="./img/a2.png.crdownload" style="height: 250px; width: 750px; margin-right: 20px; margin-left: 155px;filter: drop-shadow(1px 1px 30px white);   ">
+    </p></div>
+    <nav>
+        <ul>
+            <li> <a href="./homeraj.html">  HOME </a> </li>
+            <li><a href="./aboutus.html"> ABOUT US </a>  </li>
+            <li> <a href="./contactus.html"> CONTACT US   </a> </li>     
+            <li> <a href="./services.html"> SERVICES    </a></li>
+            <li> <a href="./account.html">ACCOUNT  </a> </li>
+        </ul>
+        </nav>
+        <div class="service" style="border-bottom: 3px double black;">
+            <img src="./img/flight.jpg"> <figcaption><a href="C:\raj.html\Flights.html" style="color: black; font-weight: bold;"> flights</a> </figcaption> 
+            <img src="./img/holiday.png"> <figcaption> Holiday <br> Packages</figcaption>
+        <img src="./img/hotel.png"> <figcaption> Hotels</figcaption>
+        <img src="./img/homestays.jpg"> <figcaption> Home <br> Stays</figcaption>
+        <img src="./img/cabs.png"> <figcaption> Cabs</figcaption>
+        <img src="./img/gift cards.png"> <figcaption> Gift <br> Cards </figcaption>
+        </div>
+
+<!-- 
+        <div class="road">
+        <img src="./img/car2.png" style="height: 300px; width: 450px;"
+        </div> -->
+
+
+<!-- 
+    <div id="w1"><table id="w2">
+        <tr>
+            <td> flights
+                <br>
+            <img src="./img/f1.webp" style=" height: 100px ; width: 150px;"> </td>
+            <td>trains </td>
+
+<td>buses</td>            <td>cabs</td> 
+   <td> byby</td>
+    <td> coolies</td> -->
+</tr>
+    </table>
+    </div>
+    <div id="w3">
+        <img src="./img/car2.png" style="height: 200px; width: 300px;border-bottom: 5px double #333;  ">
+    </div>
+   
+    </div>
+  
+<div class="w4">
+    <centre> <div class="box">
+        <div class="child"></div>
+    </div></centre>
+</div>
+
+
+</body>
+</html>

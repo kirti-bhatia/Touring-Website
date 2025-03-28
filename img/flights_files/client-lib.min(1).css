@@ -1,0 +1,22 @@
+.super-nav-container{width:100%;position:fixed;bottom:0;background-color:#fff;border-top:1px solid #dbdee8;z-index:31;display:none;padding:10px 10px 6px}
+.inner-supernav-container{position:relative}
+.inner-supernav-container ul{display:flex;flex-wrap:wrap;margin-bottom:0}
+.inner-supernav-container li{padding:0 10px;text-align:center}
+.no-fav-icon .inner-supernav-container li{flex:1 1 15%}
+.inner-supernav-container .nav-4 li{width:90px}
+.inner-supernav-container .nav-2 li{width:190px}
+.inner-supernav-container .nav-4 li:nth-child(2),.inner-supernav-container .nav-4 li:nth-child(3){width:138px}
+.inner-supernav-container .nav-4 li:nth-child(2){padding-right:52px;padding-left:16px}
+.inner-supernav-container .nav-4 li:nth-child(3){padding-left:58px}
+.inner-supernav-container li a{min-width:32px;font-size:14px;font-family:'Graphik Web';line-height:18px;color:#4a525d;text-align:center;display:inline-block;background:no-repeat top center;padding-top:35px}
+.inner-supernav-container li a.selected-nav{color:#8e2157}
+.inner-supernav-container .supernav-fav-icon{margin-top:-20px;text-align:center;position:absolute;top:0;left:calc(50% - 40px)}
+.inner-supernav-container .supernav-fav-icon .icon-gradient{background-color:#dbdee8;border-radius:50%;padding:2px}
+.inner-supernav-container .supernav-fav-icon a{background:#fff;display:flex;align-items:center;justify-content:center;border-radius:50%;width:71px;height:71px}
+.inner-supernav-container .supernav-fav-icon a img{width:40px;height:40px}
+.inner-supernav-container .supernav-fav-icon.burgundy .icon-gradient{background-image:linear-gradient(180deg,#5c0931,#8e2157,#5c0931)}
+.inner-supernav-container .supernav-fav-icon.silver .icon-gradient{background-image:linear-gradient(180deg,#4a525d,#8c919b,#4a525d)}
+.inner-supernav-container .supernav-fav-icon.gold .icon-gradient{background-image:linear-gradient(180deg,#644316,#c29352,#644316)}
+.inner-supernav-container .supernav-fav-icon.platinum .icon-gradient{background-image:linear-gradient(180deg,#2f3739,#414a4c,#2f3739)}
+@media(max-width:768px){.scrolledcontent .super-nav-container{display:block}
+}

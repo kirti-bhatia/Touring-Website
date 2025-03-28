@@ -1,0 +1,308 @@
+window._boxeverq = window._boxeverq || [];
+var boxeverEventsMap = new Map();
+var langCode = $(document).find('#langpagename').val();
+var boxeverLang = langCode.toLocaleUpperCase();
+var boxeverCurrency = $('#boxeverCurrencyVal').val();
+var boxeverDefaultOrigin = $('#boxeverDefaultOrigin').val();
+var boxeverChannel;
+var trendingDests=[];
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || navigator.userAgent.indexOf("Mobile") != -1) {
+        boxeverChannel = "MOBILE_WEB";
+} else {
+    boxeverChannel = 'WEB';
+}
+var clientKeyVal = "QtRKHYqnbZkUG1beHZCp1CtN0hfm1y1k";
+if ($('#isProd').val() != 'true') {
+    clientKeyVal = "VFdGeWExSmxaR1I1U1hOQlRHVm5aVzVr";
+} else {
+    clientKeyVal = "QtRKHYqnbZkUG1beHZCp1CtN0hfm1y1k";
+}
+
+var flowExecutionResponse;
+var callFlowResponse;
+var offersGridResponse;
+var qhelpBoxeverResponse;
+var headerAncilDestinResponce;
+var jpcFlowResponce;
+var friendlyIdHPB = "dr_homepage_heroimage*";
+var friendlyIdHPFD = "homepage_destination_recommender*";
+var friendlyIdPHAD = "header_nav_destinations_ancillaries*";
+var currentPageUrl = document.location.href;
+var bxpageName = currentPageUrl.substring(currentPageUrl.lastIndexOf('/') + 1, currentPageUrl.indexOf('.html'));
+var pathArray = window.location.pathname.split('/');
+var bxTemplate =$('#boxeverTemplateVal').val();
+var region = pathArray[1];
+var regionToSend;
+if (region.indexOf("-") != -1) {
+    regionToSendArray = region.split("-");
+    regionToSend = regionToSendArray[1];
+} else {
+    regionToSend = "Global";
+}
+//testing flow for hero image
+if (regionToSend == "ke" || regionToSend == "bw") {
+    friendlyIdHPB = "cbr_homepage_heroimage*";
+}
+//ITP browser issue fix
+function updateBxCookie(){
+    if(window.localStorage.getItem("bStorage")!=null){
+        var bxstor_obj=window.localStorage.getItem("bStorage");
+        var jsonobj = JSON.parse(bxstor_obj);
+        if(jsonobj !=null){
+         _boxever.setCookie(bxcookiename,jsonobj[bxcookiename],_boxever.cookie_expires_days);
+        }
+    }
+}
+boxEverSuggetions();
+function sendAysncFlowcall(bxdefaultOrigin, bxfriendlyID){
+bxdefaultOrigin = (typeof bxdefaultOrigin!='undefined' && bxdefaultOrigin!="")?bxdefaultOrigin:boxeverDefaultOrigin;
+    var flowExecutionRequest = {
+        "context": {
+            "clientKey": clientKeyVal,
+            "browserId": _boxever.getID(),
+            "friendlyId": bxfriendlyID,
+            "channel": boxeverChannel,
+            "language": boxeverLang,
+            "currencyCode": boxeverCurrency,
+            "pointOfSale": "qatarairways.com",
+            "params": { "region": getRegionFromCountry(regionToSend), "country" : regionToSend, "pointOfCommencement":bxdefaultOrigin}
+        }
+    };
+    $.ajax({
+        url: 'https://api.boxever.com/v2/callFlows?message=' + JSON.stringify(flowExecutionRequest),
+        type: 'get',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        async: false,
+        success: function(flowExecutionResponses) {
+            flowExecutionResponse=flowExecutionResponses;
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.error("flow execution failed");
+        }
+    });
+    handleResponses(flowExecutionResponse)
+    return flowExecutionResponse;
+}
+
+function sendBXTrackingEvent(bxAction) {
+    try {
+        var langCode = ($(document).find('#langpagename').val() != undefined) ? $(document).find('#langpagename').val() : "";
+        var boxeverLang = langCode.toLocaleUpperCase();
+        var boxeverCurrency = ($('#boxeverCurrencyVal').val() != undefined) ? $('#boxeverCurrencyVal').val() : "";
+        var boxeverChannel;
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || navigator.userAgent.indexOf("Mobile") != -1) {
+            boxeverChannel = "MOBILE_WEB";
+        } else {
+            boxeverChannel = 'WEB';
+        }
+    var hpclickEvent = {channel: boxeverChannel, type: bxAction,page: "/homepage", language: boxeverLang, currency: boxeverCurrency, pos: "qatarairways.com", browser_id: Boxever.getID()};
+        Boxever.eventCreate(hpclickEvent, function(data) {}, 'json');
+    } catch (err) {}
+}
+
+function sendBXTrackingEventNew(bxAction) {
+    try {
+        var langCode = ($(document).find('#langpagename').val() != undefined) ? $(document).find('#langpagename').val() : "";
+        var boxeverLang = langCode.toLocaleUpperCase();
+        var boxeverCurrency = ($('#boxeverCurrencyVal').val() != undefined) ? $('#boxeverCurrencyVal').val() : "";
+        bxpageName = (bxpageName != undefined && bxpageName !="") ? bxpageName : "/homepage";
+        var boxeverChannel;
+        var bxInteractionType = (bxAction.indexOf("ANCI_")!=-1) ? "ANCILLARY_": "INTERACTION_";
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || navigator.userAgent.indexOf("Mobile") != -1) {
+            boxeverChannel = "MOBILE_WEB";
+        } else {
+            boxeverChannel = 'WEB';
+        }
+
+        var hpclickEvent = {
+            "channel": boxeverChannel,
+            "page": bxpageName,
+            "language": boxeverLang,
+            "currency": boxeverCurrency,
+            "pos": "qatarairways.com",
+            "browser_id": Boxever.getID(),
+            "type": bxInteractionType + bxAction.split("_")[4],
+            "interactionID": bxAction.split("_")[0] + "_" + bxAction.split("_")[1],
+            "interactionName": bxAction.split("_")[2],
+            "interactionLoc": bxAction.split("_")[3]
+        };
+        Boxever.eventCreate(hpclickEvent, function(data) {}, 'json');
+    } catch (err) {}
+}
+function handleResponses(flowExecutionResponses) {
+    flowExecutionResponse = flowExecutionResponses;
+    trendingDests =  (flowExecutionResponse != undefined && flowExecutionResponse.offerContent != undefined && flowExecutionResponse.offerContent.newitems.trending != undefined) ? flowExecutionResponse.offerContent.newitems.trending : [];
+    if(typeof updateBXEventMap != "undefined") {updateBXEventMap();}
+    console.log("flowExecutionResponse 1" + flowExecutionResponse);
+}
+function getRegionFromCountry(countryCode) {
+    if (["ir", "iq", "kw", "jo", "lb", "qa", "om"].indexOf(countryCode)!=-1) {
+        return "MiddleEast"
+    }
+    if (["gb", "tr", "rs", "ch", "pl", "pt", "no", "nl", "ie", "gr", "ro", "fr", "de", "cz", "bg", "be", "ba", "at", "ua", "se", "rs", "mk", "mt", "fi", "cy", "bl", "am", "az", "hr", "dk", "es", "ge", "hu", "it", "ru"].indexOf(countryCode)!=-1) {
+        return "Europe"
+    }
+    if (["au", "bd", "kh", "cn", "hk", "in", "id", "jp", "my", "mv", "mm", "np", "nz", "pk", "ph", "sg", "lk", "tw", "th", "vn", "kr"].indexOf(countryCode)!=-1) {
+        return "AsiaPacific"
+    }
+    if (["dz", "bw", "dj", "et", "gh", "ke", "ma", "mz", "na", "ng", "rw", "sn", "sc", "so", "za", "sd", "tz", "tn", "ug", "zm", "zw"].indexOf(countryCode)!=-1) {
+        return "Africa"
+    }
+    if (["ar", "ca", "br", "us"].indexOf(countryCode)!=-1) {
+        return "Americas"
+    }
+    return "Global"
+}
+
+function handleCallFlowResponse(callFlowsResponse) {
+    callFlowResponse = callFlowsResponse;
+    console.log("Boxever callFlows Response" + callFlowResponse);
+}
+function handleOffersGridResponse(offersGridResponses) {
+    offersGridResponse = offersGridResponses;
+}
+function handleQhelpTilesResponse(qhelpTilesResponse) {
+    qhelpBoxeverResponse = qhelpTilesResponse;
+}
+
+function handleHeaderAncilDesinesponses(headerAncilDestinRes) {
+    headerAncilDestinResponce = headerAncilDestinRes;
+
+  if(headerAncilDestinResponce!=undefined && headerAncilDestinResponce.personalizedHeaderResults!=undefined
+    && headerAncilDestinResponce.personalizedHeaderResults.prefillSearch){
+	    if(typeof previousSearchBX != "undefined") {
+          previousSearchBX(headerAncilDestinResponce);
+        }
+  }
+}
+
+ function boxEverSuggetions(){
+
+    window._boxeverq.push(function() {
+        var callFlowsRequest = {
+            "context": {
+                "clientKey": clientKeyVal,
+                "browserId": _boxever.getID(),
+                "friendlyId": friendlyIdHPB,
+                "channel": boxeverChannel,
+                "language": boxeverLang,
+                "currencyCode": boxeverCurrency,
+                "pointOfSale": "qatarairways.com",
+                "params": { "region": getRegionFromCountry(regionToSend), "country" : regionToSend, "pointOfCommencement":boxeverDefaultOrigin}
+            }
+        };
+        var flowExecutionRequest = {
+            "context": {
+                "clientKey": clientKeyVal,
+                "browserId": _boxever.getID(),
+                "friendlyId": friendlyIdHPFD,
+                "channel": boxeverChannel,
+                "language": boxeverLang,
+                "currencyCode": boxeverCurrency,
+                "pointOfSale": "qatarairways.com",
+                "params": { "region": getRegionFromCountry(regionToSend), "country" : regionToSend, "pointOfCommencement":boxeverDefaultOrigin}
+            }
+        };
+        var offersGridRequest = {
+            "context": {
+                "clientKey": clientKeyVal,
+                "browserId": Boxever.getID(),
+                "channel": boxeverChannel,
+                "language": boxeverLang,
+                "currencyCode": boxeverCurrency,
+                "friendlyId": "dr_offers_grid*",
+                "pointOfSale": "qatarairways.com",
+                "params": { "region": getRegionFromCountry(regionToSend), "country" : regionToSend, "pointOfCommencement":boxeverDefaultOrigin}
+            }
+        };
+
+        var headerAncillaryDestinReq = {
+            "context": {
+                "clientKey": clientKeyVal,
+                "browserId": _boxever.getID(),
+                "friendlyId": friendlyIdPHAD,
+                "channel": boxeverChannel,
+                "language": boxeverLang,
+                "currencyCode": boxeverCurrency,
+                "pointOfSale": "qatarairways.com",
+                "params": { "region": getRegionFromCountry(regionToSend), "country" : regionToSend, "pointOfCommencement":boxeverDefaultOrigin}
+            }
+        };
+
+		var joinPCrecomondationReq = {
+            "context": {
+                "clientKey": clientKeyVal,
+                "browserId": _boxever.getID(),
+                "friendlyId": "upgrade_to_pc_membership*",
+                "channel": boxeverChannel,
+                "language": boxeverLang,
+                "currencyCode": boxeverCurrency,
+                "pointOfSale": "qatarairways.com",
+                "params": {
+                    "region": getRegionFromCountry(regionToSend),
+                    "country": regionToSend,
+                    "pointOfCommencement": boxeverDefaultOrigin
+                }
+            }
+		};
+
+		var qHelpTilesPersonalizationReq = {
+                            "context": {
+                                "clientKey": clientKeyVal,
+                                "browserId": _boxever.getID(),
+                                "friendlyId": "qhelp_tiles_personalization*",
+                                "channel": boxeverChannel,
+                                "language": boxeverLang,
+                                "currencyCode": boxeverCurrency,
+                                "pointOfSale": "qatarairways.com",
+                                "params": {
+                                    "region": getRegionFromCountry(regionToSend),
+                                    "country": regionToSend,
+                                    "pointOfCommencement": boxeverDefaultOrigin
+                                }
+                            }
+                		};
+
+        try {
+			if (window.location.hostname != "qrauthor.qatarairways.com.qa") {
+            if (currentPageUrl.indexOf('/homepage') != -1) {
+                Boxever.callFlows(callFlowsRequest, function(callFlowsResponse) {
+                    handleCallFlowResponse(callFlowsResponse);
+                }, 'json');
+                Boxever.callFlows(headerAncillaryDestinReq, function(headerAncilDestinRes) {
+                    handleHeaderAncilDesinesponses(headerAncilDestinRes);
+                }, 'json');
+            }
+            if (currentPageUrl.indexOf("offers.html") != -1 && bxTemplate != '/apps/qrweb/templates/withoutNavgenericcontentpage') {
+                Boxever.callFlows(offersGridRequest, function(offersGridResponses) {
+                    handleOffersGridResponse(offersGridResponses);
+                }, 'json');
+            }
+             if (currentPageUrl.indexOf("help.html") != -1) {
+                Boxever.callFlows(qHelpTilesPersonalizationReq, function(qhelpTilesResponse) {
+                    handleQhelpTilesResponse(qhelpTilesResponse);
+                }, 'json');
+             }
+            if(currentPageUrl.indexOf('/homepage') != -1 || bxTemplate == '/apps/qrweb/templates/withoutNavgenericcontentpage' || bxTemplate == '/apps/qrweb/templates/genericcontentpage' && currentPageUrl.indexOf("offers.html") == -1 ){
+                Boxever.callFlows(flowExecutionRequest, function(flowExecutionResponses) {
+                    handleResponses(flowExecutionResponses);
+                }, 'json');
+            }
+			Boxever.callFlows(joinPCrecomondationReq, function(jpcExecutionResponses) {
+                    if (jpcExecutionResponses != undefined && jpcExecutionResponses.jpcFlowResult != undefined) {
+                        jpcFlowResponce = jpcExecutionResponses.jpcFlowResult;
+                    }
+
+            }, 'json');
+            if (navigator&&navigator.userAgent&&/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+                updateBxCookie();
+            }
+			}
+        } catch (err) {
+            $('.skeletonLoad').css('opacity', 0);
+            $('#boxeverSuggetion').css('min-height', 0);
+            $('.promotional-content').find('.teaser-overview-video-banner').removeClass('hide');
+        }
+    });
+}

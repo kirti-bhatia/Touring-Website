@@ -1,0 +1,1984 @@
+.calendarblock{position:static}
+#jquery-script-menu{position:fixed;height:90px;width:100%;top:0;left:0;border-top:5px solid #316594;background:#fff;-moz-box-shadow:0 2px 3px 0 rgba(0,0,0,0.16);-webkit-box-shadow:0 2px 3px 0 rgba(0,0,0,0.16);box-shadow:0 2px 3px 0 rgba(0,0,0,0.16);z-index:999999;padding:10px 0;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}
+.jquery-script-center{width:960px;margin:0 auto}
+.jquery-script-center ul{width:212px;float:left;line-height:45px;margin:0;padding:0;list-style:none}
+.jquery-script-center a{text-decoration:none}
+.jquery-script-ads{width:728px;height:90px;float:right}
+.jquery-script-clear{clear:both;height:0}
+.t-check-in,.t-check-out,.qr-datepicker{display:inline-block;float:left}
+.t-check-in,.t-check-out{position:static}
+.qr-datepicker{clear:both;width:100%;font-size:14px;line-height:1.4em}
+.t-check-in .t-date-info-title,.t-check-out .t-date-info-title{position:absolute;top:3px;left:10px;display:block;font-weight:400;font-size:10px;cursor:pointer;color:#560a30}
+.t-check-in .fa,.t-check-out .fa{top:-1px;position:relative}
+.t-arrow-top{top:42px;z-index:9999}
+.t-arrow-top,.t-arrow-top::after{border-width:10px;border-style:solid;border-color:transparent transparent #ddd;display:inline-block;position:absolute}
+.t-arrow-top::after{top:-9px;left:-10px;content:'';border-width:10px;border-bottom-color:#fff}
+.t-dates{box-sizing:border-box;border:1px solid #d7d7d7;padding:23px 15px 7px 10px;background:#fff;height:51px;position:relative}
+.qr-datepicker-day{border-width:1px;border-style:solid;top:61px;overflow:hidden;position:absolute;z-index:9998;padding:10px 0 45px;border-radius:4px;box-shadow:0 7px 15px rgba(0,0,0,.25);border-color:#ededed;background:#fff;left:15px;right:10px}
+.t-table-wrap{width:100%;padding:0 10px;display:inline-block;vertical-align:top}
+.qr-datepicker-days{width:924px}
+.qr-datepicker-days .t-table-wrap{padding:0;width:47%;margin-left:2%}
+.dateRangePic input[type=text].t-day-check-in,.dateRangePic input[type=text].t-day-check-out{background:0;color:#000;font-size:var(--input-label);left:0;margin:0;top:1px}
+@media(max-width:480px){.qr-datepicker-days{width:300px}
+.qr-datepicker-days .t-table-wrap{margin-left:0;width:100%;padding:0 10px}
+}
+@media(max-width:320px){.qr-datepicker-days{width:290px}
+.qr-datepicker-days .t-table-wrap{padding:0 5px}
+}
+.t-table-condensed{width:100%;border-spacing:0;border-collapse:collapse;vertical-align:top}
+.t-table-condensed td{text-align:center;padding:10px;color:#666;font-weight:normal;font-size:15px}
+.t-next,.t-prev,.t-table-condensed th{text-align:center;padding:10px;color:var(--primary1);font-weight:normal;font-size:15px}
+.t-date-title{clear:both;width:100%;text-align:center;display:block;margin:0;padding:10px 0 0;position:absolute;bottom:10px;left:0}
+.t-day,.t-disabled,.t-end,.t-range,.t-start{border-width:1px;border-style:solid}
+.t-hover-day::after,.t-special-day:before{content:'';border-style:solid}
+.t-arrow,.t-dates,.t-day,.t-end,.t-end-limit,.t-range,.t-start{cursor:pointer}
+.t-special-day{position:relative}
+.t-special-day:before{height:8px;width:8px;bottom:4px;right:4px;position:absolute;display:block;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;background:#04aeee;border-radius:4px;border:0;display:inline-block}
+.t-hover-day{position:relative}
+.t-hover-day-content{position:absolute;width:auto;top:2px;right:auto;font-size:10px;padding:1px;border-radius:0;z-index:9999;left:0;line-height:10px}
+.t-hover-day::after{position:absolute;top:-8px;right:calc(50% - 7px);border-width:7px}
+.t-today .t-hover-day-content{z-index:9998}
+.t-check-in .t-end-limit,.t-disabled{opacity:.25;cursor:auto}
+.t-check-in,.t-check-out,.t-check-in:hover,.t-check-out:hover{border-color:#ededed;border:0;text-decoration:none !important;color:#666;font-weight:400;width:50%;box-sizing:border-box}
+.t-picker-only,.t-picker-only:hover{width:100%}
+.t-date-title{color:#999;font-size:12px}
+.t-date-title:before{content:"";height:8px;width:8px;display:inline-block;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;background:#04aeee;border-radius:4px;border:0;margin-right:8px}
+.t-day,.t-disabled,.t-end,.t-range,.t-start{background:#fff;border-color:#e5e5e5}
+td.t-disabled{background:0}
+.t-highlighted{color:var(--primary1)}
+.t-highlighted.t-disabled{background:#fff}
+td.t-end,td.t-end-limit,td.t-start,td.t-end.t-range-limit{color:#fff !important;background:var(--primary1);position:relative}
+td.t-range,td.t-range-limit{color:#fff}
+td.t-range{background:#aaa;color:#fff}
+.t-range-limit{background:#aaa}
+.t-range-limit.t-end,.t-range-limit.t-start{color:#fff}
+.t-check-in .t-end,.t-check-out .t-start,.t-check-out tr~.t-end{color:#fff !important;background:var(--primary1)}
+.t-hover-day,.t-hover-day-content,.t-hover-day:hover{color:#fff !important;background:var(--primary1)}
+.t-hover-day::after{border-color:#5c0931 transparent transparent}
+.t-today,.t-today .t-hover-day-content{background:#ccc}
+.t-today::after{border-top-color:#aeaeae}
+.t-today:hover,.t-today:hover .t-hover-day-content{background:var(--primary1)}
+.t-today:hover::after{border-top-color:var(--primary1)}
+.t-end.t-today,.t-start.t-today{color:#fff}
+.t-end.t-today,.t-end.t-today .t-hover-day-content,.t-start.t-today,.t-start.t-today .t-hover-day-content{background:var(--primary1)}
+.t-end.t-today::after,.t-start.t-today::after{border-top-color:var(--primary1)}
+.multiflightHead{display:none}
+.t-check-in td.t-hover-day:after,td.t-start:after{content:' ';display:inline-block;position:absolute;right:-10px;top:0;border-color:transparent #5c0931;border-style:solid;border-width:20px 0 20px 10px;height:0;width:0;z-index:1}
+.t-check-out td.t-hover-day:after,td.t-end:after{content:' ';display:inline-block;position:absolute;left:-10px;top:0;border-color:transparent #5c0931;border-style:solid;border-width:20px 10px 20px 0;height:0;width:0}
+td.t-range-limit.t-hover-day:after{display:inline-block !important}
+.t-check-in td.t-start.t-range-limit:after,.t-check-out td.t-end.t-range-limit:after{display:none}
+.t-picker-only td.t-end:after{display:none}
+.t-day:hover{color:#fff !important;background:var(--primary1) !important}
+.t-table-condensed .t-arrow{border:0;text-align:left;padding:10px 0;font-size:22px}
+.t-table-condensed .t-next{text-align:right}
+td.t-today{color:#fff !important}
+.t-today:after{display:none !important;color:#fff}
+td.t-start.t-today:after{display:inline-block !important;right:-10px;border-width:25px 0 25px 10px !important;left:auto}
+.qr-datepicker-open .T7-tab-container{height:490px}
+.mobCalHead,.mobCalMonthHead{display:none}
+.t-hover-day .t-hover-day-content{display:none}
+.t-today span.t-hover-day-content:first-child{display:inline-block}
+td.t-today.t-disabled{color:var(--primary1) !important;background:#ccc}
+td.t-start.same-date:after,td.t-start.same-date.t-today:after{border:0 !important}
+.t-picker-only td.t-start.t-today:after,.t-picker-only .t-check-in td.t-hover-day:after,.t-picker-only td.t-start:after{display:none !important}
+@media only screen and (max-width:767px){.qr-datepicker-open body{overflow:hidden}
+.calendarblock{margin-bottom:14px;transition-timing-function:cubic-bezier(0.4,0.0,0.2,1);transition:all .2s}
+.t-dates{height:63px;padding:29px 15px 7px 10px}
+.qr-datepicker{font-size:15px;position:relative}
+.glyphicon-calendar:before{font-size:32px;top:20px}
+.t-arrow-top{top:116px}
+th.t-month{padding-top:25px}
+.qr-datepicker-days{width:100%;left:-22px;right:auto;box-sizing:content-box;padding-left:20px;padding-right:20px;border-radius:0;top:80px;height:55vh;overflow-y:auto;z-index:1;margin-top:100px;padding-bottom:200px !important}
+.t-check-in td.t-hover-day:after,td.t-start:after{border-width:25.5px 0 25.5px 11px !important;top:-5px !important;right:-9px !important;left:auto !important;border-radius:100%}
+.t-check-out td.t-hover-day:after,td.t-end:after{top:-5px !important;border-width:25px 11px 25px 0;left:-9.3px;right:auto !important;border-radius:100%}
+.qr-datepicker-open .calendarblock.calOpen .mobCalHead{display:block;background:#fff;width:100%;color:var(--primary1);border-bottom:1px solid #ccc;position:relative;padding:15px 15px 15px 20px;box-sizing:content-box;margin-left:-15px;margin-bottom:15px;font-size:var(--font-m);position:absolute}
+.qr-datepicker-open .calendarblock.calOpen{position:fixed;z-index:13;top:0 !important;left:0;background:#f7f7f7;overflow:hidden;height:100vh;width:100%;max-width:100%}
+.qr-datepicker-open .calOpen.calendarblock.px-0{padding:0 15px !important}
+.qr-datepicker-days .t-table-wrap{margin-left:0;width:100%;padding:0}
+.qr-datepicker-open .calOpen.calendarblock .mobCalMonthHead{display:none;position:absolute;top:136px;left:0;z-index:10;width:100%;padding:5px 10px;background:#fff;border-bottom:1px solid #e5e5e5;z-index:100}
+.qr-datepicker-open .calOpen.calendarblock .mobCalMonthHead.startofweekS,.qr-datepicker-open .calOpen.calendarblock .mobCalMonthHead.startofweekM{display:block}
+.t-dayRow{display:none}
+.closeCal{display:block;position:absolute;top:8px;right:40px;width:35px;height:35px;text-indent:-999px;z-index:100}
+.qr-datepicker-open .calOpen.calendarblock .dateRangePic{margin-top:60px;-webkit-transition:0 all;-moz-transition:0 all;-o-transition:0 all;-ms-transition:0 all}
+.qr-datepicker-open .calOpen.calendarblock .dateRangePic:hover,.qr-datepicker-open .calOpen.calendarblock .dateRangePic:focus{background:none transparent}
+.qr-datepicker-open .calOpen.calendarblock .dateRangePic:hover,.qr-datepicker-open .calOpen.calendarblock .dateRangePic:focus{background:none transparent;outline:0}
+.t-dates.t-date-check-in{border-radius:6px 0 0 6px}
+.t-dates.t-date-check-out{border-radius:0 6px 6px 0}
+.t-check-out .t-dates{border-left:1px !important}
+.qr-datepicker-open .navbar{display:none}
+}
+.t-check-in .t-date-info-title,.t-check-out .t-date-info-title{top:0}
+td.t-disabled[rel="noDay"]{border:0}
+a.dateRangePic:focus{outline:none !important;color:#666}
+a.dateRangePic:focus .t-dates{border:2px solid #528ff4;padding:29px 15px}
+.newStyle td.t-range-limit.t-hover-day:after{display:none !important}
+.newStyle .t-check-out .t-start{color:#fff;background:var(--primary1)}
+@media only screen and (min-width:768px){.fromAutoComplete .t-arrow-top{left:654px !important}
+}
+.t-disabled+td.t-end.t-range-limit{background:var(--primary1)}
+.dateRangePic input[type=text]{position:relative;margin-top:-28px;left:11px;background:#fff;width:93px;border:0;display:block}
+.dateRangePic input[type=text]:focus{outline:none !important;border:0}
+.qr-datepicker-open .cC,.cO{display:none}
+.qr-datepicker-open .cO,.cC{display:inline}
+.t-arrow.t-disabled .noVisible{display:none}
+.t-dates.t-date-check-in{border-right:0;position:relative;padding:30px 15px}
+.t-dates.t-date-check-out{padding:30px 15px}
+.t-check-in .t-date-info-title,.t-check-out .t-date-info-title{font-size:12px;color:#333;top:6px;left:14px}
+.qr-datepicker i.glyphicon.glyphicon-calendar.fa-calendar{opacity:0}
+.date-picker,.passengers-picker{padding:0}
+.bookingwizard .input-base{font-weight:500;color:#555;font-size:var(--font-l)}
+.t-check-in{margin-right:30px}
+span.t-year-check-in{display:none}
+span.t-year-check-out{display:none}
+span.t-day-check-in,span.t-day-check-out,span.t-month-check-in,span.t-month-check-out{font-weight:500;color:#555;font-size:var(--font-l)}
+.datefrom::after{content:'';display:none}
+.dateRangePic input[type="text"]{width:auto !important}
+.t-dates,.t-dates:focus{outline:0}
+.multicityTrip .multiflightnew .multiflight:first-child .removeflightbtn{display:none}
+@media only screen and (min-width:1024px){.t-check-out .t-dates{border-left:0;position:relative;padding:29px 15px}
+.qr-datepicker-day.qr-datepicker-days{left:0;top:69px;width:100%;z-index:20}
+.t-arrow-top{top:49px;z-index:20}
+.multicityTrip #multiflight_1 .qr-datepicker-day.qr-datepicker-days{left:0;top:144px;width:100%}
+.multicityTrip #multiflight_1 .t-arrow-top{top:125px;z-index:20}
+.t-dates.t-date-check-in::after{content:'-';font-size:35px;font-weight:200;position:absolute;top:18px;right:-5px}
+}
+@media only screen and (min-width:768px){.t-check-in{margin-right:0}
+.datefrom .t-date-check-in{margin-left:0}
+.t-check-in.t-picker-only .t-dates.t-date-check-in::after{content:''}
+.flightto .inputText{border-right:.5px;border-left:.5px}
+.passengers-picker .bw-passenger{border-left:.5px solid #d7d7d7;margin-left:-1px}
+.onewayTrip .passengers-picker .bw-passenger{border-left:1px solid #d7d7d7}
+.qr-datepicker-open .multicityTrip div.t-date-check-in{border:solid #d7d7d7;border-width:1px}
+.retrunTrip .dateRangePic:focus,.retrunTrip .qr-datepicker:focus{outline:0}
+.multicityTrip .dateRangePic:focus .t-date-info-title{left:13px}
+.multicityTrip .dateRangePic:focus input[type=text].t-day-check-in{left:-2px !important}
+.multicityTrip .qr-datepicker{margin-left:1px}
+.calButtonwrap{display:none}
+.passengers-picker .bw-passenger{border-left:.5px solid #d7d7d7;margin-left:-1px}
+.onewayTrip .passengers-picker .bw-passenger{border-left:1px solid #d7d7d7}
+.qr-datepicker-open .onewayTrip div.t-date-check-in,.qr-datepicker-open .multicityTrip div.t-date-check-in:focus{box-shadow:inset 2px 2px 0 0 #6181ba,inset -3px -2px 0 0 #6181ba}
+.qr-datepicker-open .retrunTrip div.t-date-check-in{box-shadow:inset 2px 2px 0 0 #6181ba,inset 2px -2px 0 0 #6181ba}
+.qr-datepicker-open .retrunTrip div.t-date-check-out{box-shadow:inset -2px 2px 0 0 #6181ba,inset 0 -2px 0 0 #6181ba}
+.qr-datepicker-open .multicityTrip div.t-date-check-in{border:solid #d7d7d7;border-width:1px}
+}
+@media only screen and (max-width:767px){.dateRangePic{overflow:hidden}
+.dateRangePic input[type="text"].t-day-check-in,.dateRangePic input[type="text"].t-day-check-out{font-size:22px !important;top:-6px !important;padding-left:3px !important}
+.qr-datepicker-open .header{display:none}
+.promocode .inputText{min-height:auto;padding:23px 0 0}
+.multicityborder.t-picker-only .t-dates.t-date-check-in.t-picker-only{border-radius:6px;border-right:1px solid #d7d7d7 !important}
+.multicityTrip .multicityborder .inputText,.multicityTrip .multicityborder .t-dates.t-date-check-in{border-radius:0 0 6px 6px !important;border:1px solid #d7d7d7 !important}
+.datefrom .t-date-check-in{margin-left:0 !important}
+td.t-end:after{top:-5px !important}
+.userpreferences .dropdown{min-width:20%;padding-right:20px}
+.userpreferences .dropdown button{font-size:var(--font-l)}
+.multiflightHead{display:block;padding:1rem 0}
+.multiflightHead h6{display:inline-block;font-weight:400}
+.calendarblock .datefrom,.calendarblock .datereturn{height:63px !important}
+.calButtonwrap{display:none}
+.qr-datepicker-open .calOpen .calButtonwrap{position:fixed;bottom:0;z-index:100;width:100%;display:block;left:0}
+.retrunTrip .datefrom .t-date-check-in{border-right:1px solid #d7d7d7}
+}
+.datefrom,.datereturn{height:60px !important}
+.noVisible{display:none}
+.flightfrom .inputText{border-radius:6px 0 0 6px}
+.passengers-picker .bw-passenger{border-radius:0 6px 6px 0}
+.inputText{font-size:var(--font-l)}
+.removeflightbtn,.multicityTrip .removeflightbtn{display:none}
+.removeflightbtn.responsiveremovebtn,.multicityTrip .removeflightbtn.responsiveremovebtn{display:inline-flex;float:left}
+.multiflightnew .multiflight{position:relative}
+.removeflightbtn,.multicityTrip .removeflightbtn{display:none}
+.removeflightbtn.responsiveremovebtn,.multicityTrip .removeflightbtn.responsiveremovebtn{display:inline-flex;float:left}
+.multiflightnew .multiflight{position:relative}
+.calendar-buttons{border-top:1px solid #e5e5e5;margin:15px 2% 0 2%;padding-top:15px}
+.calendar-buttons .confirmBtn{margin-left:20px;width:25%}
+.calendar-buttons label input[type="checkbox"]{position:relative;top:16px;left:4px}
+.enableflexibleDate .calendar-buttons label input[type="checkbox"]{opacity:0}
+;.calendar-buttons label input[type="checkbox"]+span{font-size:15px;color:#333;font-weight:300;position:relative;z-index:10;display:inline-block;margin:0;line-height:17px;min-height:14px;min-width:14px;margin-right:5px;padding-left:30px;padding-top:2px}
+.calendar-buttons .checkbox-label:before{content:'';position:absolute;left:0;top:0;width:20px;height:20px;border:1px solid #d7d7d7;background-color:#fff;border-radius:5px;transition:background .2s ease}
+.calendar-buttons .checkbox-label:after{content:'';position:absolute;left:0;top:0;font-family:icomoon !important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;font-size:var(--font-m);line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:var(--primary1);width:0;pointer-events:none;transition:all .2s ease;overflow:hidden/*!rtl:raw: right: 1px;*/}
+.calendar-buttons label input[type="checkbox"]:checked+span:after{text-align:center;width:20px;height:20px;background-color:var(--primary1);border-radius:5px;font-weight:normal;margin-top:0;content:'\f00c';font-family:icomoon !important;font-size:14px;color:#fff;line-height:20px}
+.flightfrom .inputText{border-radius:6px 0 0 6px}
+.passengers-picker .bw-passenger{border-radius:0 6px 6px 0}
+.removeflightbtn,.multicityTrip .removeflightbtn{display:none}
+.removeflightbtn.responsiveremovebtn,.multicityTrip .removeflightbtn.responsiveremovebtn{display:inline-flex;float:left}
+.multiflightnew .multiflight{position:relative}
+.calendar-buttons{border-top:1px solid #e5e5e5;margin:15px 2% 0 2%;padding-top:15px}
+.calendar-buttons .confirmBtn{margin-left:20px;width:25%}
+.calendar-buttons label input[type="checkbox"]{position:relative;top:16px;left:4px}
+.calendar-buttons label input[type="checkbox"]+span{font-size:15px;color:#333;font-weight:300;position:relative;z-index:10;display:inline-block;margin:0;line-height:17px;min-height:14px;min-width:14px;margin-right:5px;padding-left:30px;padding-top:2px}
+.calendar-buttons .checkbox-label:before{content:'';position:absolute;left:0;top:0;width:20px;height:20px;border:1px solid #d7d7d7;background-color:#fff;border-radius:5px;transition:background .2s ease}
+.calendar-buttons .checkbox-label:after{content:'';position:absolute;left:0;top:0;font-family:icomoon !important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;font-size:var(--font-m);line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:var(--primary1);width:0;pointer-events:none;transition:all .2s ease;overflow:hidden/*!rtl:raw: right: 1px;*/}
+.calendar-buttons label input[type="checkbox"]:checked+span:after{text-align:center;width:20px;height:20px;background-color:var(--primary1);border-radius:5px;font-weight:normal;margin-top:0;content:'\f00c';font-family:icomoon !important;font-size:14px;color:#fff;line-height:20px}
+.flightsearchformFlightsHotels .datePickerCol .calendar-buttons label,.enable-stopindoha .datePickerCol .calendar-buttons label,.multicityTrip .datePickerCol .calendar-buttons label{display:none !important}
+.enableflexibleDate{padding-bottom:15px}
+@media only screen and (max-width:767px){.calendar-buttons{position:fixed;bottom:0;left:0;width:100%;box-shadow:0 7px 45px rgb(0 0 0 / 25%);background:#fff;padding:7px 0 5px;margin:0}
+.calendar-buttons .confirmBtn{width:45%}
+.calendar-buttons>div{padding-left:0}
+.calendar-buttons label{float:left;margin-top:-10px}
+.calendar-buttons label input[type="checkbox"]+span{font-size:13px;line-height:22px}
+.enableflexibleDate{padding-bottom:200px}
+}
+#book .multicityTrip .qr-datepicker .calendar-buttons{display:none}
+@media only screen and (min-width:1024px){.qr-datepicker-day.qr-datepicker-days{overflow:visible}
+.qr-datepicker-days .t-table-wrap{padding:0;width:43.4%;margin-left:4.5%}
+}
+.t-check-in td.t-hover-day:after,td.t-start:after{border-width:25px 0 25px 11px !important}
+.t-check-out td.t-hover-day:after,td.t-end:after{border-width:25px 11px 25px 0}
+.qr-datepicker-open .header{z-index:-1 !important;top:-80px !important}
+.calendar-header{padding:0 4% 0 4%;margin-bottom:15px}
+.calendar-buttons{margin-top:15px;padding-top:30px !important}
+.calendar-header .topleft-container p{margin:0;font-size:16px;font-weight:500}
+.calendar-header .topright-container{text-align:right}
+.t-table-condensed td{height:50px;padding:5px}
+.t-disabled,.t-start,.t-day{height:50px}
+.t-next,.t-prev,.t-table-condensed th{padding:5px}
+.t-table-condensed .t-next,.t-table-condensed .t-prev{width:32px;top:222px;height:32px;padding:5px;text-align:center}
+.t-next .icon-arrow-right3,.t-prev .icon-arrow-right3{font-size:14px}
+.t-prev .icon-arrow-right3:before{content:"\e92a";text-shadow:0 2px 3px rgba(255,255,255,0.5);-webkit-background-clip:text;-moz-background-clip:text;background-clip:text}
+.t-prev .icon-arrow-right3{padding-left:0}
+.t-table-condensed .t-next{position:absolute;right:7px;z-index:999}
+.t-table-condensed .t-prev{position:absolute;left:7px;z-index:999}
+.t-table-condensed .t-arrow.t-prev.t-disabled{width:0;height:0;padding:0;left:18px;padding-top:5px}
+.t-table-condensed .t-next:hover,.t-table-condensed .t-prev:hover{color:#652245 !important}
+td.t-range,td.t-range-limit{background:#832B561A;color:#666}
+.td-hover-day{color:#fff !important}
+.fare-info{display:inline-block;color:#652245;vertical-align:middle;font-size:13px}
+.fare-info span{padding-right:5px}
+.fare-info strong{font-size:var(--font-m)}
+.fare-info .trip-text{color:#666;font-size:var(--font-xs)}
+.fare-info:before{content:'*Terms and Conditions apply';position:absolute;top:-27px;right:0;width:38%;font-size:13px}
+.fares{font-size:11px;display:block;text-align:center;line-height:12px}
+.t-disabled .fares{display:none}
+.calnav{display:flex;width:100%;justify-content:center;border-bottom:1px solid #e5e5e5;padding-bottom:10px;position:relative}
+.calnav span.monthActive{width:67px;height:2px;background-color:var(--primary1);content:'';position:absolute;left:286px;top:28px;transition:all 1s ease}
+.calnav ul{display:flex}
+.calnav ul li{margin-right:20px}
+.calnav ul li a{color:#999;font-size:var(--font-xs)}
+.calnav ul li a:focus{outline-offset:5px;outline:0}
+.calnav ul li a.active{color:var(--primary1)}
+.calnav ul li a span:first-child:after{content:'-';padding:0 2px;margin-left:5px}
+.topleft-container,.topright-container{display:none}
+.calnav li a:hover{color:var(--primary1)}
+span.highlightDepart{font-size:8px;display:none;position:absolute;left:7px;top:2px;line-height:12px}
+span.highlightReturn{font-size:8px;display:none;position:absolute;top:2px;right:7px;line-height:12px}
+.t-table-condensed td{padding-top:10px;position:relative}
+@-moz-document url-prefix(){.t-table-condensed td{background-clip:padding-box}
+}
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){.t-table-condensed td{background-clip:padding-box}
+}
+.fare-info{display:none}
+@keyframes shineNew{to{background-position:0 0,100% 100%,0 10px}
+}
+.fare-skeleton{height:10px;background-image:linear-gradient(100deg,rgba(247,247,247,0),rgba(247,247,247,0.5) 50%,rgba(247,247,247,0) 100%),linear-gradient(rgba(0,0,0,0.1) 20px,transparent 0);background-repeat:no-repeat;background-size:50px 10px,10% 100px;background-position:0 0,100% 100%,0 10px;animation:shineNew 1s infinite}
+.low-price{color:green}
+.t-start .low-price{color:#fff}
+.t-day:hover .low-price{color:#fff}
+.calendar-buttons div:first-child{padding-left:0}
+.calendar-buttons div:last-child{padding-right:0}
+.calendar-buttons label{display:inline-grid}
+@media only screen and (max-width:767px){.calnav,.topleft-container{display:none}
+.calendar-header{position:fixed;background:#fff;top:138px;width:100%;padding-top:0}
+.qr-datepicker-open .calOpen.calendarblock .mobCalMonthHead{top:185}
+.topright-container label input[type="checkbox"]+span{font-size:16px}
+.t-arrow-top{width:50%;height:56px;border:none !important;transition:all ease 1s}
+.multicityTrip .t-arrow-top{width:100%}
+.t-arrow-top::after{top:5px;left:40%}
+.qr-datepicker-open .t-arrow-top:before{width:101%;height:63px;content:'';position:absolute;border:2px solid #0049ca;top:-58px;left:-2px;z-index:-1}
+.t-check-in td.t-hover-day:after,td.t-start:after{border-width:30px 0 30px 11px !important}
+.t-check-out td.t-hover-day:after,td.t-end:after{border-width:30px 11px 30px 0}
+td.t-start.t-today:after{border-width:30px 0 30px 11px !important;right:-9px !important}
+.t-table-condensed th{padding:10px !important}
+.qr-datepicker-open .calOpen.calendarblock .dateRangePic{margin-top:75px;box-shadow:2px 2px 20px #ccc}
+.qr-datepicker-open .calOpen.calendarblock .mobCalMonthHead{top:158px}
+.t-arrow-top{top:133px}
+.qr-datepicker-days{height:53vh;margin-top:122px}
+@supports(-webkit-touch-callout:none){.qr-datepicker-days{height:65vh}
+}
+@media all and (device-width:768px) and (device-height:1024px) and (orientation:portrait){.qr-datepicker-days{height:40vh}
+}
+.multicityTrip .qr-datepicker-days{height:61vh}
+.qr-datepicker-open .t-dates{border:0 solid transparent}
+.calendar-buttons div:first-child{padding-left:15px !important}
+.calendar-buttons div:last-child{padding-right:15px !important}
+.fare-info:before{content:'*Terms and Conditions apply';position:absolute;top:70px;left:-95%;width:100%;text-align:left}
+}
+.t-today{background:#ccc}
+span.t-hover-day-content.t-highlight-today{display:inline-block}
+.t-start.t-today{background:var(--primary1) !important}
+td.t-start.t-today .t-highlight-today{z-index:-1}
+@media only screen and (max-width:769px){.t-table-condensed .t-prev{display:none}
+.t-arrow.t-next,.t-arrow.t-prev{display:none}
+.qr-datepicker-open .calOpen .calButtonwrap{display:none}
+.onewayTrip .t-arrow-top{width:100%}
+.calendar-buttons{z-index:2}
+.calendar-buttons .confirmBtn{padding-left:10px;padding-right:10px}
+}
+.tooltipStopOver{position:absolute}
+.tooltipStopOver:hover:after{display:-webkit-flex;display:flex;-webkit-justify-content:center;justify-content:center;background:#444;border-radius:8px;color:#fff;content:attr(title);font-size:12px;padding:5px 10px;width:198px;position:absolute;z-index:1 !important;top:-25px;left:-61px}
+.tooltipStopOver:hover:before{border:solid;border-color:#444 transparent;border-width:12px 6px 0 6px;content:"";left:42%;top:1px;position:absolute}
+.t-disabled.tooltipStopOver:hover{opacity:1;background:#f2f3fa !important;color:#4a525d !important}
+.t-start.t-disabled.tooltipStopOver:hover:after,.t-end.t-disabled.tooltipStopOver:hover:after{border-width:unset !important;height:unset !important;border-style:unset !important}
+td.t-start.t-disabled.tooltipStopOver,td.t-end.t-disabled.tooltipStopOver{color:#fbf9fc !important;background:#d6c1cb !important;opacity:1}
+td.t-start.t-disabled.tooltipStopOver:after,td.t-end.t-disabled.tooltipStopOver:after{border-color:transparent #d6c1cb !important}
+td.t-start.t-disabled.tooltipStopOver:hover:before,td.t-end.t-disabled.tooltipStopOver:hover:before{content:' ';display:inline-block;position:absolute;left:-10px;top:0;border-color:transparent #d6c1cb;border-style:solid;border-width:25px 11px 25px 0;height:0;width:0;z-index:1}
+td.t-start.t-disabled.tooltipStopOver:hover:before{right:-10px;left:unset;border-width:25px 0 25px 11px !important}
+.t-disabled.tooltipStopOver{background:#f2f3fa;opacity:1;color:#4a525d}
+h6.stopOverFIFAInfo{background:#dbdee8;line-height:40px !important;position:relative;padding-left:40px;color:#1f212b}
+.infoIconStopOverFifa{height:20px;width:20px;background-color:#6661cf;border-radius:50%;display:inline-block;position:absolute;left:0;display:flex;top:10px;left:10px}
+.infoIconStopOverFifa:before{content:"i";line-height:20px;position:absolute;text-align:center;width:20px;display:inline-block;color:#fff}
+div#flights-search-from.onewayTrip.enable-stopindoha td.t-start.t-disabled.tooltipStopOver:hover:before{display:-webkit-flex;display:flex;-webkit-justify-content:center;justify-content:center;background:#444;border-radius:8px;color:#fff;content:attr(title);font-size:12px;padding:5px 10px;width:198px;position:absolute;z-index:1 !important;top:-25px;left:-61px;right:0 !important;border-width:0 !important;border-color:0;border-style:0;height:29px}
+@media only screen and (max-width:769px){h6.stopOverFIFAInfo{display:none}
+.stopoverInfoMobile{background:#f2f3fa}
+.emptyTRstopover{height:10px}
+}
+#flights-search-from.enable-stopindoha .calendar-buttons .text-left label{display:none !important}
+.covidInfolink{width:40%;display:inline;float:right;color:#000;font-size:15px;padding:4px;padding-left:10px !important;background:#dbdee8;border-radius:6px}
+.covidInfolink a{color:#5c0931 !important;font-weight:500;cursor:pointer;margin-left:0;display:inline;position:relative}
+.covidmodal.modal.left .modal-dialog,.covidmodal.modal.right .modal-dialog{position:fixed;margin:auto;height:100%;-webkit-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0);-o-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+.covidmodal.modal.left .modal-content,.covidmodal.modal.right .modal-content{height:100%;overflow-y:auto}
+.covidmodal .modal-header .close{position:absolute !important;left:32px;top:32px;width:12px !important;height:12px !important;opacity:1;padding:19px !important;background-color:#0000007D !important;float:unset !important;margin-top:0 !important;border-radius:50%;right:auto !important}
+.covidmodal .modal-header .close:before,.covidmodal .modal-header .close:after{position:absolute;top:12px;content:' ';height:16px;width:1px;background-color:#fff}
+.covidmodal .modal-header .close:before{transform:rotate(45deg)}
+.covidmodal .modal-header .close:after{transform:rotate(-45deg)}
+.covidmodal .modal-title{right:auto;width:100%;font-size:var(--font-xxl);font-weight:400;letter-spacing:0;margin:36px 0 7px 16px}
+.covidmodal.modal.right.fade .modal-dialog{right:0;-webkit-transition:opacity .3s linear,right .3s ease-out;-moz-transition:opacity .3s linear,right .3s ease-out;-o-transition:opacity .3s linear,right .3s ease-out;transition:opacity .3s linear,right .3s ease-out;transform:none}
+.covidmodal.modal.right.fade.in .modal-dialog{right:0}
+.covidmodal .modal-content{border-radius:0;border:0;background-size:500px}
+.covidmodal .modal-header{color:#000;border:0}
+@media(max-width:767px){.covidInfolink.desktopcovidlink{display:none !important}
+.covidInfolink.mobilecovidlink{display:flex;width:100%;font-size:15px;white-space:nowrap}
+.mobilecovidlink a::after{padding-top:1px;font-family:icomoon !important;speak:none;font-style:normal;font-weight:bolder;font-variant:normal;text-transform:none;transform:rotate(-90deg);content:'\e928' !important;border:0 !important;color:var(--primary1);background:0;font-size:5px;position:absolute;width:17px;height:17px;z-index:9;right:-11px;top:7px}
+.covidInfolink a{text-align:right;width:100%;padding-right:9px;position:relative;margin-right:10px}
+.covidmodal.modal.left .modal-body,.covidmodal.modal.right .modal-body{padding:10px;top:50px;margin-left:0 !important;padding-bottom:160px}
+.covidmodal .modal-title{font-size:var(--font-l);padding-left:4px;color:var(--primary1);margin:0}
+.covidmodal .modal-header{border-bottom:1px solid #ccc !important;padding:.8rem 1rem;position:fixed;width:100%;z-index:100;border-radius:6px 6px 0 0;background-color:#fff;padding-left:0 !important}
+#myModal2 .modal-header{padding:0 !important}
+.covidmodal .modal-content{background:#fff}
+.covidmodal .modal-body{background:url(../../../bookflight/v1/bookflight/clientlib/resources/globe_bg.svg) #fff no-repeat 174% -0;background-size:71%}
+.covidmodal .device-small li{display:inline-flex;margin:0 6% 0 1%}
+.covidmodal .device-small li a{color:#555;font-size:12px;padding:0 !important;background-color:transparent !important;border:0}
+.covidmodal .device-small li a.active,.inner-page .covidmodal .device-small li.active a{color:var(--primary1);border-bottom:var(--primary1-border);padding-bottom:5px !important}
+.covidmodal .restrictiontypes .type{padding-top:35px}
+.covidmodal .modal-header .close{left:16px !important;position:absolute;background-size:50%;width:32px;height:32px;top:16px}
+.covidmodal .device-small li a span{display:block;font-size:var(--font-m);font-weight:500}
+.covidmodal.modal.left .modal-dialog,.covidmodal.modal.right .modal-dialog{width:100%;min-width:100%;bottom:0;height:100vh;bottom:0;position:relative;margin-top:0 !important}
+.covidmodal.modal.left .modal-content,.covidmodal.modal.right .modal-content{border-radius:6px 6px 0 0;padding-bottom:0}
+.covidmodal .modal-body a:focus,.covidmodal .modal-body a:active{transition:none}
+.modal-open .covidmodal.modal{overflow:hidden !important}
+.covidmodal .modal-footer{padding:85px 20px 20px 25px !important;margin-bottom:0}
+.covidmodal .device-small li a:focus,.covidmodal .device-small li a:hover{text-decoration:none !important}
+}
+@media only screen and (min-width:768px){.desktopcovidlink a::after{padding-top:1px;font-family:icomoon !important;speak:none;font-style:normal;font-weight:bolder;font-variant:normal;text-transform:none;transform:rotate(-90deg);content:'\e928' !important;border:0 !important;color:var(--primary1);background:0;font-size:5px;position:absolute;width:17px;height:17px;z-index:9;margin-left:2px}
+.covidInfolink{margin-top:-49px}
+.covidmodal#myModal2 .modal-dialog{max-width:90%}
+.covidmodal .covid19 .device-big,.covidmodal .covid19 .tab-content>.tab-pane{display:block}
+.covidmodal .covid19 .device-small{display:none}
+.covidmodal .covid19 .tab-content>.tab-pane{display:inline-flex;max-width:540px;width:48%;padding:0;margin-right:15px}
+.covidmodal .restrictiontypes{width:96%}
+.covidInfolink.mobilecovidlink{display:none !important}
+.navmobilewidth{display:inline-flex}
+.covidmodal .covid19 .tab-content div:nth-child(2){margin-right:0}
+}
+@media only screen and (min-width:1024px){.covidmodal#myModal2 .modal-dialog{max-width:616px;min-width:616px}
+.covidmodal .restrictiontypes{width:93%}
+.covidmodal .covid19 .tab-content>.tab-pane{margin-right:30px;width:47%}
+}
+@media only screen and (min-width:1366px){.covidmodal#myModal2 .modal-dialog{max-width:616px;min-width:616px}
+.covidmodal .restrictiontypes{width:88%}
+.covidmodal .covid19 .tab-content>.tab-pane{margin-right:65px;width:46%}
+}
+.covidmodal .read-more{color:#5c0931 !important;font-weight:500;line-height:0}
+.covidmodal .show-read-more .more-text{display:none;margin-left:-15px}
+body{padding-right:0 !important}
+.covidmodal .modal-footer{text-align:left;padding-left:60px;font-weight:400;font-size:var(--font-xs);color:#555;max-width:fit-content;border-top:0;padding-top:30px;margin-bottom:50px}
+.covidmodal.modal.right .modal-content{overflow-x:hidden}
+.covidalert{width:93%;display:flex;align-items:stretch;margin-bottom:35px}
+.covidmodal .covidalert p{font-size:var(--font-xs);font-weight:300;line-height:23px;letter-spacing:normal;color:#000;display:inline-flex;padding:15px;height:100%;width:100%;line-height:18px;border:1px solid #f2f2f2;border-left:0;border-radius:0 6px 6px 0;background-color:#fff}
+.alertIcon{background-color:#ffe900;width:44px;display:inline-flex;padding:8px;border-radius:6px 0 0 6px}
+.alertIcon svg{margin:auto}
+.timestamp{padding-left:38px}
+.timestamp span{display:block;color:#555;font-size:var(--font-xs);font-weight:300;line-height:23px}
+.timestamp span b{font-weight:500}
+@media(max-width:767px){.covidalert{width:94%;margin:0 3%}
+}
+@media only screen and (min-width:768px){.covid19 .tab-content>.tab-pane{flex-direction:column}
+}
+@-webkit-keyframes fadeInRight{1%{opacity:0;-webkit-transform:translateX(200px)}
+80%{opacity:1;-webkit-transform:translateX(150px)}
+100%{opacity:1;-webkit-transform:translateX(0)}
+}
+@-moz-keyframes fadeInRight{1%{opacity:0;-moz-transform:translateX(200px)}
+80%{opacity:1;-webkit-transform:translateX(150px)}
+100%{opacity:1;-moz-transform:translateX(0)}
+}
+@-o-keyframes fadeInRight{1%{opacity:0;-o-transform:translateX(200px)}
+80%{opacity:1;-webkit-transform:translateX(150px)}
+100%{opacity:1;-o-transform:translateX(0)}
+}
+@keyframes fadeInRight{1%{opacity:0;transform:translateX(200px)}
+100%{opacity:1;transform:translateX(0)}
+}
+@-webkit-keyframes fadeInUp{1%{opacity:0;-webkit-transform:translateY(50px)}
+100%{opacity:1;-webkit-transform:translateY(0)}
+}
+@-moz-keyframes fadeInUp{1%{opacity:0;-moz-transform:translateY(50px)}
+100%{opacity:1;-moz-transform:translateY(0)}
+}
+@-o-keyframes fadeInUp{1%{opacity:0;-o-transform:translateY(50px)}
+100%{opacity:1;-o-transform:translateY(0)}
+}
+@keyframes fadeInUp{1%{opacity:0;transform:translateY(50px)}
+100%{opacity:1;transform:translateY(0)}
+}
+.covidInfolink a:hover{text-decoration:none}
+.covidmodal .timestamp{font-size:13px !important;padding-bottom:5px !important}
+@media(min-width:768px){.covidmodal .modal-header{min-height:264px}
+}
+#myModal2.iframeModal #loading{display:inline-block;width:50px;height:50px;border:3px solid rgba(158,136,148,0.3);border-radius:50%;border-top-color:#19050f;animation:spin 1s ease-in-out infinite;-webkit-animation:spin 1s ease-in-out infinite;position:relative;left:50%;top:50%}
+@keyframes spin{to{-webkit-transform:rotate(360deg)}
+}
+@-webkit-keyframes spin{to{-webkit-transform:rotate(360deg)}
+}
+.covidmodal#myModal2.iframeModal .modal-dialog{max-width:100%}
+#myModal2.iframeModal .close{display:none}
+@media(max-width:768px){#myModal2.iframeModal.covidmodal .modal-dialog{margin:0 !important;height:100vh !important}
+#myModal2.iframeModal.covidmodal{padding-left:0 !important;background:#fff}
+#myModal2.iframeModal.covidmodal .modal-header{display:none;border:0 solid transparent !important}
+}
+.covidmodal .timestamp{font-size:13px !important;padding-bottom:5px !important}
+.covidmodal .modal-header{padding:0 !important}
+.covidmodal .restrictionStatus{position:absolute;top:32px;padding:15px 16px 15px 32px;border-radius:22px;background:#0000001A;line-height:14px;color:#fff;font-size:14px;right:32px}
+.covidmodal .restrictionStatus .restDot{width:8px;height:8px;background:#fcc500;display:inline-block;margin-right:8px;border-radius:50%}
+.covidmodal .textOverImage{font-size:24px;line-height:28px;position:absolute;bottom:65px;left:32px;color:white;font-weight:300}
+.covidmodal .modal-header{position:relative}
+.covidmodal .modal-body{margin:0 32px}
+.covidmodal .covidWidget{min-height:160px;background-color:#fff;top:-48px;position:relative;border-radius:20px;box-shadow:0 2px 16px #00000014;z-index:2}
+.covidmodal .covidModalBG{min-height:264px;max-height:264px;width:100%;object-fit:cover;object-position:center}
+.covidmodal .modal-content{background-color:#f2f3fa !important}
+.covidmodal .covidWidget .form-group{padding:24px 24px 16px 24px;margin:0}
+.covidmodal .covidWidget .covidInputText{font-size:16px !important;font-weight:400;color:#333;text-transform:capitalize;min-height:48px;border:1px solid #d7d7d7;width:100%;background-clip:padding-box;padding:25px 0 8px 16px !important;line-height:16px;max-height:48px}
+.covidmodal .covidWidget #w-from-covid{border-radius:8px 0 0 8px}
+.covidmodal .covidWidget #w-to-covid{border-radius:0 8px 8px 0}
+.covidmodal .covidWidget .floating-label{font-size:12px;line-height:14px;padding:0;margin-bottom:4px;left:16px;top:8px;height:14px}
+.covidmodal .covidWidget #w-to-covid.covidInputText{padding:25px 0 8px 25px !important}
+.covidmodal .covidWidget .destinationCovid .floating-label{left:25px}
+.covidmodal .swap{font-size:24px !important;width:24px;height:24px;line-height:24px !important;top:24px;background:#fff !important}
+.covidmodal .covidWidget .form-group2{padding:0 24px}
+.covidmodal .covidWidget .form-group2 .btn{font-size:16px !important;font-weight:400;color:#333;text-transform:capitalize;min-height:48px;border:1px solid #d7d7d7;width:100%;background-clip:padding-box;padding:25px 0 8px 16px !important;line-height:16px;max-height:48px;border-radius:8px !important;text-align:left}
+.covidmodal .covidWidget .form-group2 .btn:hover,.covidmodal .covidWidget .form-group2 .btn:focus{background:0}
+.covidmodal .covidWidget .form-group2 .passportDrop,.covidmodal .covidWidget .form-group2 .vaccineDrop{width:100%}
+.covidmodal .covidWidget .form-group2 .passportDrop .floating-label,.covidmodal .covidWidget .form-group2 .vaccineDrop .floating-label{font-weight:400}
+.covidmodal .covidWidget .form-group2 .passportDrop .passBtn:after,.covidmodal .covidWidget .form-group2 .vaccineDrop .passBtn:after{right:21.5px;top:20.5px;padding-top:1px;font-family:icomoon !important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;content:'\e928' !important;border:0 !important;color:#a29a92;background:0;font-size:6px;position:absolute;width:13px;height:7px;line-height:7px;z-index:8;display:inline-block;margin-left:.255em;vertical-align:.255em;border-top:.3em solid;border-right:.3em solid transparent;border-bottom:0;border-left:.3em solid transparent;transform:rotate(0);transition:transform .5s}
+.passportDrop .dropdown-menu .countryDropList{height:360px;overflow:hidden;overflow-y:scroll}
+.covidmodal .accordion h1{font-size:24px}
+@media(max-width:767px){.covidmodal .covidWidget .form-group2 .dropdown-menu{height:100%}
+.passportDrop .dropdown-menu .countryDropList{height:100%}
+}
+.covidmodal .covidWidget #w-from-covid:focus,#swap-locationCov:focus,.covidmodal .covidWidget #w-to-covid:focus,#covid-passport:focus,#covid-vaccine:focus,.infoBoxCovid:focus,.covidmodal div:focus{outline:2px solid #6181ba !important}
+.covidmodal .close:focus{outline:2px solid #6181ba !important;opacity:1 !important}
+@media(max-width:767px){.covidmodal .covidWidget .form-group2 .vaccineDrop .dropdown-menu.show{height:350px}
+.covidmodal .covidWidget .form-group2 .passportDrop .dropdown-menu.show{border-radius:0 !important}
+}
+.covidmodal .covidWidget .form-group2 .passportDrop .dropdown-menu li a:hover,.covidmodal .covidWidget .form-group2 .vaccineDrop .dropdown-menu li a:hover{background:#f2f3fa;margin:0 !important;border-radius:0;text-decoration:none !important;color:var(--primary1) !important}
+.hrLineDropdown{width:96%;float:right;margin:0 !important}
+.covidmodal .modal-header:after{background:linear-gradient(to top,rgba(0,0,0,0.80),rgba(255,255,255,0.10) 90%);mix-blend-mode:multiply;content:'';position:absolute;height:100%;width:100%;bottom:50px;top:0}
+.covidmodal .textOverImage,.covidmodal .modal-header .close{z-index:1}
+.covidmodal .covidWidget .form-group2 .passportDrop.show .passBtn:after,.covidmodal .covidWidget .form-group2 .vaccineDrop.show .passBtn:after{transform:rotate(180deg);transition:transform .5s}
+.covidmodal .covidWidget .form-group2 .passportDrop .dropdown-menu,.covidmodal .covidWidget .form-group2 .vaccineDrop .dropdown-menu{top:48px !important;width:97%}
+.covidmodal .covidWidget .form-group2 .passportDrop .dropdown-menu li a,.covidmodal .covidWidget .form-group2 .vaccineDrop .dropdown-menu li a{padding:10px 11px;margin:0 auto;width:100%;line-height:16px;font-size:16px}
+.covidmodal .covidWidget .form-group2 .passportDrop .dropdown-menu li:last-child a,.covidmodal .covidWidget .form-group2 .vaccineDrop .dropdown-menu li:last-child a{border-bottom:0}
+.covidmodal .covidWidget .form-group2 .passportDrop{padding-right:8px !important}
+.covidmodal .covidWidget .form-group2 .vaccineDrop{padding-left:8px !important}
+.covidmodal .covidWidget .form-group2 .vaccineDrop #vaccineLabel{left:24px}
+.covidmodal .covidWidget .form-group2 .vaccineDrop .dropdown-menu{left:8px !important}
+.covidmodal .infoBoxCovid .alert-notice-icon{background-image:url(../../../bookflight/v1/bookflight/clientlib/resources/alert_white.svg);background-repeat:no-repeat;width:24px;height:24px;padding:0 !important;margin:0 !important}
+.covidmodal .infoBoxCovid .extLinkIcon{background-image:url(../../../bookflight/v1/bookflight/clientlib/resources/arrow_external_link.svg);background-repeat:no-repeat;width:16px;height:16px;display:inline-block;margin-left:3px}
+.covidmodal .infoBoxCovid .alert-notice-icon:before{display:none}
+.covidmodal .infoBoxCovid{display:flex;flex-direction:row;top:-22px;position:relative}
+.covidmodal .infoBoxCovid-content{width:94%;padding-left:8px;font-size:16px;line-height:22px;color:#4a525d}
+.covidmodal .infoBoxCovid-content p{font-size:16px;line-height:22px;margin-bottom:17px}
+.covidmodal .infoBoxCovid-content .extLink{font-size:16px;line-height:21px;color:#8e2157;font-weight:500;cursor:pointer}
+.covidmodal .travelRestBox,.covidmodal .travelFormBox{position:relative;top:4px;margin-bottom:32px}
+.covidmodal .travelRestBox .travelREst-title,.covidmodal .travelFormBox .travelForms-title{font-size:24px;line-height:30px;font-weight:100}
+.covidmodal .accordion{margin-top:16px;border-radius:20px;background:white}
+.covidmodal .accordion .card{border:0;background-color:transparent;border-bottom:1px solid #f2f3fa !important;margin-left:24px}
+.covidmodal .accordion .card h2{cursor:pointer;font-size:16px;font-weight:400;line-height:16px;margin-top:0;padding:28px 0;color:#1f212b}
+.covidmodal .accordion .card-body{padding-left:0;padding-right:0}
+.covidmodal .accordion .card h2 .arrow:before{font-family:icomoon !important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;content:'\e928' !important;border:0 !important;color:#a29a92;background:0;font-size:6px;position:relative;width:13px;height:7px;line-height:7px;z-index:8;display:inline-block;border-top:.3em solid;border-right:.3em solid transparent;border-bottom:0;border-left:.3em solid transparent;transform:rotate(0);transition:transform .5s;top:-2px}
+.covidmodal .accordion .card .arrow{padding-right:10px}
+.covidmodal .accordion .card h2[aria-expanded="true"] .arrow:before{transform:rotate(180deg);transition:transform .5s}
+.covidmodal .accordion .card-body{padding:0 24px 25px 28px;text-align:justify;width:100%;font-size:16px;line-height:22px;color:#4a525d}
+.covidmodal .accordion .covid-body-alert{padding:16px 40px 16px 20px;background:#f2f3fa;border-radius:20px;font-size:16px;line-height:22px;color:#4a525d}
+.covidmodal .covid-body-content ul li{list-style-type:disc;padding-top:20px;padding-bottom:0}
+.covidmodal .covid-body-content ul li:first-child{padding-top:16px}
+.covidmodal .covid-body-alertHeading{font-weight:normal;padding-bottom:16px;color:#1f212b;font-size:16px;line-height:18px}
+.covidmodal .covid-body-content-lastUpdate{padding-top:16px;line-height:18px;font-size:14px;color:#1F212B80}
+.covidmodal .covid-body-content-lastUpdate a{padding-top:10px;line-height:18px;font-size:14px;color:#1F212B80;display:block}
+.covidmodal .burgandyText{color:#8e2157;font-size:16px;font-weight:500;line-height:22px}
+.covidmodal .accordion .card h2 .arrow:before{z-index:1}
+@media(max-width:767px){.covidmodal .restrictionStatus{right:16px;top:16px}
+.covidmodal .covidModalBG{min-height:184px;max-height:184px;width:100%}
+.covidmodal .textOverImage{font-size:20px;line-height:24px;left:16px;bottom:56px}
+.covidmodal .modal-body{top:0 !important;margin:0 !important;padding:0 16px !important;background:0}
+.covidmodal .covidWidget{top:-40px;z-index:999}
+.covidmodal .swap{font-size:32px !important;top:54px;right:10%;position:absolute}
+.covidmodal .covidWidget #w-from-covid{border-radius:8px 8px 0 0}
+.covidmodal .covidWidget #w-to-covid{border-radius:0 0 8px 8px}
+.covidmodal .covidWidget .floating-label{padding:0 !important}
+.covidmodal .covidWidget .destinationCovid .floating-label{left:16px}
+.covidmodal .covidWidget #w-to-covid.covidInputText{padding:25px 0 8px 16px !important}
+.covidmodal .covidWidget .form-group2 .passportDrop{padding-right:0 !important;padding-bottom:16px !important}
+.covidmodal .covidWidget .form-group2 .vaccineDrop{padding-left:0 !important;padding-bottom:24px !important}
+.covidmodal .infoBoxCovid{top:-5px}
+.covidmodal .infoBoxCovid-content p{margin-bottom:18px;font-size:14px;line-height:20px}
+.covidmodal .infoBoxCovid{margin-bottom:32px}
+.covidmodal .covidWidget .form-group2 .vaccineDrop #vaccineLabel{left:16px}
+.covidmodal .infoBoxCovid{margin-bottom:32px}
+.dropdown.show .responsivedropoverlay{display:block}
+.covidmodal .covidWidget .form-group2 .dropdown-menu.show{top:auto !important;width:100%}
+.covidmodal .infoBoxCovid-content .extLink{font-size:14px;line-height:18px}
+.covidmodal .travelRestBox .travelREst-title,.covidmodal .travelFormBox .travelForms-title{font-size:20px;line-height:32px;font-weight:300}
+.covidmodal .covid-body-alertHeading{font-size:14px}
+.covidmodal .accordion .covid-body-alert{font-size:14px}
+.covidmodal .accordion .card-body{font-size:14px}
+.covidmodal .covidWidget .form-group2 .vaccineDrop .dropdown-menu{left:0 !important}
+.covidmodal .burgandyText{font-size:14px}
+.covidmodal .travelFormBox{margin-bottom:200px}
+.covidmodal .covid-body-content ul li{padding-top:16px}
+.covidmodal .accordion .card h2:focus{outline:none !important}
+}
+.covidmodal.iframeModal{background:#f2f3fa;font-family:Jotia,Verdana,Geneva,sans-serif !important}
+.covidmodal.iframeModal .modal-dialog{max-width:869px !important;min-width:869px !important;position:relative !important;margin:0 auto !important}
+.covidmodal.iframeModal .covidWidget .form-group{padding:24px 16px 24px 24px}
+.covidmodal.iframeModal .covidWidget .form-group2{padding:24px 24px 24px 0}
+.covidmodal.iframeModal .modal-body{margin:0 !important;padding:0 !important}
+.covidmodal.iframeModal .modal-header:after{display:none}
+.covidmodal.iframeModal .textOverImage{top:48px;left:0;bottom:auto}
+.covidmodal.iframeModal .textOverImage h1{margin-top:0;margin-bottom:26px;font-size:32px;font-weight:100;color:#1f212b}
+.covidmodal.iframeModal .textOverImage p{font-size:16px;color:#1f212b}
+.covidmodal.iframeModal .covidWidget{min-height:96px;top:0}
+.covidmodal.iframeModal .modal-header{min-height:132px}
+.covidmodal.iframeModal .infoBoxCovid{top:0;padding-top:26px}
+.covidmodal.iframeModal .travelRestBox,.covidmodal.iframeModal .travelFormBox{top:0;padding-top:32px}
+.covidmodal.iframeModal #swap-locationCov{right:47.6%}
+.covidmodal.iframeModal{max-width:100% !important;min-width:100% !important;margin:0 auto !important}
+.covidmodal.iframeModal .modal-dialog{max-width:100% !important;min-width:100% !important;position:relative !important;margin:0 auto !important}
+.covidmodal pre{padding-bottom:1rem}
+.covidmodal.iframeModal .modal-content{padding:0 20px !important}
+@media(max-width:767px){.covidmodal.iframeModal .modal-header{display:block !important;background:transparent}
+.covidmodal.iframeModal .modal-header{min-height:187px;position:relative !important}
+.covidmodal.iframeModal .swap{font-size:32px !important;top:54px;right:10% !important;position:absolute;transform:rotate(90deg)}
+.covidmodal.iframeModal a.swap.active{top:57px !important;right:8% !important;transform:rotate(270deg) !important}
+.covidmodal.iframeModal .covidWidget .form-group{padding:24px 24px 16px 24px !important;margin:0}
+.covidmodal.iframeModal .covidWidget .form-group2{padding:0 24px}
+.covidmodal.iframeModal .covidWidget .form-group2 .btn{padding:25px 0 8px 16px !important}
+}
+.covidmodal .accordion .card-body p{font-size:16px}
+.covidmodal .covidWidget .form-group2 .passportDrop .dropdown-menu li a:active,.covidmodal .covidWidget .form-group2 .vaccineDrop .dropdown-menu li a:active{color:var(--primary1) !important}
+.covidmodal .covidWidget .covidInputText:disabled{-webkit-appearance:none;opacity:1;-webkit-text-fill-color:#333 !important}
+.covidmodal .accordion .card ul{margin-bottom:16px !important;padding-left:20px !important}
+.travel-req .modal-backdrop.in{z-index:100}
+.travel-req .modal-backdrop{transition:none}
+header.two-columns-content-block-header{position:static;min-height:auto;width:auto}
+.covidmodal p{line-height:1.5;font-size:var(--font-s)}
+.covidmodal .h1,.covidmodal .h2,.covidmodal .h3,.covidmodal h1,.covidmodal h2,.covidmodal h3{margin-top:21px;margin-bottom:10.5px;font-weight:300;letter-spacing:0}
+.covidmodal p{letter-spacing:0;margin:0;line-height:20px}
+.covidmodal a:hover{color:var(--primary1);text-decoration:undeline}
+.btn{padding:12px 25px 8px;font-size:var(--font-m);font-weight:400}
+.btn.btn-white-transparent{color:#fff;background:0;border:2px solid #fff}
+.btn.btn-white-transparent:active,.btn.btn-white-transparent:focus,.btn.btn-white-transparent:hover{color:var(--primary1);background:#fff;border-color:#fff}
+.btn.btn-dark-transparent:active,.btn.btn-dark-transparent:focus,.btn.btn-dark-transparent:hover{color:#fff;background:var(--primary1);border-color:var(--primary1)}
+.destinations-offers-custom-col .destinations-offers-block-info-overlay .btn{display:block;background:var(--primary2);color:#460c2e;border-radius:2px;border:var(--primary2-border)}
+.row.tab-container{display:block}
+.destination-offers-origin .custom-select{padding:0;height:auto;font-weight:100}
+.btn-back-to-top{padding:12px 40px 8px 30px !important;display:none}
+#search-modal .modal-dialog{max-width:590px}
+.covidmodal .modal-dialog{position:relative;margin:200px auto !important;width:auto}
+.modal-search-overlay{padding:34px 20px}
+.modal-search .modal-header{padding:0 !important;position:relative !important;z-index:2 !important;text-align:left;justify-content:flex-start}
+.covidmodal .modal-body{position:relative;padding:0}
+#search-modal .close{position:absolute;top:-30px;font-size:54px;line-height:30px;background:0;border:0;z-index:5;font-weight:300;opacity:1;right:0;left:unset !important}
+.btn.btn-dark-transparent{color:var(--primary1);background:0;border:var(--primary1-border)}
+.covidmodal .fade{opacity:0;transition:opacity .15s linear}
+.destinations-offers.destinations-offers-search .row,.teaser-text.section .row{display:block}
+.drop-privilege-club.nav-club .col-md-3.desktop-only{display:block;flex:none;max-width:100%}
+.header-logo-one-world a{font:0/0 a;color:transparent}
+.footer-additional-nav a,.footer-additional-nav a:hover{color:#fff}
+.btn.btn-dark.btn-back-to-top{z-index:12}
+.btn-dark:not(:disabled):not(.disabled).active:focus,.btn-dark:not(:disabled):not(.disabled):active:focus,.show>.btn-dark.dropdown-toggle:focus{box-shadow:none}
+.footer-logo a{display:block;height:100%;color:transparent;font:0/0 a}
+@media only screen and (max-width:768px){.teaser-text.section .row{margin:0 15px}
+}
+@media only screen and (min-width:768px){.teaser-text .C16.C16-full-width{max-width:100%}
+.header-dropdown .row{display:block;flex-wrap:nowrap;margin-right:0;margin-left:0}
+.header-dropdown .pl-4{padding-left:.5rem !important}
+}
+@media only screen and (min-width:1280px){.header-dropdown .pl-4{padding-left:1.5rem !important}
+.destination-price .container,.C8.container{max-width:1185px}
+.header-dropdown .container,.language-drop .container{max-width:1140px;padding-right:15px;padding-left:15px}
+.language-drop .container{width:100%;min-height:440px}
+}
+.covidmodal.fade{opacity:1.0}
+@media(max-width:767px){.covidmodal .modal-title{margin:0 !important}
+.covidmodal .modal-header{border:0;padding:13px 0 11px 16px !important;margin-top:-1px}
+.covidmodal.fade .modal-dialog{margin-bottom:0 !important}
+.modal-header .close{margin-top:-19px;margin-right:-1px !important}
+.tab-content>.tab-pane.active{display:block}
+.tab-content>.tab-pane{display:none}
+}
+@media(min-width:768px){#bookingwidgt .radio-base input[type=radio]{position:absolute;z-index:-1}
+.covidmodal .modal-dialog{width:auto;margin:0 !important;transform:none !important}
+.covidmodal .modal-header .close{width:32px;height:32px;float:left;position:static;margin-top:-10px}
+.T7_4-flight .covidInfolink{margin-top:0}
+}
+.covidmodal p.restrictionlabel{line-height:32px;margin:0}
+.departurefrom,.whocanenter,.whocantenter,.arrivalprocedures{margin-bottom:25px;font-size:var(--font-m);line-height:1.5}
+.restrictiontypes{margin:30px 0 38px -3px !important}
+.covidmodal .modal-title{margin-top:26px;padding-left:19px;line-height:1.5;width:98%}
+.covidmodal.show .modal-title{margin-top:26px;padding-left:0;line-height:1.5;width:98%}
+.covidmodal .modal.left .modal-body,.covidmodal .modal.right .modal-body{margin-left:48px}
+.modal.covidmodal a{z-index:10 !important}
+.covidmodal.fade .modal-dialog{transform:none}
+.covidmodal .modal-open .modal-backdrop.fade{opacity:.5 !important}
+.covidmodal .modal-content{border:0;border-radius:0;padding-left:0}
+.covidmodal .modal-header{border:0;padding:23px 0 16px 16px}
+.border-0{border:0 !important}
+.covidmodal .departurefrom p,.covidmodal .whocanenter p,.covidmodal .whocantenter p,.covidmodal .arrivalprocedures p,.covidmodal .airlineentry p,.covidmodal .borderrules p,.covidmodal .recommendapp p,.covidmodal .maskrule p,.covidmodal .transportation p,.covidmodal .tourism p,.covidmodal .restaurantsrule p{padding-top:4px}
+.covid19 .nav-tabs{border-bottom:0}
+.hider-return{padding-right:100px}
+.covid19.hide-return .tab-content div.tab-pane:nth-child(2){display:none}
+.covid19.hide-return .tab-content>.tab-pane{width:100%}
+.covid19.hide-return .countryrestrictionsinfo{border-right:0}
+.covid19.hide-return .device-small li:nth-child(2){display:none}
+.btn-back-to-top+.tooltip{position:fixed}
+.upcoming-trips-content{font-size:15px;font-weight:400;color:#333}
+.upcoming-trips-content .upcoming-inner-content{min-height:133px;border-radius:5px;border:1px solid #e4e4e4;display:flex}
+.upcoming-trips-content .upcoming-inner-content:hover{box-shadow:0 5px 15px #0000001A}
+.upcoming-trips-content .upcoming-inner-content:hover .trip-image{opacity:.8}
+.upcoming-trips-content>div:first-child{padding-right:0}
+.managebookingtitle,.check-intitle{display:inline-block}
+#managebooking p,#checkin p{margin:0;padding-bottom:15px;color:#555;font-size:15px;font-weight:400;letter-spacing:normal;line-height:20px;padding-top:8px}
+.trip-image{width:169px;height:133px}
+.trip-image img{width:100%;height:100%;border-radius:5px 0 0 5px;object-fit:cover}
+.trip-upgrade,.trip-details{width:calc(100% - 139px);padding:15px}
+.trip-upgrade>div:first-child{font-size:15px;line-height:20px;padding-bottom:3px}
+.trip-upgrade span.trip-price{font-weight:500;padding-left:8px}
+.trip-upgrade a{display:flex;color:#662046;padding-top:25px}
+.manage-another-booking{padding-top:15px}
+.manage-another-booking p,.manage-another-booking a{font-size:15px;font-weight:400;color:#555;display:inline-flex}
+.manage-another-booking a{color:#662046;padding-left:10px}
+.trip-duration,.trip-reference{color:#555;font-size:13px}
+.trip-reference{float:right}
+.trip-submit .submitbutton{font-size:16px;width:100%;padding:12px 25px 10px !important}
+.trip-submit .submitbutton:hover,.trip-submit .submitbutton:focus{color:#000}
+.trip-info{padding-top:10px}
+.trip-info>div{display:inline-block;width:43%}
+.trip-info .flight-icon{width:10%;text-align:center;vertical-align:top;margin-top:10px}
+.trip-info span{display:block}
+.trip-submit{margin-top:21px}
+.trip-origin span:first-child,.trip-dest span:first-child{font-size:30px;color:#333;font-weight:300}
+.trip-origin span:last-child,.trip-dest span:last-child{font-size:13px;color:#555;font-weight:400}
+.trip-dest{text-align:right}
+.show-upcoming-trips{float:right;font-size:var(--font-s);color:#662046;padding-right:20px;position:relative}
+.upcoming-trips-content .icon-arrow-right3,.manage-another-booking a .icon-arrow-right3,.show-upcoming-trips .icon-arrow-right3{font-size:10px;padding-left:6px;padding-top:7px;transition:padding .25s ease}
+.upcoming-trips-content a:hover .icon-arrow-right3,.manage-another-booking a:hover .icon-arrow-right3{padding-left:10px}
+.show-upcoming-trips .icon-arrow-right3{position:absolute;right:6px;padding-left:0;transition:right .25s ease}
+.show-upcoming-trips:hover .icon-arrow-right3{right:2px}
+.trip-upgrade a{display:inline-block}
+.manage-another-booking{padding-top:15px}
+.manage-another-booking p{padding-bottom:5px}
+.flight-icon svg path{fill:#555}
+@media(max-width:768px){.upcoming-trips-content .upcoming-inner-content{min-height:120px}
+.upcoming-trips-content div:first-child .upcoming-inner-content{flex-direction:column}
+.upcoming-trips-content>div:first-child{padding-right:15px;padding-bottom:15px}
+.upcoming-trips-content>div:first-child .trip-image{width:100%;height:150px;max-width:100%;max-height:150px}
+.upcoming-trips-content>div:first-child .trip-image img{border-radius:5px 5px 0 0}
+.manage-another-booking p{padding-bottom:0 !important;padding-right:10px}
+.manage-another-booking a{padding-left:0}
+.trip-info,.trip-submit,.trip-details{width:100%}
+.trip-upgrade{width:calc(100% - 40%);padding:15px 10px 10px}
+.trip-image{max-width:181px;height:120px;width:40%;max-height:120px}
+.trip-details{padding:15px 15px 17px}
+.trip-upgrade a{padding-top:17px}
+.trip-upgrade>div:first-child{font-size:15px}
+.managebookingtitle,.check-intitle{display:block}
+.show-upcoming-trips{padding-bottom:15px}
+.managebookingform,.check-inform{width:100%}
+}
+@media only screen and (min-device-width :768px) and (max-device-width :1024px){.trip-info>div{width:42%}
+.trip-upgrade a{padding-top:16px}
+}
+.flightsearchform .tt-menu{width:auto;min-width:550px;font-size:15px;color:#666;overflow:auto;background:#fff;box-shadow:0 2px 7px rgba(0,0,0,.25);max-height:500px;height:auto;z-index:16 !important}
+.twitter-typeahead .tt-menu{z-index:16 !important}
+@-moz-document url-prefix(){.flightsearchform .tt-menu{min-width:580px}
+}
+.flightsearchform .tt-menu.no-scroll{height:auto;max-height:500px;overflow:hidden}
+.flightsearchform .tt-menu .tt-suggestion{min-width:563px;min-height:60px;display:block;font-weight:normal;font-size:14px;line-height:1.5;color:#000;padding:10px;padding-left:40px;border-bottom:1px solid #dbdee8;white-space:nowrap;cursor:pointer;margin:0;overflow:hidden;position:relative}
+.flightsearchform .tt-menu .tt-suggestion.active span{color:#f9f9f9 !important}
+.flightsearchform .tt-menu .tt-suggestion strong{display:block;color:#1f212b;font-weight:500;font-size:16px}
+.flightsearchform .tt-menu .tt-suggestion .airport{display:block;color:#4a525d;float:right}
+.flightsearchform .tt-menu .tt-suggestion .countrycode{color:#4a525d}
+.flightsearchform .tt-menu .tt-suggestion .iatacode{color:#1f212b;float:right;position:absolute;top:10px;right:10px;font-weight:500;font-size:16px}
+.flightsearchform .tt-menu .tt-suggestion .tt-highlight{display:inline-block;font-weight:inherit;font-size:inherit;color:#8e2157}
+.flightsearchform .tt-menu .tt-suggestion.nomatch-text{min-width:auto;min-height:auto;color:#4a525d}
+.flightsearchform .tt-menu .tt-cursor strong,.flightsearchform .tt-menu .tt-cursor .airport,.flightsearchform .tt-cursor .countrycode,.flightsearchform .tt-menu .tt-suggestion.active{transition:background .2s ease}
+.flightsearchform .autocompleteHeader{display:none;font-size:var(--font-m);padding:15px;border-bottom:1px solid #ccc;margin:0 0 15px}
+.flightsearchform .close-autocomplete{display:block;position:absolute;top:8px;right:5px;width:35px;height:35px;text-indent:-9999px;cursor:pointer}
+.flightsearchform .tt-menu .tt-suggestion:hover,.flightsearchform .tt-menu .tt-suggestion.tt-cursor{background:#f2f3fa;transition:background .2s ease}
+.bw-autocomplete .floating-label.active,.bw-autocomplete.filled .floating-label{height:26px;padding:5px 17px 0;font-size:10px;transition:all .2s ease;font-size:12px;color:#333 !important;font-weight:400}
+.flightto .floating-label.active,.flightto.filled .floating-label{padding:6px 23px 0}
+.bw-autocomplete .bw-autocomplete-suggestion,.bw-autocomplete .twitter-typeahead{width:100%}
+.passengers-drop{display:none}
+.floating-label{z-index:+2}
+.previous-search-drop{position:absolute;z-index:10;width:132%;left:0;display:none;margin-top:10px}
+.previous-search-arrow-show{left:10%;top:-20px;z-index:9999}
+.previous-search-arrow-show,.previous-search-arrow-show:after{border-width:10px;border-style:solid;border-color:transparent transparent #ddd;display:inline-block;position:absolute}
+.previous-search-drop .autocomplete-prev-drop{background:#fff;color:#000;padding:15px 15px;margin-left:15px;font-weight:400;margin:0;border:1px solid #e4e4e4;box-shadow:0 7px 15px rgba(0,0,0,.25);border-radius:7px}
+.previous-search-arrow-show:after{top:-9px;left:-10px;content:'';border-width:10px;border-bottom-color:#fff}
+.previous-search-drop ul{padding-top:4px}
+.previous-search-drop li{padding:10px 0;border-bottom:1px solid rgba(0,0,0,.1);color:#000;font-size:var(--font-s)}
+.previous-search-drop li:last-child{border-bottom:0;padding-bottom:0}
+#prevfromIata{padding-right:8%;cursor:pointer}
+#prevtoIata{padding-left:24%;cursor:pointer}
+#prevdate{padding-left:6%;color:#797979;font-size:15px;cursor:pointer}
+.previous-search-drop li .prevarrow-icon:before{color:#797979;cursor:pointer;content:"\e911";font-size:var(--font-xs);font-family:icomoon !important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased}
+.previous-search-drop li .prevarrow-icon.oneWay:before{font-size:14px;padding-left:3px;position:absolute;line-height:20px}
+.previous-search-drop li .prevarrow-icon.return{background:url(../../../../../foundation/booking/fromto/v1/fromto/clientlib/resources/return_arrow.svg) no-repeat;background-repeat:no-repeat;position:absolute;width:20px;height:20px}
+.previous-search-drop li .prevarrow-icon.return:before{display:none}
+.previous-search-drop li .passengerIcon{background:url(../../../../../foundation/booking/fromto/v1/fromto/clientlib/resources/passenger.svg) no-repeat;background-repeat:no-repeat;position:absolute;width:20px;height:20px;width:10%;display:inline-block;font-size:15px}
+.previous-search-drop li .passengercount{color:#797979;font-size:15px;padding-left:9%;padding-right:4%;width:10%;display:inline-block}
+.previous-search-drop li .routeCol{width:40%;display:inline-block;font-size:15px}
+@media only screen and (max-width:767px){.autoComplete-open .inputText{width:96% !important;margin:0 2% !important}
+.flightsearchform .tt-menu{min-width:100%;margin:10px 0;box-shadow:none !important;max-height:100vh !important}
+.flightto.autoComplete-open .floating-label,.flightfrom.autoComplete-open .floating-label,.flightto.autoComplete-open .floating-label{padding:0 !important;left:22px !important;top:25px}
+#prevfromIata{padding-right:10%}
+#prevtoIata{padding-left:22%}
+#prevdate{padding-left:6%}
+.previous-search-drop .autocomplete-prev-drop{width:auto}
+.previous-search-drop li .passengercount{padding-left:10%}
+.flightto.autoComplete-open .floating-label.active{left:22px !important;top:14px}
+.flightfrom.autoComplete-open .floating-label.active{left:26px !important;top:13px}
+.flightfrom.autoComplete-open .inputText,.flightto.autoComplete-open .inputText{border-radius:0 !important}
+.flightsearchform .bw-autocomplete-suggestion{position:relative}
+.flightsearchform .bw-autocomplete{position:static;transition-timing-function:cubic-bezier(0.4,0.0,0.2,1);transition:all .2s}
+.flightsearchform .autoComplete-open.bw-autocomplete{position:fixed;z-index:50;top:0 !important;left:0;background:#fff;overflow:hidden;height:100vh}
+.flightsearchform .autoComplete-open .autocompleteHeader{display:block}
+.flightsearchform .autocomplete-typeahead input[type=text]{padding-top:27px;padding-bottom:15px}
+.flightsearchform .autocomplete-typeahead .tt-menu{box-shadow:none;margin-top:20px;border:none !important;max-height:500px}
+.flightsearchform .autocomplete-typeahead .tt-menu .tt-suggestion{min-width:100%}
+.flightsearchform .autoComplete-open .bw-autocomplete-suggestion input[type=text],.flightsearchform .autoComplete-open .input-base-elem{padding:15px 5px 0;font-size:15px}
+.flightsearchform #multiFlightContainer .autoComplete-open{width:100%}
+.flightsearchform .autoComplete-open .bw-autocomplete-suggestion,.flightsearchform .autoComplete-open .twitter-typeahead,.flightsearchform .autoComplete-open .bw-autocomplete-suggestion input[type=text]{height:62px}
+.bw-autocomplete.input-group{display:block}
+.bw-autocomplete .floating-label.active,.bw-autocomplete.filled .floating-label{font-size:12px;line-height:12px}
+.flightsearchform .tt-menu .tt-suggestion{min-width:auto;margin:0 2%}
+.suggestion-list{max-height:85vh !important}
+.no-scroll .suggestion-list{max-height:80vh !important}
+.previous-search-drop .autocomplete-prev-drop{background:0;box-shadow:none}
+.previous-search-arrow-show{display:none}
+.previous-search-drop{width:100%;padding:20px 10px 0;border-top:1px solid #e4e4e4;margin-top:15px}
+}
+.autosuggest-tabs{width:100%;background:#f2f3fa;text-align:center;height:50px;padding:10px 16px;display:none}
+.autosuggest-tabs.show-autotabs{display:flex}
+.autosuggest-tabs li{margin-bottom:0;padding:0}
+.autosuggest-tabs a{color:#4a525d !important;background:#fff !important;border:1px solid #dbdee7 !important;border-radius:20px !important;font-size:13px !important;padding:4px 20px;margin-right:10px}
+.autosuggest-tabs li a:hover{color:#8e2157 !important;text-decoration:none !important;border:1px solid #8e2157 !important}
+.autosuggest-tabs li a:focus,.autosuggest-tabs li a.active{color:#fff !important;background:#8e2157 !important;border:1px solid #8e2157 !important}
+.suggestion-list{position:relative;max-height:384px;overflow:auto}
+.flightsearchform .showrail .tt-menu .busCity,.flightsearchform .showrail .tt-menu .flyCity{display:none}
+.flightsearchform .showrail .tt-menu .railCity{display:block}
+.flightsearchform .hiderailflybus .tt-menu .busCity,.flightsearchform .hiderailflybus .tt-menu .railCity{display:none}
+.flightsearchform .showrailflybus .tt-menu .busCity,.flightsearchform .showrailflybus .tt-menu .railCity,.flightsearchform .showrailflybus .tt-menu .flyCity{display:block}
+.flightsearchform .tt-menu h3{color:#8e2157;font-size:16px;font-weight:500;border-bottom:1px solid #dbdee8;padding:25px 0 10px;padding-left:40px;margin:0}
+.flightsearchform .tt-menu .tt-dataset-location h3{display:none}
+.flightsearchform .tt-menu .tt-dataset-location h3.show-title,.flightsearchform .tt-menu .tt-dataset-location .tt-nomatch h3{display:block}
+.flightsearchform .tt-menu .tt-empty{color:#1f212b;padding:10px 0 10px;padding-left:40px;font-weight:400;font-size:14px}
+.flightsearchform .tt-menu .tt-empty strong{font-weight:500;font-size:16px;padding-bottom:3px;display:block}
+.flightsearchform .tt-menu .tt-suggestion::before{width:24px;height:24px;content:"";position:absolute;top:30%;left:8px}
+.nearyou-height .suggestion-list{max-height:374px}
+.fixed-top{overflow:hidden !important}
+@media only screen and (max-width:767px){.autosuggest-tabs{padding:10px 12px}
+.flightsearchform .tt-menu h3{margin:0 2%}
+.flightsearchform .tt-menu .tt-suggestion::before{left:5px}
+.flightsearchform .tt-menu{max-height:70vh !important}
+}
+@font-face{font-family:'icomoon';src:url("../../../flights/v1/flights-widget/clientlib/resources/fonts/icomoon.eot");src:url("../../../flights/v1/flights-widget/clientlib/resources/fonts/icomoon.eot") format("embedded-opentype"),url("../../../flights/v1/flights-widget/clientlib/resources/fonts/icomoon.ttf") format("truetype"),url("../../../flights/v1/flights-widget/clientlib/resources/fonts/icomoon.woff") format("woff"),url("../../../flights/v1/flights-widget/clientlib/resources/fonts/icomoon.svg") format("svg");font-weight:normal;font-style:normal;font-display:swap}
+[class^="icon-"],[class*=" icon-"]{font-family:'icomoon' !important;speak:never;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.icon-twitter:before{content:"\e900";color:#fff}
+.icon-Youtube:before{content:"\e901";color:#fff}
+.icon-LinkedIn:before{content:"\e902";color:#fff}
+.icon-Instagram:before{content:"\e903";color:#fff}
+.icon-fb:before{content:"\e904";color:#fff}
+.icon-Burger-menu:before{content:"\e905";color:#5c0931}
+.icon-profile-24x24:before{content:"\e907";color:#5c0931}
+.icon-bw-swap:before{content:"\e909";color:#5c0931}
+.icon-nw-close:before{content:"\e906"}
+.icon-ic-search:before{content:"\e908";color:#5c0931}
+.icon-bw-flightstatus:before{content:"\e90a";color:#5c0931}
+.icon-bw-book:before{content:"\e90b";color:#5c0931}
+.icon-bw-manage:before{content:"\e90c";color:#5c0931}
+.icon-bw-checkin:before{content:"\e90d";color:#5c0931}
+.icon-Chauffer-Drive:before{content:"\e98a"}
+.icon-viator:before{content:"\e98b";color:#662046}
+.icon-Al-Maha:before{content:"\e98c"}
+.icon-user-plus:before{content:"\e983"}
+.icon-user-tie:before{content:"\e984"}
+.icon-equalizer:before{content:"\e992"}
+.icon-equalizer2:before{content:"\e993"}
+.icon-multicity_48px:before{content:"\e97d"}
+.icon-newspaper_48px:before{content:"\e97e"}
+.icon-people_48px:before{content:"\e97f"}
+.icon-limo_48px:before{content:"\e980"}
+.icon-car_48px:before{content:"\e981"}
+.icon-Group-6228:before{content:"\e9003";color:#fff}
+.icon-heart2:before{content:"\e90e"}
+.icon-favorite:before{content:"\e87d"}
+.icon-favorite_border:before{content:"\e87e"}
+.icon-error_outline:before{content:"\e001"}
+.icon-close:before{content:"\e5cd"}
+.icon-notification:before{content:"\e961"}
+.icon-menu:before{content:"\e917"}
+.icon-cross:before{content:"\e918"}
+.icon-checkmark:before{content:"\e90f"}
+.icon-arrow-up2:before{content:"\e910"}
+.icon-arrow-right2:before{content:"\e911"}
+.icon-arrow-down2:before{content:"\e912"}
+.icon-arrow-left2:before{content:"\e913"}
+.icon-checkbox-checked:before{content:"\e914"}
+.icon-checkbox-unchecked:before{content:"\e915"}
+.icon-new-tab:before{content:"\ea7e"}
+.icon-office:before{content:"\e97a"}
+.icon-library:before{content:"\e97b"}
+.icon-cart:before{content:"\e97c"}
+.icon-spoon-knife:before{content:"\e9a3"}
+.icon-earth:before{content:"\e9ca"}
+.icon-heart:before{content:"\e9da"}
+.icon-man-woman:before{content:"\e9de"}
+.icon-user2:before{content:"\e982"}
+.icon-users2:before{content:"\e985"}
+.icon-user-plus2:before{content:"\e986"}
+.icon-user-minus:before{content:"\e987"}
+.icon-user-check:before{content:"\e988"}
+.icon-user-tie2:before{content:"\e989"}
+.icon-info1:before{content:"\ea0c"}
+.icon-instagram1:before{content:"\ea92"}
+.icon-youtube:before{content:"\ea9d"}
+.icon-magazines:before{content:"\e979"}
+.icon-audio:before{content:"\e974"}
+.icon-discover:before{content:"\e975"}
+.icon-games:before{content:"\e976"}
+.icon-movies:before{content:"\e977"}
+.icon-tv:before{content:"\e978"}
+.icon-weather-cloudy:before{content:"\e965"}
+.icon-weather-fog:before{content:"\e966"}
+.icon-weather-hail:before{content:"\e967"}
+.icon-weather-lightning:before{content:"\e968"}
+.icon-weather-lightning-rainy:before{content:"\e969"}
+.icon-weather-night:before{content:"\e96a"}
+.icon-weather-partlycloudy:before{content:"\e96b"}
+.icon-weather-pouring:before{content:"\e96c"}
+.icon-weather-rainy:before{content:"\e96d"}
+.icon-weather-snowy:before{content:"\e96e"}
+.icon-weather-snowy-rainy:before{content:"\e96f"}
+.icon-weather-sunny:before{content:"\e970"}
+.icon-weather-sunset:before{content:"\e971"}
+.icon-weather-windy:before{content:"\e972"}
+.icon-weather-windy-variant:before{content:"\e973"}
+.icon-delete:before{content:"\e964"}
+.icon-routes:before{content:"\e963"}
+.icon-heart-filled:before{content:"\e962"}
+.icon-hotel-2:before{content:"\e959"}
+.icon-exclaim:before{content:"\e960"}
+.icon-close-circle:before{content:"\e95a"}
+.icon-car-2:before{content:"\e95b"}
+.icon-logout:before{content:"\e95c"}
+.icon-user-2:before{content:"\e95d"}
+.icon-dashboard:before{content:"\e95e"}
+.icon-arrow-strong-left:before{content:"\e95f"}
+.icon-user:before{content:"\e957"}
+.icon-search-sort:before{content:"\e958"}
+.icon-insurance-car:before{content:"\e951"}
+.icon-holidays:before{content:"\e952"}
+.icon-hotels:before{content:"\e953"}
+.icon-credit-card:before{content:"\e954"}
+.icon-users:before{content:"\e955"}
+.icon-airplaine-top:before{content:"\e956"}
+.icon-share:before{content:"\e950";color:#5c0631}
+.icon-airplane-up-right:before{content:"\e94e"}
+.icon-airpline-right-02:before{content:"\e94f"}
+.icon-double-baggage:before{content:"\e94b"}
+.icon-double-basket:before{content:"\e94c"}
+.icon-stared-label:before{content:"\e94d"}
+.icon-basket:before{content:"\e942"}
+.icon-beach:before{content:"\e943"}
+.icon-calendar:before{content:"\e944"}
+.icon-currecly:before{content:"\e945"}
+.icon-electricity:before{content:"\e946"}
+.icon-info2:before{content:"\e947"}
+.icon-instagram:before{content:"\e948"}
+.icon-search:before{content:"\e949"}
+.icon-sun:before{content:"\e94a"}
+.icon-arrow-left3:before{content:"\e92a"}
+.icon-arrow-right3:before{content:"\e92b"}
+.icon-arrow-left-thin:before{content:"\e93e"}
+.icon-arrow-right-thin:before{content:"\e93f"}
+.icon-plus-circle:before{content:"\e93d"}
+.icon-camera-01:before{content:"\e93c"}
+.icon-info-01:before{content:"\e93a"}
+.icon-map-marker:before{content:"\e93b"}
+.icon-no-qmiles:before{content:"\e939"}
+.icon-express-baggage:before{content:"\e930"}
+.icon-family:before{content:"\e931"}
+.icon-lounge-access:before{content:"\e932"}
+.icon-priority-baggage:before{content:"\e933"}
+.icon-priority-check-in:before{content:"\e934"}
+.icon-priority-stand-by:before{content:"\e935"}
+.icon-shop-play:before{content:"\e936"}
+.icon-tier-bonus:before{content:"\e937"}
+.icon-upgrade-departure:before{content:"\e938"}
+.icon-arrow-left:before{content:"\e916"}
+.icon-arrow-right:before{content:"\e919"}
+.icon-car:before{content:"\e92d"}
+.icon-hotel:before{content:"\e92e"}
+.icon-insurance:before{content:"\e92f"}
+.icon-airplanes-to-from:before{content:"\e92c"}
+.icon-arrow-thin-left:before{content:"\e941"}
+.icon-arrow-thin-right:before{content:"\e940"}
+.icon-arrow-down3:before{content:"\e928"}
+.icon-arrow-up:before{content:"\e929"}
+.icon-arrow-down:before{content:"\e926"}
+.icon-arrow-top:before{content:"\e927"}
+.icon-clock:before{content:"\e925"}
+.icon-arrow-down-circle:before{content:"\e923"}
+.icon-arrow-up-circle:before{content:"\e924"}
+.icon-airplane-dioganal:before{content:"\e91f"}
+.icon-globe:before{content:"\e920"}
+.icon-info:before{content:"\e921"}
+.icon-seat:before{content:"\e922"}
+.icon-arrow-top-small:before{content:"\e91e"}
+.icon-airplane-left:before{content:"\e91a"}
+.icon-arrow-strong:before{content:"\e91b"}
+.icon-download:before{content:"\e91c"}
+.icon-mail:before{content:"\e91d"}
+.icon-print:before{content:"\e98d"}
+.icon-arrow-bothdirections:before{content:"\e98e"}
+.icon-magnify:before{content:"\e98f"}
+.icon-pencil:before{content:"\e990"}
+.icon-social-facebook:before{content:"\e991"}
+.icon-social-instagram:before{content:"\e994"}
+.icon-social-linkedin:before{content:"\e995"}
+.icon-social-twitter:before{content:"\e996"}
+.icon-social-youtube:before{content:"\e997"}
+.icon-star-limited-time:before{content:"\e998"}
+.icon-suitcase:before{content:"\e999"}
+.icon-airplane-01:before{content:"\e99a"}
+.icon-airplane-right:before{content:"\e99b"}
+.icon-arrows-updown:before{content:"\e99c"}
+.icon-play:before{content:"\f04b"}
+.icon-pause:before{content:"\f04c"}
+.icon-stop:before{content:"\f04d"}
+.icon-check:before{content:"\f00c"}
+.icon-plus:before{content:"\f067"}
+.icon-minus:before{content:"\f068"}
+.icon-exclamation-circle:before{content:"\f06a"}
+.icon-bars:before{content:"\f0c9"}
+.icon-navicon:before{content:"\f0c9"}
+.icon-reorder:before{content:"\f0c9"}
+.icon-exclamation:before{content:"\f12a"}
+header{position:absolute;width:100%;z-index:9;min-height:80px}
+.nav-link{color:white !important}
+.nav-link:hover{background-color:transparent}
+.nav-item{padding:0 16px}
+.bookingwizard .bookingwidget-wrapper{box-shadow:0 29px 32px -20px rgba(0,0,0,0.5),0 4px 11px -3px rgba(0,0,0,0.25);width:100%;border-radius:var(--flow-standard-radius)}
+.wizardpane{padding:0;border-radius:var(--flow-standard-radius) var(--flow-standard-radius) 0 0;position:relative;z-index:4;transition:all .3s ease;background:-webkit-linear-gradient(to left,rgba(128,28,79,1),rgba(82,12,48,1) 70%);background:linear-gradient(to left,rgba(128,28,79,1),rgba(82,12,48,1) 70%);width:100%}
+.wizardpane .nav-item{padding:0}
+.wizardpane .nav-link{padding:12px 15px 13px 15px}
+.wizardpane li a.nav-link:hover{text-decoration:none !important}
+.wizardpane li a.nav-link.active{color:var(--primary1) !important}
+.wizardpane li a.nav-link{border:0;border-radius:0}
+.wizardpane li a.nav-link:focus{text-decoration:none !important}
+body li a.dropdown-item:hover{text-decoration:none !important}
+.wizardpane li:first-child a.nav-link{border-radius:var(--flow-standard-radius) 0 0 0}
+.wizardpane li:last-child a.nav-link{border-radius:0 var(--flow-standard-radius) 0 0}
+.wizardpane li a.nav-link span{font-size:24px;margin-right:10px;display:inline-flex;vertical-align:middle;color:#fff}
+.wizardpane li a.nav-link span:before{color:#fff}
+.wizardpane li a.nav-link.active span:before{color:var(--primary1)}
+a.nav-link:hover{border-width:0}
+.wizardpane ~ .tab-content{padding:15px 18px;background:#fff;border-radius:0 0 var(--flow-standard-radius) var(--flow-standard-radius)}
+.wizardpane.d-none~.tab-content{border-radius:var(--flow-standard-radius)}
+.inner-tabs li{line-height:36px;padding:0 15px}
+.inner-tabs li:first-child{padding-left:0}
+.inner-tabs li a{color:#333;font-size:15px;padding:2px 0;line-height:30px}
+.inner-tabs li a.active{border-bottom:2px solid var(--primary1);color:var(--primary1)}
+.nav.inner-tabs li a:hover,.nav.inner-tabs li a:focus{color:var(--primary1)}
+.nav.inner-tabs li a:hover,.nav.inner-tabs li a:focus{text-decoration:none !important}
+.inner-tabs li a:focus,.inner-tabs li a:hover{outline:0}
+.booktabcontent{padding:0}
+.nav-fill .nav-item{-ms-flex:1 1 auto;flex:1 1 auto !important;text-align:center}
+.numberofpassengers{padding:0 0 0 15px;align-items:center}
+.numberofpassengers label{height:15px}
+.personalizedtext{color:#fff;background-color:rgba(0,0,0,0.6);font-size:15px;padding:0 5px}
+@media(max-width:768px){.wizardpane .nav-link{padding:10px 8px 10px 15px;text-align:center;font-size:15px;min-width:87px}
+.wizardpane li a.nav-link span{display:flex;vertical-align:middle;justify-content:center;margin-right:0}
+}
+@media(max-width:736px){.datefrom{border-right:1px solid #d7d7d7}
+.datefrom::after{display:none}
+a.swap{top:36%;right:5%;transform:rotate(90deg)}
+.swap{width:32px !important;height:32px !important;background-size:32px !important}
+a.swap.active{transform:rotate(270deg)}
+.swapfh{left:auto !important;position:relative;top:47% !important;right:26px !important}
+.classtype{display:flex !important;padding-right:16px}
+.selectclasstype ul{display:none}
+.dropdown-menu{min-width:7rem !important}
+.dropdown-item{padding:.25rem .5rem !important}
+.dropdown .btn{font-size:13px}
+.dropdown-toggle::after{font-size:5px !important;top:12px !important}
+.flightfrom .inputText,.datereturn .inputText{border-radius:6px 6px 0 0 !important}
+.flightsearchform .flightfrom,.flightplushotels .flightfrom{margin-bottom:-1px !important}
+.flightto .inputText{border-radius:0 0 6px 6px !important;padding-left:0 !important}
+.datefrom .inputText{border-radius:6px 0 0 6px !important;border-left:1px solid #d7d7d7 !important}
+.datereturn .inputText{border-radius:0 6px 6px 0 !important}
+.bookingref .inputText,.passengerselect .inputText{border-radius:6px !important;border-left:1px solid #d7d7d7}
+.flightfrom{margin-bottom:-1px !important}
+.flightto{margin-bottom:0 !important}
+.booktabcontent{padding:12px 0 5px !important}
+.inputText{min-height:46px !important;font-size:var(--font-l) !important}
+.floating-label{padding:10px 22px !important}
+input:focus ~ .floating-label{top:-5px !important;left:-10px !important;font-size:12px !important}
+.btn-submit{padding:12px 25px 10px !important}
+.flighthoteltriptype{display:none}
+.lastname .inputText{border-radius:6px !important;border-left:1px solid #d7d7d7 !important}
+.flightstatusform .flightto .inputText{border-left:1px solid #d7d7d7 !important;border-radius:6px !important}
+.form-group{margin-bottom:15px}
+.input-group-append{top:27% !important}
+.flightto .floating-label{left:-6px !important}
+.datereturn .inputText{border-right:1px solid #d7d7d7 !important}
+.inputText:focus{outline:0 !important}
+.passengerselect .inputText{border-left:1px solid #d7d7d7}
+.onewayTrip .datefrom{border-right:0}
+.passengerselect .inputText{border-left:1px solid #d7d7d7}
+.onewayTrip .multicitychange{width:100% !important}
+.onewayTrip .datefrom{min-width:100% !important}
+.onewayTrip .datefrom{min-width:inherit !important;flex:0 0 100%;max-width:100% !important}
+.onewayTrip .datefrom .inputText{border-right:1px solid #d7d7d7 !important;border-radius:6px !important}
+.onewayTrip .t-dates.t-date-check-in{border-right:1px solid #ccc;border-radius:0 6px 6px 0 !important}
+.multiflight .form-group{width:100%}
+.multicityTrip .multiflight{display:contents !important}
+.multicityTrip .multicitychange .multicitysearchbtn{max-width:inherit !important;padding:0}
+.multicityTrip .multicitychange .passengerselect{max-width:inherit !important}
+.multicityTrip .datefrom,.onewayTrip .datefrom{min-width:inherit !important;flex:0 0 100%;max-width:100% !important;border-right:0}
+.multicityTrip .flightto .inputText{border-radius:0 !important}
+.multicityTrip .flightto{margin-bottom:-1px !important}
+.multicityTrip .datefrom{margin-top:-9px}
+.multicityTrip .multicityborder .inputText{border-radius:0 0 6px 6px !important}
+.multicityTrip .responsiveremovebtn{display:none !important}
+.flightremovebtn{width:100%}
+.flightremovebtn label{display:flow-root}
+.multicityTrip .removeflightbtn{width:100%;display:block}
+.removeflight{margin-top:0 !important}
+.removeflightbtn label{display:inline-flex !important}
+.multicityTrip .defaultremovebtn{display:flex !important}
+}
+@media(max-width:480px){.responsiveitem{display:none}
+.wizardpane,.wizardpane li:first-child a.nav-link{border-radius:0}
+.wizardpane li a.nav-link.active{font-size:15px}
+.rempadresponsive{padding:0 !important}
+.nav-fill .nav-item{-ms-flex:1 1 auto;flex:1 1 auto !important}
+.wizardpane ~ .tab-content{padding:10px 10px}
+}
+@media(max-width:415px){.inner-tabs li a{padding:8px 27px}
+}
+@media(max-width:384px){.inner-tabs li a{padding:8px 28px}
+}
+@media(max-width:375px){.inner-tabs li a{padding:8px 19px}
+}
+@media(max-width:320px){.inner-tabs li a{padding:8px 12px}
+}
+.dropdown-toggle::after{padding-top:1px;font-family:icomoon !important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;content:'\e928' !important;border:0 !important;color:#a29a92;background:0;font-size:6px;position:absolute;width:17px;height:17px;z-index:8;right:5px;top:15px}
+.dropdown-item:active{background-color:var(--primary1) !important;color:#fff !important;border:0 !important}
+.triptype,.numberofpassenger{display:inline-flex;width:96.5%}
+.row-wrap+.row-wrap{justify-content:start;padding-top:15px}
+body.v4 .row-wrap{margin-bottom:6px}
+.row-wrap+.row-wrap{display:flex;margin-bottom:0;justify-content:space-between}
+.row-wrap{display:flex;margin-bottom:8px;position:relative}
+.btn.btn-dark{color:#fff;background:var(--primary1);border:var(--primary1-border)}
+.btn.btn-white{color:var(--primary1);background:#fff;border:2px solid #ebebeb}
+.submitbutton{display:inline-block;vertical-align:top;padding:13px 25px 13px;white-space:nowrap;font-size:var(--font-l);font-weight:400;text-align:center;color:#000;border-radius:5px;background:var(--primary2);border:2px solid var(--primary2);outline:0}
+.submitbutton.btn.btn-dark{color:#fff;background:var(--primary1);border:var(--primary1-border)}
+.submitbutton:focus{outline:0}
+.form-row button[type=submit]{width:100%}
+.btn-submit{padding:17px 25px 15px}
+.flightsearh-btn::after{content:"\e99a";font-size:30px;color:#460c2e;display:inline-block;line-height:normal;vertical-align:top;font-family:'icomoon' !important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:26px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.btn-submit:active,.btn-submit:focus,.btn-submit:hover{text-decoration:none;color:#460c2e;background:#f8981d;border:2px solid #f8981d;outline:0;box-shadow:none}
+[class^="icon-"],[class*=" icon-"]{font-family:'icomoon' !important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+[class^="icon-"],[class*=" icon-"]{font-family:'icomoon' !important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.icon-minus:before{content:"\f068"}
+.noVisible{width:1px;height:1px;position:relative;display:inline-block;z-index:-1;overflow:hidden}
+.icon-plus:before{content:"\f067"}
+.flightsearchform{justify-content:start;margin-bottom:6px;display:flex;position:relative}
+input:focus ~ .floating-label,.floating-label.active{height:26px;padding:5px 17px 0;font-size:10px;transition:all .2s ease;font-size:12px;color:#333 !important;font-weight:400}
+input:required{box-shadow:none}
+.inputText{text-indent:11px;font-size:17px !important;font-weight:400;color:#333;text-transform:capitalize;min-height:46px;border:1px solid #d7d7d7;border-radius:6px 0 0 6px;width:100%;background-clip:padding-box}
+.inputText:focus{outline:2px solid #6181ba;z-index:2}
+.datereturn .inputText{border-left:0;border-right:0}
+.flightto .inputText,.datefrom .inputText{border-radius:0}
+.datefrom::after{content:'-';font-size:35px;font-weight:200;position:absolute;z-index:1;top:0;right:10px}
+.flightfrom,.flightto{position:relative}
+.datefrom,.datereturn{min-width:12% !important}
+.passengers-picker .inputText{border-radius:0}
+.cabin-picker .inputText{border-radius:0 6px 6px 0}
+.datereturn .inputText{border-radius:0}
+.floating-label{position:absolute;pointer-events:none;left:-5px;top:1px;transition:.2s ease all;color:#555 !important;font-weight:200;padding:20px 26px;font-size:12px;padding:17px 26px;font-size:var(--input-label)}
+.promocodecontent .floating-label{padding:17px 23px}
+.promocodecontent .floating-label.active{padding:5px 17px 0}
+.flightto .inputText{padding-left:15px}
+.flightto .floating-label{position:absolute;pointer-events:none;left:0}
+.flightto input:focus ~ .floating-label,.flightto input:not(:focus):valid ~ .floating-label{left:0}
+.swap{width:28px;height:28px;z-index:5;top:15px;position:absolute;background-color:#fff;transition:-webkit-transform 350ms;transition:transform 350ms;transition:transform 350ms,-webkit-transform 350ms;font-size:28px}
+.swap:focus,.swap:focus{outline:0 solid #528ff4 !important}
+.swap.active{transform:rotate(180deg);transition:-webkit-transform 350ms;transition:transform 350ms;transition:transform 350ms,-webkit-transform 350ms}
+.swapfh{left:-32px;position:relative;top:1px}
+.selectclasstype ul{list-style:none;margin-bottom:0}
+.selectclasstype li{display:inline-block}
+.selectclasstype input{visibility:hidden}
+.selectclasstype label{cursor:pointer;color:#000}
+.selectclasstype input:checked+label{color:var(--primary1);border-bottom:var(--primary1-border);background:none transparent}
+.classtype{display:none}
+.multiflight{display:none}
+.addbutton{border:0;background-color:transparent;color:var(--primary1);padding:10px 0;text-decoration:none;text-align:right;font-size:15px;text-decoration:none;display:flex}
+.removeflight,.addbutton:focus{border:0;outline:0 !important}
+.flightplushotels .datereturn .inputText{min-width:110px;border-radius:0 6px 6px 0;border-right:1px solid #d7d7d7}
+.flighthotelssearchform .datefrom .inputText{border-left:0}
+.flighthoteltriptype{border:1px solid #d7d7d7;min-width:100px;border-width:1px 0 1px}
+.triptype button{padding-left:0}
+.formopentext{font-size:14px;color:#555}
+.flightplushotels .datefrom::after{right:1px}
+.managebookingtitle,.check-intitle,.flightstatustitle,.flightplushotelstitle{letter-spacing:0;color:#555}
+.lastname .inputText{border-radius:0 6px 6px 0;border-left:0}
+.flightstatusform .flightto .inputText{border-left:0}
+.input-group-append{position:absolute;right:3%;height:21px;font-size:0;top:33%;background:url(../../../flights/v1/flights-widget/clientlib/resources/info_icon.svg) no-repeat left top;width:21px}
+.input-group-append button{background:no-repeat;border:0;height:21px;width:21px;font-size:0}
+.input-group-append button:hover,.input-group-append button:active,.input-group-append button:focus{background:none !important;border:none !important;box-shadow:none !important}
+.multicityhr{display:none}
+.removeflight,.addroomclosebtn{width:20px;height:20px;background:url(../../../flights/v1/flights-widget/clientlib/resources/Close.svg) no-repeat left top;font-size:0;color:var(--primary1);border:0;margin:9px 0 0 6px}
+.addroomclosebtn{margin:7px 16px 0 0;font-size:0 !important}
+.onewayTrip .datereturn{display:none}
+.onewayTrip .passengers-picker{border-left:0 solid #d7d7d7;min-width:18%}
+.onewayTrip .datefrom::after{content:none}
+.onewayTrip .datefrom{min-width:15% !important}
+.onewayTrip .multicitychange{width:38.1%}
+.multicityTrip .datereturn{display:none}
+.multicityTrip .datefrom::after{content:none}
+.multicityTrip .datefrom{min-width:25% !important;padding-right:0 !important}
+.multicityTrip .multicitychange{width:100%}
+.multicityTrip .multicitychange .passengers-picker{margin-left:0 !important;border-left:0}
+.multicityTrip .multicitychange .multicitysearchbtn{max-width:23%}
+.multicityTrip .multicityborder .inputText{border-right:1px solid #d7d7d7 !important;border-radius:0 6px 6px 0}
+.multicityTrip .multicityhr{display:flex}
+.multicityTrip .multiflight{display:flex;width:100%}
+.multicityTrip .mulfiglightnew{display:block;width:100%}
+.multicityTrip .mulfiglightnew .multiflight{display:flex;width:100%}
+.multicityTrip .multicitychange .passengers-picker .inputText{border-radius:6px}
+.flightremovebtn{display:none}
+.flightremovebtn label{display:none}
+.mulfiglightnew{display:none}
+.multicityTrip .removeflightbtn label{display:none}
+.multicityTrip .responsiveremovebtn{display:inline-flex}
+.removeflightbtn{display:none}
+.multicityPromocode{display:none}
+.multicityTrip .multicityPromocode{display:inherit}
+.multicityTrip .multicitychange .passengers-picker .inputText{border-radius:6px 0 0 6px}
+.multicityTrip .multicityPromocode .inputText{border-radius:0 6px 6px 0;border-left:0}
+.multicityTrip .multicityborder .inputText,.multicityTrip .multicityborder .t-dates.t-date-check-in{border-right:1px solid #d7d7d7 !important;border-radius:0 6px 6px 0;border-left:1px solid #d7d7d7}
+.multicityTrip .multicityhr{display:none}
+.multiflightnew{display:none}
+.multicityTrip .multiflightnew{display:block}
+.userpreferences.multicity .promocode{display:none}
+.userpreferences .selectclasstype{display:inline-flex}
+.promocode{display:inline-flex}
+.multicityuserpreferences{padding:12px 0}
+.userpreferences .multicityClasstype{display:none}
+.userpreferences.multicity .multicityClasstype{display:inline-flex !important}
+.userpreferences.multicity .selectclasstype{display:none}
+.userpreferences .dropdown{min-width:13%}
+.userpreferences .dropdown button{width:100%}
+.multicityuserpreferences .selectclasstype,.multicityuserpreferences .promocode{display:none}
+.selectclasstype{display:inline-flex}
+.multicityuserpreferences{padding:12px 0}
+.datefrom .inputText{border-right:0 !important}
+.defaultremovebtn{display:none}
+.btn.dropdown-toggle,.btn.dropdown-toggle:hover,.btn.dropdown-toggle:focus,.btn.dropdown-toggle:active{background:none transparent;border:0 solid transparent;outline-offset:0}
+.dropdown.triptype.show{display:block !important}
+.multicityTrip .dropdown.triptype.show{display:inline-block !important}
+.holiday-link picture{width:16px;height:16px;display:inline-block}
+.holiday-link svg{vertical-align:top;margin-top:6px;margin-left:2px}
+.holiday-link:hover svg rect{fill:rgba(92,9,49,1)}
+.holiday-link:hover svg path,.holiday-link:hover svg line{stroke:rgba(92,9,49,1)}
+@media(min-width:768px){a.swap{margin:13px 0 0 -33px;right:47.5%;top:4.5%}
+.flightto .inputText,.passengers-picker .inputText{margin-left:0}
+.datefrom .t-date-check-in{margin-left:-2px}
+}
+span{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input:disabled{background-color:white}
+.tooltip{background-color:#fff;padding:0;margin:0}
+.customtooltip{background-color:#fff;color:#000;padding:0;margin:0}
+.removetooltip{background:url(../../../flights/v1/flights-widget/clientlib/resources/close_btn.png) no-repeat left top}
+.flightsearchform .close-autocomplete,.closeCal{background:url(../../../flights/v1/flights-widget/clientlib/resources/closeIco.gif) no-repeat center center}
+.addcustomwidth-mb.fade{opacity:1 !important}
+@media only screen and (min-width:1280px){.bookingwizard .container{max-width:1192px !important;width:1192px !important}
+.datePickerCol.col-md-3{max-width:20%;flex:0 0 20%}
+.multicityTrip .datePickerCol.col-md-3{max-width:25.5%;flex:0 0 25.5%}
+}
+.flightstatus-dropdown{text-indent:11px;font-size:var(--font-l);font-weight:400;text-transform:capitalize;min-height:60px;border:1px solid #d7d7d7;padding:5px 8px;width:100%;box-shadow:none;color:#333;background-color:transparent;background-image:none;-webkit-appearance:none;-moz-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;appearance:none}
+.flightstatus-dropdown::-ms-expand{display:none}
+.flightstatusdrop.dropdown-toggle::after{top:24px;pointer-events:none}
+.bookingref .inputText{border-radius:6px 0 0 6px}
+.flightstatus-dropdown{border-radius:0 6px 6px 0}
+.multicityPromocode{display:none}
+.multicityTrip .multicityPromocode{display:inherit}
+.multicityTrip .multicitychange .passengers-picker .inputText{border-radius:6px 0 0 6px}
+.multicityTrip .multicityPromocode .inputText{border-radius:0 6px 6px 0}
+.multicityTrip .multicityborder .inputText,.multicityTrip .multicityborder .t-dates.t-date-check-in{border-right:1px solid #d7d7d7 !important;border-radius:0 6px 6px 0}
+.multicityTrip .multicityhr{display:none}
+.multiflightnew{display:none}
+.multicityTrip .multiflightnew{display:block}
+.inputText{padding:27px 0 6px}
+.selectclasstype{display:inline-flex}
+.multicityuserpreferences{padding:12px 0}
+.multicityClasstype{display:none !important}
+.multicityuserpreferences .multicityClasstype{display:inline-flex !important}
+.multicityuserpreferences .selectclasstype{display:none}
+.datereturn .inputText{border-left:0;border-right:0}
+.flightto .inputText,.datefrom .inputText{border-radius:0}
+.flightfrom,.flightto{position:relative}
+.datefrom,.datereturn{min-width:12% !important}
+.cabin-picker .inputText{border-radius:0 6px 6px 0}
+.datereturn .inputText{border-radius:0}
+.calendarblock{max-width:20%}
+.multicitychange{min-width:20%;max-width:20%}
+.triptypeselect{min-width:10%;max-width:10%}
+.triptypeselect,.cabin-picker{border:1px solid #d7d7d7;border-width:1px 0}
+.triptype,.numberofpassenger{margin:0}
+.triptypeselect .floating-label,.cabin-picker .floating-label{top:5px;left:10px;font-size:12px;font-weight:400;opacity:1;color:#555 !important;padding:0}
+.triptypeselect .triptype button,.cabin-picker button{padding:27px 0 5px 10px;border-radius:0;width:100%;max-width:100%;text-align:left;font-size:var(--input-label)}
+.cabin-picker{border-radius:0 6px 6px 0;border-width:1px 1px 1px 0}
+.triptypeselect .triptype button::after{right:2%;top:25px}
+.retrunTrip .triptypeselect .triptype button::after{right:2%}
+.cabin-picker .cabintype button::after{right:2%;top:25px}
+.onewayTrip .t-dates.t-date-check-in::after{display:none}
+.cabin-picker .dropdown-menu.show{right:-2px;left:auto !important}
+@media only screen and (min-width:1025px){.cabin-picker .dropdown-menu.show{min-width:227px}
+}
+.multicityTrip .cabin-picker .dropdown-menu.show{min-width:200px}
+.cabin-picker .dropdown-menu .input-group-append{top:-6px;right:-5px;position:relative;display:inline-flex;left:auto}
+.cabin-picker .dropdown-menu .input-group-append button{padding:0;margin:0;font-size:0 !important}
+.cabin-picker .dropdown-menu .dropdown-item{padding:10px 18px;display:inline-flex}
+.cabin-picker .cabinClass-tooltip{background-color:#e2e2e2;padding:5px;font-size:12px;letter-spacing:0;padding:10px 13px;margin-bottom:10px;border-radius:6px;display:none}
+.cabinClass-tooltip .removetooltip{min-width:20px !important;width:20px !important}
+.cabinClass-tooltip p{line-height:20px;color:#000;font-size:var(--font-xs);letter-spacing:0}
+.formsubmit{display:inline-flex;max-width:48%;margin-left:1%}
+.cabintooltip-icon{left:-15px;min-width:21px !important}
+.responsivedropoverlay ul{transform:none !important}
+.removetooltip{font-size:0 !important}
+@media(min-width:768px){a.swap{margin:13px 0 0 -33px;right:47.5%;top:4.5%}
+}
+@media(max-width:736px){.triptypeselect .floating-label,.cabin-picker .floating-label{top:-7px;left:-10px}
+.triptype,.numberofpassenger{padding-right:0;width:100%}
+.multicitychange{min-width:35%}
+.triptypeselect{min-width:35%}
+.cabin-picker{max-width:64.6%}
+.calendarblock{min-width:65% !important}
+.triptypeselect{border-width:1px 0 1px 1px;border-radius:6px 0 0 6px}
+.triptypeselect .triptype button,.cabin-picker button{padding:23px 0 2px 10px !important}
+.t-dates.t-date-check-in{border-radius:0 !important}
+.calendarblock .t-check-out .t-dates{border-left:0 solid #d7d7d7 !important}
+.navmobilewidth{width:94%}
+.responsivedropoverlay{position:fixed;display:none;height:100%;top:auto !important;left:0;right:0;bottom:0 !important;background-color:rgba(0,0,0,0.5);z-index:40;cursor:pointer}
+.responsivedropoverlay ul{background:#fff;padding:20px 15px;font-weight:400;margin:0;border-radius:7px 7px 0 0;float:none;width:100%;max-width:100%;top:auto !important;bottom:0 !important;transform:none !important}
+.triptype.show .responsivedropoverlay,.cabintype.show .responsivedropoverlay{display:inline-flex}
+.responsivedropoverlay button{min-width:20px !important;width:auto !important}
+.responsivedropoverlay label{padding-top:5px !important}
+.cabin-picker .dropdown-menu.show{right:auto}
+}
+.responsive-menu-overlay{display:none}
+.passengers-picker .passengerselectinput::after{padding-top:1px;font-family:icomoon !important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;content:'\e928' !important;border:0 !important;color:#a29a92;background:0;font-size:6px;position:absolute;width:17px;height:17px;z-index:9;right:5px;top:15px}
+.multicityTrip .multicitychange{min-width:75.5%}
+.multicityTrip .multicitysearchbtn{max-width:23%}
+.multicityTrip .multicitysearchbtn .multicitysearchbtn{min-width:100%}
+.multicityTrip .mulfiglightnew{min-width:33% !important}
+.multicityTrip .triptypeselect{width:100%;min-width:100%;border:0}
+.multicityTrip .calendarblock{max-width:25%}
+.multicityswitch{display:none}
+.multicityTrip .triptypeselect .triptype{min-width:25%;border:1px solid #d7d7d7 !important;border-radius:6px;width:25%}
+.multicityTrip .triptypeselect .triptype button::after{right:4%;top:23px}
+.multicityTrip .cabin-picker,.multicityTrip .passengers-picker,.multicityTrip .multicityPromocode{max-width:22.2%;padding:0 !important;margin:0 !important}
+.multicityTrip .promocode{display:none}
+.multicityTrip .formsubmit{min-width:100%}
+.multicityTrip .cabin-picker{border-radius:0}
+.passengers-picker .inputText{border-left:0}
+.multicityTrip .passengers-picker .inputText{border-left:1px solid #d7d7d7}
+.triptypeselect{border-left:1px solid #d7d7d7}
+.multycitycabinclass{display:none}
+.multicityTrip .multycitycabinclass{display:block}
+.multicityTrip .roundtripcabinclass{display:none}
+@media(max-width:736px){.multicityTrip .multicitychange{min-width:100%}
+.multicityTrip .multicitychange .passengers-picker{min-width:35%}
+.multicityTrip .cabin-picker{border-radius:0 6px 6px 0;min-width:65%}
+.multicityTrip .triptypeselect .triptype{min-width:100%;width:100%}
+.multicityTrip .multicityPromocode{max-width:100%}
+.passengers-picker{max-width:35%}
+.multicitychange{min-width:100%}
+.promocode{display:inline-flex !important;text-align:left;margin-left:0 !important;padding:0 0 16px !important}
+.promocode a.more{margin-left:0 !important}
+.promocodecontent{position:relative !important;top:0 !important;right:0 !important;margin-right:0 !important}
+.promocode .inputText{border-radius:6px}
+.multicityTrip .multicitysearchbtn{max-width:100% !important}
+.multicityTrip .multicityPromocode{display:none}
+.multicityTrip .mulfiglightnew{padding:10px 0 18px}
+.formsubmit{max-width:100%;flex:0 0 100%;margin:0}
+.triptypeselect .triptype button::after,.cabin-picker .cabintype button::after{right:2% !important;top:25px !important}
+.multicityTrip .calendarblock{max-width:100%}
+.cabin-picker .dropdown-menu .input-group-append{top:18px !important;float:right}
+.t-check-in .t-date-info-title,.t-check-out .t-date-info-title{font-size:12px !important;top:5px !important;left:16px !important}
+.dropdown-menu.show .drop-arrow-top{display:none}
+.cabin-picker .dropdown-menu.show,.triptype .dropdown-menu.show{top:auto !important}
+.multicityTrip .form-group{margin-bottom:8px !important}
+.dropdown-menu li{border-bottom:1px solid #d7d7d761}
+.dropdown-item{padding:18px 0 !important}
+}
+.dropdown-menu.show{position:absolute;top:68px !important;border:1px solid #d7d7d7;z-index:10}
+.drop-arrow-top,.drop-arrow-top::after{border-width:10px;border-style:solid;border-color:transparent transparent #ddd;display:inline-block;position:absolute}
+.drop-arrow-top::after{top:-9px;left:-10px;content:'';border-width:10px;border-bottom-color:#fff}
+.dropdown-menu.show .drop-arrow-top{top:-20px;left:13px}
+.cabintype .dropdown-menu.show .drop-arrow-top{top:-21px;right:73px;left:auto}
+.triptype .dropdown-menu.show{left:12px}
+@media(max-width:768px){div:focus,input:focus,span:focus,a:focus,button:focus,select:focus{outline:none !important}
+.flightstatus{display:none !important}
+.dropdown-menu.show{position:absolute;left:0 !important}
+.passengers-picker .inputText,.bw-autocomplete .inputText,.inputText{font-size:22px !important}
+.inner-tabs li:first-child{padding-left:40px !important}
+.inner-tabs li{flex:0 1 auto !important;padding:0 20px !important;text-align:center}
+.inner-tabs li a{font-size:15px}
+.nav.inner-tabs li a:hover,.nav.inner-tabs li a:focus{text-decoration:none !important}
+}
+@media screen and (min-width:1024px){.bookingwizard .container{min-width:1020px;max-width:100%}
+.wizardpane li a.nav-link{font-size:var(--font-m);line-height:1.5}
+.managebooking a,.managebooking a.active{background-position:23% center}
+.check-in a,.check-in a.active{background-position:31% center}
+.flightstatus a,.flightstatus a.active{background-position:27% center}
+.triptypeselect .triptype button,.cabin-picker button{min-width:88px;height:58px}
+.inputText{font-size:17px !important}
+.triptypeselect,.cabin-picker,.flightplushotels .cabin-picker{height:60px}
+.dateRangePic input[type=text].t-day-check-in,.dateRangePic input[type=text].t-day-check-out{font-size:16px !important}
+.t-dates.t-date-check-in,.t-check-out .t-dates{height:60px;padding:30px 15px 25px 15px !important}
+.cabin-picker .cabintype button::after{right:1%;top:23px}
+}
+@media only screen and (min-width:768px){.flightsearchform.multicityTrip .triptype{padding-right:0}
+.passengers-picker{flex:1 0 49%}
+}
+span.promoCodePlusIcon{font-size:19px}
+.flightsearchform .dropdown-toggle:focus{outline:2px solid #6181ba;height:56px;z-index:2}
+.flightsearchform .btn:focus{box-shadow:none}
+.flightsearchform .mulfiglightnew .addbutton{display:inline-block}
+.bpg-logo-bottom,.bpg-logo-top{background:url("../../../../../../../../etc/designs/qrweb/homepageClientlibs/images/bpg.png") no-repeat;padding:12px 27px 0;font-family:jotia;font-size:16px;background-size:20px 20px}
+.bpg-logo-bottom{display:block;background-position:left 13px !important}
+.multicityTrip .bpg-logo-top{float:right;background-size:20px 20px;padding-right:0;background-position:left 11px !important}
+.bpg-logo-top{display:none}
+.dropdown-menu{margin:0;padding:0}
+.dropdown-menu.show{position:absolute;top:68px !important;border:1px solid #d7d7d7}
+.dropdown-item{padding:.4rem .8rem}
+.triptype .dropdown-item{padding:.6rem .8rem}
+.dropdown-item:focus,.dropdown-item:hover,.dropdown-item:active,.cabintype li:hover,.cabintype li:focus,.cabintype li:active{color:#16181b;text-decoration:none !important;background-color:#f2f2f2 !important}
+.dropdown-menu.show .drop-arrow-top{top:-21px;left:13px}
+.btn-dark:active,.btn-dark:focus,.btn-dark:hover{color:#fff;background:#3e0621;border-color:var(--primary1)}
+.plusbtn.btn:active,.plusbtn.btn:hover,.plusbtn.btn:focus,.minusbtn.btn:active,.minusbtn.btn:hover,.minusbtn.btn:focus{background-color:var(--primary1) !important;color:#fff !important}
+.plusbtn.btn:active:focus,.minusbtn.btn:active:focus,.plus.btn:active:focus,.minus.btn:active:focus{outline:2px solid #6181ba !important;outline-offset:-3px !important}
+@media only screen and (max-width:767px){.flightto .floating-label.active,.flightfrom .floating-label.active{left:-10px !important}
+.flightto .floating-label,.flightfrom .floating-label{left:-8px !important}
+.flightsearchform .bpg-mobile a{position:relative;left:13px}
+.responsivepaxbartitle{padding-bottom:10px}
+.multicityTrip .t-date-check-in .t-date-info-title{left:13px !important}
+.multicityTrip .t-date-check-in .t-day-check-in{left:-1px !important}
+}
+.removeflightbtn .removeflight:focus,#mulfiglightnew .addbutton:focus,.passengers-drop .fieldwrap .no-gutter .regular-select-element:focus,.passengers-drop label:focus,.passengers-drop .passengertooltip .tooltip-icon:focus,.errorvalidationmessage:focus,.cabintooltip-icon:focus,.passengers-drop .tooltip-content .removetooltip:focus,.passengers-drop .addroomlink:focus,.errormessageManageBooking:focus,.errormessageCheckin:focus,#trackFlightErrorBlock:focus,.dropdown-menu li a:focus,#myTab .nav-item a:focus,.check-intitle:focus,.managebookingtitle:focus,.flightstatustitle:focus,.dohastop:focus,#ihavePromo:focus,.bookingwidget-wrapper .submitbutton:focus,.paxconfirm:focus,.bookingwidget-wrapper .enableflexibleDate .confirmBtn:focus{outline:2px solid #6181ba !important;z-index:2}
+#flightstatus .flightstatus-dropdown:focus{outline:2px solid #6181ba !important;z-index:2}
+#book-flight .cabintype li:hover,#book-flight .cabintype li:focus,#book-flight .cabintype li:active,#flight-hotel .cabin-picker li:hover,#flight-hotel .cabin-picker li:focus,#flight-hotel .cabin-picker li:active{background:var(--primary1) !important;transition:background .2s ease !important}
+#book-flight .triptype .dropdown-item:hover,#book-flight .triptype .dropdown-item:active{color:#fff !important;background:var(--primary1) !important}
+.cabintype .dropdown-item:focus,.cabintype .dropdown-item:hover,.cabintype .dropdown-item:active,.cabintype li:hover,.cabintype li:focus,.cabintype li:active,#flight-hotel .cabin-picker .dropdown-item:focus,#flight-hotel .cabin-picker .dropdown-item:hover,#flight-hotel .cabin-picker .dropdown-item:active{color:none !important;background:none !important}
+#book-flight .dropdown-menu li:hover .dropdown-item,#flight-hotel .dropdown-menu li:hover .dropdown-item{color:#fff !important}
+.fifa-shuttle-enabled .calendar-buttons label{display:none !important}
+.fifa-shuttle-enabled .icon-bw-swap,.fifa-shuttle-enabled .calendar-header{display:none}
+.fifa-shuttle-enabled .twitter-typeahead h3.show-title{display:none !important}
+.fifa-shuttle-enabled .calendar-header,.fifa-shuttle-enabled .calendar-container .t-prev,.fifa-shuttle-enabled .calendar-container .t-next{display:none !important}
+.fifa-shuttle-enabled .btn.reset-cal-btn:active,.fifa-shuttle-enabled .btn.reset-cal-btn:focus,.fifa-shuttle-enabled .btn.reset-cal-btn:hover{background:#8e2157 !important;border-radius:100px !important;color:#fff}
+.fifa-shuttle-enabled .calendar-buttons .reset-cal-btn{color:#8e2157;background:0;border:1px solid #8e2157;border-radius:100px !important}
+.fifa-shuttle-enabled .btn.confirmBtn{border:1px solid #8e2157;background:#8e2157;border-radius:100px !important}
+.fifa-shuttle-enabled .btn.confirmBtn:active,.fifa-shuttle-enabled .btn.confirmBtn:focus,.fifa-shuttle-enabled .btn.confirmBtn:hover{background:#8e2157 !important;color:#fff}
+@media only screen and (min-width:768px){#managebooking .submitbutton,#checkin .submitbutton,#flightstatus .submitbutton{padding:15px 25px 14px}
+#flightstatus .flightto .floating-label{left:-5px !important}
+#flightstatus .flightto .floating-label.active,#flightstatus .flightto.filled .floating-label{padding:5px 17px 0}
+#flightstatus .flightto .inputText{padding-left:0 !important}
+#flightstatus #flightDateRange{padding-left:12px !important}
+}
+@-moz-document url-prefix(){#flightstatus #flightDateRange{line-height:48px}
+}
+#main.accessbilityDisabled #myTab .nav-item a:focus,#main.accessbilityDisabled .bookingwidget-wrapper .submitbutton:focus,#main.accessbilityDisabled .paxconfirm:focus,#main.accessbilityDisabled .bookingwidget-wrapper .enableflexibleDate .confirmBtn:focus{outline:none !important}
+@media(max-width:768px){.hero-image-teaser .teaser-box-new.text-white a.knowmore{font-size:var(--font-m) !important}
+.triptypeselect .triptype button,.cabin-picker button{padding-top:26px !important}
+.triptypeselect .floating-label,.cabin-picker .floating-label{top:-4px !important;left:-12px !important}
+.passengers-picker .floating-label.active{top:-3px !important}
+.t-check-in .t-date-info-title,.t-check-out .t-date-info-title{left:10px !important}
+.t-dates.t-date-check-in,.t-dates.t-date-check-out{padding-left:10px !important}
+.flightto.autoComplete-open .floating-label,.flightfrom.autoComplete-open .floating-label,.flightto.autoComplete-open .floating-label{left:22px !important}
+.flightto .floating-label,.flightfrom .floating-label{left:-10px !important;padding:21px 22px !important}
+.covidmodal .modal-title{padding-left:0 !important}
+.covidmodal .modal-header{padding-left:15px !important}
+.dropdown-toggle::after{top:25px !important}
+.managebooking a,.managebooking a.active{background-size:18px 18px}
+.check-in a.active,.check-in a{background-size:18px 18px}
+.booking a,.booking a.active{background-size:19px 19px}
+.footer-column h4#title-links{text-align:center}
+.destinationpricecomponent .dpcomponent .container{margin-top:29px !important}
+.flightsearchform .tt-menu{max-width:96% !important}
+.fifa-shuttle-enabled .calendar-buttons div:first-child{max-width:30% !important}
+.fifa-shuttle-enabled .calendar-buttons div:last-child{max-width:70% !important;flex:0 0 70% !important;padding-bottom:10px}
+}
+.destinationpricecomponent .dpcomponent .container{margin-top:29px !important}
+a.btn.btn-dark.btn-back-to-top.scrolled+.tooltip>.tooltip-inner{border-radius:0 !important}
+.bookingwizard .bookingwidget-wrapper{box-shadow:0 15px 32px -10px rgb(108 117 125 / .1),0 4px 11px -3px rgba(0,0,0,0.25)}
+.appstore .icon-cross{right:2%}
+.flightsearchform .tt-menu .railCity::before{background:url(../../../flights/v1/flights-widget/clientlib/resources/ic_nav_train.svg) no-repeat 0 0}
+.flightsearchform .tt-menu .busCity::before{background:url(../../../flights/v1/flights-widget/clientlib/resources/ic_nav_bus.svg) no-repeat 0 0}
+.flightsearchform .tt-menu .flyCity::before{background:url(../../../flights/v1/flights-widget/clientlib/resources/ic_nav_plan.svg) no-repeat 0 0}
+.flightsearchform .tt-menu .locationCity::before{background:url(../../../flights/v1/flights-widget/clientlib/resources/ic_nav_Location.svg) no-repeat 0 0}
+#book-flight .passengers-picker .inputText{border-radius:0 6px 6px 0}
+@media(max-width:769px){.passengers-picker .inputText,.bw-autocomplete .inputText,.inputText,.triptypeselect .btn,.cabintype .btn{font-size:22px !important}
+#book-flight .passengers-picker .inputText{border-radius:6px !important}
+}
+a#premiumclass span{padding-left:5px}
+@media only screen and (max-width:769px){.dateRangePic input[type=text].t-day-check-in,.dateRangePic input[type=text].t-day-check-out{top:-4px !important;font-size:22px !important}
+.paxbar .btn-white.minusbtn,.paxbar .btn-white.plusbtn{height:42px !important;line-height:42px !important}
+.paxbar .btn-white.minusbtn{line-height:12px !important}
+}
+@media only screen and (min-width:769px){.paxbar .plusbtn,.paxbar .minusbtn{line-height:42px !important;padding-top:0 !important;text-align:center}
+.paxbar .plusbtn{padding-left:15px !important;padding-right:31px !important}
+.paxbar .regular-select-element{padding-left:15px !important}
+}
+span.tabLabel{display:block;line-height:0;text-align:right;font-size:10px;position:relative;top:3px;color:var(--primary1)}
+.sticky-error.errorvalidationmessage{display:none}
+.hero-image{display:inline-block;background:none !important}
+.deActiveFlightsHotel .flightplushotels.active{display:none}
+;.errorview{outline:1px solid #b50000 !important;outline-offset:-1px}
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){.errorview{z-index:1}
+}
+.t-dates.t-date-check-out.errorview{margin-right:1px !important}
+.t-dates.t-date-check-in.errorview{margin-right:1px !important}
+.errorvalidationmessage,.errormessageManageBooking,.errormessageCheckin,.bookingwizard .error .input-base-msg-box,.errormessageFlightsStatus{border:1px solid #b50000;background-color:#f7e5e5;padding:15px;border-radius:6px;color:#b50000}
+.errorvalidationmessage li,.errormessageManageBooking li,.errormessageCheckin li,.errormessageFlightsStatus li,.bookingwizard .error .input-base-msg-box ul li{list-style-type:disc;margin-left:15px;padding-left:0}
+input#flightStatusto[disabled]{background:#ebebeb}
+.bookingwizard .error .input-base-msg-box{display:block}
+.bookingwizard .error .input-base-msg-box ul li:before{content:'';display:none}
+.promocode{float:none;min-height:35px}
+.promocode a.more,.respromocode a.more{color:var(--primary1);text-decoration:none;text-align:right;font-size:15px;text-decoration:none;display:inline-block}
+.promocode a.more:hover,.respromocode a.more:hover{background-color:none !important}
+.promocodecontent{position:absolute;top:-30px;outline:0;right:0;min-width:175px;padding:0;margin-right:0;display:none}
+.text-hide{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0;position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+.promocode .inputText{min-height:auto;padding:23px 0 0;border-width:1px}
+.respromocode{display:none}
+.promocode{display:inline-flex}
+.multicityuserpreferences .promocode{display:none}
+.selectclasstype,.promocode{display:inline-flex;padding-right:20px}
+.promocode a.more,.respromocode a.more{color:var(--primary1);padding:20px 0;text-decoration:none;text-align:right;font-size:var(--font-s);text-decoration:none;display:inline-block;margin-right:28px}
+.promocode a.more:hover,.respromocode a.more:hover{background-color:none !important}
+.promocodecontent{position:absolute;top:0;outline:0;padding:0;display:none}
+.userpreferences{padding:10px 0}
+.promocode a.more{padding:0}
+.promocode .inputText{min-height:60px !important;border-width:1px;border-radius:6px}
+.promocode .inputText:focus{outline-width:0}
+@media(max-width:736px){.respromocode{display:flex !important}
+.respromocode a.more{padding:0 0 13px !important;font-size:12px !important}
+}
+@media all and (-ms-high-contrast:active),(-ms-high-contrast:none){*::-ms-backdrop,.promocodecontent{top:-35px}
+}
+.stopindohapreferences{display:flex;box-shadow:0 9px 18px -17px rgba(0,0,0,0.1),0 0 6px -1px rgba(0,0,0,0.1);-webkit-box-shadow:0 9px 18px -17px rgba(0,0,0,0.1),0 0 6px -1px rgba(0,0,0,0.1);margin-bottom:20px !important;border:1px solid #dcdcdc;border-radius:6px}
+.whenin-journey,.howmany-days{padding:15px 0;margin-bottom:0}
+.whenin-journey{width:60%;display:inline-block}
+.howmany-days{margin-left:0;display:inline-block;width:40%;border-left:1px solid #dcdcdc}
+.dohastop{color:#333;font-size:15px;letter-spacing:0;display:inline}
+.onpagetip{position:relative;display:inline-flex;top:-3px !important;right:-5px}
+.stopindoha .datereturn .inputText{border-right:1px solid #e4e4e4;border-radius:0 6px 6px 0}
+.stopindoha .onewayTrip .datefrom .inputText{border-right:1px solid #e4e4e4 !important;border-radius:0 6px 6px 0}
+.stopindohapreferences p{color:#000;font-size:15px;letter-spacing:0;line-height:27px}
+.stopindohapreferences p,.custom-control,.duration-custom-radio{display:inline-flex}
+.custom-control-input{position:absolute;left:0;z-index:-1;width:1.25rem;height:1.375rem;opacity:0}
+.custom-control-label{position:relative;margin-bottom:0;vertical-align:top;color:#000;font-size:var(--font-m)}
+.custom-radio .custom-control-input:checked~.custom-control-label::before{background-color:#fff}
+.custom-control-input:checked~.custom-control-label::before{color:#fff;border-color:#ccc}
+.custom-radio .custom-control-label::before{border-radius:50%}
+.custom-control-label::before,.custom-file-label,.custom-select{-webkit-transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,background-size 5s ease-in-out;transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,background-size 5s ease-in-out}
+.custom-control-label::before{position:absolute;top:.125rem;left:-1.75rem;display:block;width:1.25rem;height:1.25rem;pointer-events:none;content:"";background-color:#fff;border:#ccc solid .125rem}
+.custom-radio .custom-control-input:checked~.custom-control-label::after{-webkit-transition:background-size .15s ease-in-out;transition:background-size .15s ease-in-out;background-size:80%}
+.custom-radio .custom-control-input:checked~.custom-control-label::after{background-image:url(../../../flights/v1/flights-widget/clientlib/resources/customradio.svg)}
+.custom-radio .custom-control-label::after{-webkit-transition:background-size .15s ease-in-out;transition:background-size .15s ease-in-out;background-size:0}
+.custom-control-label::after{position:absolute;top:.125rem;left:-1.75rem;display:block;width:1.25rem;height:1.25rem;content:"";background:no-repeat 50%/50% 50%}
+.stopoverwarning p{padding:5px 5px 5px 35px;background:#fff3cd url(../../../flights/v1/flights-widget/clientlib/resources/alert_icon.svg) no-repeat 8px center;background-size:1.7%;font-size:14px;letter-spacing:0;color:#000;border-radius:5px;line-height:20px}
+.stopoverdays{display:flex}
+.stopoverdays .count{color:#000;display:inline-block;vertical-align:top;font-size:var(--font-l);font-weight:400;line-height:30px;padding:0 2px;width:48px;text-align:center;border:1px solid #ccc;border-width:1px 0 1px 0;padding:6px 0 4px 0}
+.stopoverdays .plus,.stopoverdays .minus{cursor:pointer;display:inline-block;vertical-align:top;color:var(--primary1);padding:3px 14px 2px 15px;font-size:30px;font-weight:400;text-align:center;border:1px solid #ccc;line-height:24px}
+.stopoverdays .plus{border-radius:0 6px 6px 0;padding:9px 18px 6px 18px}
+.stopoverdays .minus{border-radius:6px 0 0 6px;padding:6px 18px 9px 18px}
+.minus:hover,.plus:hover,.minus:active,.plus:active,.minus:focus,.plus:focus{background-color:var(--primary1) !important;color:#fff}
+#tripType.btn:active,#tripType.btn:focus,#tripType.btn:hover{color:#333}
+@media(max-width:768px){.whenin-journey,.howmany-days{width:100% !important;height:auto;padding:25px 0}
+.howmany-days{margin-left:0 !important;border-top:1px solid #dcdcdc;margin-bottom:0;border-left:0}
+.dohastop{margin-bottom:20px}
+.whenin-journey p,.howmany-days p,.stopoverwarning p{line-height:20px}
+.stopoverwarning p{background-position:8px 5px;background-size:20px}
+}
+@media only screen and (min-device-width :768px) and (max-device-width :1024px){.howmany-days{width:39.8%}
+}
+input.custom-control-input[type=radio]:checked+label{background:0}
+.whenin-journey p,.howmany-days p{margin-bottom:0}
+.stopindoha-tooltipContent,.stopindohapreferences,.stopoverwarning{display:none}
+.enable-stopindoha{display:flex}
+.flightsearchform{width:100%}
+.removebpg{display:none !important}
+.enable-stopindoha .cashplusmilesinfo{display:none !important}
+.duration-custom-radio .custom-control-label{padding-top:2px}
+.inner-page .duration-custom-radio .custom-control-label{padding-top:3px}
+@media only screen and (min-width:768px){.standalone-stopover-BW .enable-stopindoha{width:100%}
+.standalone-stopover-BW .covidInfolink{margin-top:0;margin-bottom:15px}
+}
+.cashplusmilesinfo{font-size:var(--font-xs);font-size:var(--font-xs);color:#333;background:url(../../../flights/v1/flights-widget/clientlib/resources/cash_avios_icon.svg) no-repeat left top}
+.cashplusmilesinfo.emdinfo{background:url(../../../flights/v1/flights-widget/clientlib/resources/emd_icon.svg) no-repeat left top}
+.cashplusmilesinfo label{padding-left:35px;font-weight:500;margin-bottom:6px;padding-top:3px}
+.cashplusmilesinfo ul{display:flex;float:left;margin-left:35px}
+.cashplusmilesinfo ul li{padding-left:22px;background:url(../../../flights/v1/flights-widget/clientlib/resources/tick_icon.svg) no-repeat left 1px;font-size:12px;color:#555}
+.cashplusmilesinfo ul li:first-child{margin-right:30px}
+@media(max-width:736px){.cashplusmilesinfo ul{display:none}
+.cashplusmilesinfo{margin-top:10px;margin-bottom:10px}
+}
+@media(max-width:992px){.cashplusmilesinfo ul{display:none}
+.cashplusmilesinfo{margin-top:10px;margin-bottom:10px}
+.cashplusmilesinfo label{font-weight:400}
+}
+.redemption-flow-content label input[type="checkbox"]+span{font-size:15px;color:#333;font-weight:400;position:relative;z-index:9;display:inline-block;margin:0;line-height:17px;min-height:14px;min-width:14px;margin-right:5px;padding-left:30px;padding-top:2px}
+.redemption-flow-content label input[type="checkbox"]{position:relative;top:16px}
+.redemption-flow-content.redemption-flow-dektop label input[type="checkbox"]{left:4px}
+.redemption-flow-content label input[type="checkbox"]{opacity:0}
+.redemption-flow-content .checkbox-label:before{content:'';position:absolute;top:0;width:20px;height:20px;border:1px solid #d7d7d7;background-color:#fff;border-radius:5px;transition:background .2s ease}
+.redemption-flow-content .checkbox-label:after{content:'';position:absolute;top:0;font-family:icomoon !important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;font-size:var(--font-m);line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:var(--primary1);width:0;pointer-events:none;transition:all .2s ease;overflow:hidden/*!rtl:raw: right: 1px;*/}
+.redemption-flow-content label input[type="checkbox"]:checked+span:after{text-align:center;width:20px;height:20px;background-color:var(--primary1);border-radius:5px;font-weight:normal;margin-top:0;content:'\f00c';font-family:icomoon !important;font-size:14px;color:#fff;line-height:20px}
+.redemption-flow-content.redemption-flow-dektop .checkbox-label:after,.redemption-flow-content.redemption-flow-dektop .checkbox-label:before{left:0}
+.mobi-redemption-flow{display:none}
+.multicityTrip .redemption-flow-content,.enable-stopindoha .redemption-flow-content{display:none !important}
+.redemption-flow-content label{display:inline-grid;position:relative;top:-14px}
+.redemption-content{max-width:100%;margin:0 auto;padding:0 15px;position:relative;z-index:1}
+.redemption-content-inner{position:absolute;width:40%;padding:15px;top:-10px;border-radius:5px;background:#4a525d}
+.desktop-redem-content .redemption-content-inner{left:-94px}
+.redemp-arrow{position:absolute}
+.desktop-redem-content .redemp-arrow{left:40%;top:-11px}
+.redemp-arrow:after{position:absolute;top:-9px;left:-8px;content:'';border-width:10px;border-style:solid;border-color:transparent transparent #4a525d}
+.redemption-content-inner p{color:#fff;font-size:14px}
+.redemption-content.closeredem-tooltip{display:none !important}
+@media(max-width:768px){.mobi-redemption-flow{display:block}
+.redemption-flow-dektop{display:none}
+.redemption-flow-content label{width:100%;top:0;padding:10px 0 15px}
+.redemption-flow-content.mobi-redemption-flow label input[type="checkbox"]{position:absolute;top:4px;right:8px}
+.redemption-flow-content label input[type="checkbox"]+span{padding:0}
+.redemption-flow-content.mobi-redemption-flow .checkbox-label:before,.redemption-flow-content.mobi-redemption-flow .checkbox-label:after{right:0}
+.mobile-redem-content .redemption-content-inner{width:44%;right:0;height:90px;top:-145px}
+.mobile-redem-content .redemp-arrow{right:15px;bottom:2px}
+.mobile-redem-content .redemp-arrow:after{top:1px;transform:rotate(180deg)}
+}
+.hero-image{display:inline-block;background:none !important}
+.stickyBW #header{height:81px;transition:height 1s}
+.stickyBW .header-inner{display:none !important}
+.stickyBW #flights-search-from{position:fixed;top:0;left:0;right:0;z-index:33;background:#fff;margin:auto !important;width:100%;padding:10px 15px;height:80px;transition:height 1s}
+.stickyBW #book .inner-tabs{display:none}
+.stickyBW .header.nav-up{background-color:#fff;box-shadow:0 7px 15px rgb(0 0 0 / 25%);border-bottom:1px solid #eff0f1;z-index:32 !important;top:0 !important}
+.stickyBW .qr-datepicker-day.qr-datepicker-days{top:79px}
+.stickyBW .t-arrow-top{top:59px}
+.qr-datepicker-open .stickyBW .header{z-index:32 !important;top:0 !important}
+.stickyBW .modal-bg{position:fixed;top:0;left:0;z-index:31;width:100vw;height:100vh;background-color:#000;opacity:.5}
+.sticky-error.errorvalidationmessage{display:none}
+.stickyBW .sticky-error.errorvalidationmessage{display:none;border:0;background:0;padding:8px;position:absolute;top:60px}
+.stickyBW #flights-search-from .formsubmit{position:absolute;transition:top 1s}
+.stickyBW #flights-search-from.collapse-fields .formsubmit{top:-59px;right:5px}
+.stickyBW #flights-search-from.expand-fields .formsubmit{top:-10px;right:5px}
+.stickyBW #flights-search-from.expand-fields .promocodecontent{top:-9px}
+.stickyBW #flights-search-from.collapse-fields .promocode,.stickyBW #flights-search-from.collapse-fields .passengers-picker{display:none}
+.stickyBW #flights-search-from.expand-fields .promocode{display:inline-flex}
+.stickyBW #flights-search-from.expand-fields .passengers-picker{display:block}
+.stickyBW #flights-search-from.collapse-fields .form-group{margin-bottom:0}
+.stickyBW #flights-search-from .triptypeselect,.stickyBW .t-dates.t-date-check-in,.stickyBW .t-check-out .t-dates{height:61px}
+.stickyBW .onewayTrip.collapse-fields .datefrom{border-right:1px solid #ccc;border-radius:0 6px 6px 0}
+.stickyBW #flights-search-from.collapse-fields .formsubmit{max-width:46%}
+.stickyBW #flights-search-from.collapse-fields .sticky-error{display:none !important}
+.stickyBW #flights-search-from.collapse-fields.retrunTrip .qr-datepicker .t-dates.t-date-check-out{border-radius:0 6px 6px 0}
+.stickyBW #flights-search-from.collapse-fields.onewayTrip .qr-datepicker .t-dates.t-date-check-in{border-radius:0 6px 6px 0}
+.stickyBW .cashplusmilesinfo,.stickyBW .redemption-flow-content{display:none !important}
+@media(min-width:1024px){.stickyBW #flights-search-from{max-width:100%}
+}
+@media(min-width:1200px){.stickyBW #flights-search-from{max-width:1140px}
+}
+@media(min-width:1200px){.stickyBW #flights-search-from{max-width:1192px}
+}
+.passengers-drop{position:absolute;z-index:10;min-width:380px;right:-115px;display:none;margin-top:10px}
+.passengers-drop .passengers-arrow-show{top:-20px}
+@media only screen and (min-width:769px){.multicityTrip .passengers-drop{left:-19%}
+}
+.paxbar label{padding-left:0}
+.paxbar .fieldwrap{padding-right:0;padding-left:0}
+.paxbar .passengertooltip{position:relative;display:inline-flex;top:9px;right:7px}
+.paxbar .adulttip{background-color:#efefef;padding:5px;font-size:12px;letter-spacing:0;padding:10px 13px;margin-bottom:15px;border-radius:6px;color:#000}
+.paxbar .adulttip label{font-size:14px;font-weight:500;line-height:15px}
+.removetooltip{font-size:0;border:0;width:20px;background-size:80%;height:20px}
+.paxbar .adulttip p{line-height:20px;color:#000;font-size:var(--font-xs);letter-spacing:0;white-space:normal}
+.paxconfirm{padding:13px}
+.addpassengers{left:-5.75% !important;top:41px;width:100%}
+.addpassengerbtn{background:0;color:#000;border:0;line-height:0}
+.addpassengerbtn:focus{border:0;outline:0}
+.responsivepaxbartitle{display:none}
+.addpassengers .passengers-arrow-show{right:77% !important}
+.addroomlink{color:var(--primary1);padding:10px 0;display:inline-block}
+.defineage{font-size:13px !important;display:block;line-height:21px !important}
+.selectages{display:inline-block;min-width:32% !important;margin-right:1.3%;content:initial}
+.selectages label{font-size:12px !important;line-height:0 !important;padding-left:10px !important}
+.selectages select{margin-top:-25px;padding:21px 17px 6px 6px;height:50px;border-radius:6px}
+.dupmobilelabel{line-height:19px !important;font-weight:500 !important;margin-top:10px !important}
+.dupmobilelabel span{font-size:12px}
+.tooltip{background-color:#fff;padding:0;margin:0}
+.customtooltip{background-color:#fff;color:#000;padding:0;margin:0}
+.dateRangePic input[type=text]{width:auto !important}
+.t-next,.t-prev,.t-table-condensed th{color:black !important}
+.t-datepicker-days{width:100% !important}
+.fieldwrap .leftbtn{border-radius:6px 0 0 6px !important}
+.fieldwrap .rightbtn{border-radius:0 6px 6px 0 !important}
+.numberofpassengers{padding:0 0 0 15px;align-items:center}
+.numberofpassengers label{height:18px;color:#000}
+.passengers-arrow-show,.passengers-arrow-show::after{border-width:10px;border-style:solid;border-color:transparent transparent #ddd;display:inline-block;position:absolute}
+.passengers-drop .passengers-arrow-show{top:-20px}
+.passengers-arrow-show{top:42px;z-index:9999}
+.passengers-arrow-show::after{top:-9px;left:-10px;content:'';border-width:10px;border-bottom-color:#fff}
+.paxbar{background:#fff;padding:20px 15px;margin-left:15px;font-weight:300;margin:0;border:1px solid #e4e4e4;box-shadow:0 7px 15px rgba(0,0,0,.25);min-height:200px;border-radius:7px}
+.paxbar h4{font-size:16px;font-weight:normal;font-weight:500;color:#555;padding:10px 0;letter-spacing:0}
+.paxbar label{font-size:15px;font-weight:400;color:#555;line-height:42px}
+.paxbar .fieldwrap{justify-content:flex-end}
+.paxbar .btn-white,.stopover-content .btn-white{font-weight:normal;font-size:30px;border-radius:0;border:1px solid #e4e4e4;line-height:0;height:42px;max-width:42px}
+.paxbar .select-style,.stopover-content .select-style{padding:3px 0 2px 0;margin-left:-1px;border:1px solid #e4e4e4}
+.paxbar .select-style select,.stopover-content .select-style select{padding:5px 1px 3px 19px;font-size:var(--font-m);line-height:1;font-weight:500}
+.paxbar .btn-white.minusbtn{border-radius:6px 0 0 6px;padding:6px 28px 11px 18px}
+.paxbar .btn-white.plusbtn{border-radius:0 6px 6px 0}
+.leftbtn+.no-gutter{width:31%}
+.stopover-inner-content .leftbtn+.no-gutter{width:13%}
+.paxbar .btn-white{font-size:30px !important}
+@media only screen and (max-width:767px){.passengers-drop{margin-top:0}
+.passengers-picker .floating-label.active{top:-5px !important;left:-10px !important}
+.paxbar .btn-white.minusbtn,.paxbar .btn-white.plusbtn{border-radius:6px 0 0 6px;text-align:center;padding:0 !important;width:42px;max-width:42px}
+[data-id ="overlay"],#overlay,#overlay2{position:fixed;display:none;width:100%;height:100%;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.5);z-index:99;cursor:pointer}
+#overlay2{z-index:10 !important}
+.addpassengers{left:0 !important}
+.responsivepaxbartitle{display:flow-root !important;border-bottom:1px solid #ccc}
+.responsivepaxbartitle label{color:#5c0931 !important;font-size:17px !important;margin-bottom:0 !important}
+.addpassengers .passengers-arrow-show{right:77% !important}
+.paxbar .passengertooltip{top:21px !important;right:-25px}
+.fieldwrap .leftbtn,.fieldwrap .rightbtn{border-radius:50% !important;padding:10px 19px 8px 12px !important;height:33px !important;border-color:#5c0931 !important;margin-right:3px}
+.paxbar .select-style,.stopover-content .select-style{border:0 solid !important}
+.paxbar{width:100vw !important;position:absolute;bottom:0}
+.flightplushotelstitle{display:none}
+.paxbar .select-style select,.stopover-content .select-style select{font-size:23px !important;padding:8px 1px 3px 23px !important}
+.paxbar .select-style,.stopover-content .select-style{padding:2px 0 6px 0 !important}
+.passengers-arrow-show{display:none !important}
+.addpassengers{left:0 !important}
+.multicityPromocode .more{color:var(--primary1)}
+.paxbar .fieldwrap{margin-top:8px}
+.passengers-drop{min-width:100%}
+.paxbar{width:90vw;width:calc(100vw - 38px)}
+.passengers-picker .inputText{border-radius:6px 0 0 6px !important}
+.paxbar .btn-white{border-radius:50% !important;padding-left:13px !important;margin-right:2px !important;font-size:30px !important;font-family:sans-serif;background-color:#f9f9f9;text-align:center;padding:11px 27px 11px 21px}
+.paxbar .ntn-white span::before{font-size:17px !important}
+.paxbar .btn-white .minusbtn{border-radius:6px 0 0 6px}
+.paxbar .btn-white .pluusbtn{border-radius:0 6px 6px 0}
+.paxbar .ntn-white span::before{font-size:17px !important}
+}
+.paxbar .select-style,.stopover-content .select-style{padding:9px 0 6px 0;margin-left:-1px;border:1px solid #e4e4e4;width:42px}
+.select-style{padding:10px 0 5px 0;margin:0;border:1px solid #ccc;width:120px;overflow:hidden;background-color:#fff;width:100%;background:#fff}
+.paxbar .select-style select,.stopover-content .select-style select:focus{outline:0}
+.select-style select{padding:5px 8px;width:100%;border:0;box-shadow:none;color:#333;background-color:transparent;background-image:none;-webkit-appearance:none;-moz-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;appearance:none}
+.select-style select::-ms-expand{display:none}
+.paxbar .row .btn-white:last-child,.stopover-content .btn-white:last-child{margin-left:-8px}
+.paxbar .btn-white,.stopover-content .btn-white{padding:10px 28px 6px 18px;font-weight:normal;font-size:12px;border-radius:0;border:1px solid #e4e4e4;line-height:0;height:42px}
+.numberofpassenger .dropdown-menu{width:320px;padding:0;background-color:transparent}
+.passengers-drop .passengers-arrow-show{left:42%}
+.multicityTrip .passengers-drop .passengers-arrow-show{left:9%}
+.tooltip-content{display:none;width:100%}
+.passengertooltip .tooltip-icon{height:21px;width:21px;font-size:0}
+.passengers-picker .inputText{border-left:1px solid #d7d7d7}
+.passengers-picker .inputText{border-left:1px solid #d7d7d7}
+.passengers-picker .inputText{border-radius:0}
+.passengers-picker.dropdown-toggle::after{top:27px !important}
+.passengers-picker .floating-label.active{top:7px;left:11px;font-size:12px;font-weight:400;opacity:1;color:#555 !important;padding:0}
+.passengers-picker{cursor:pointer}
+@media all and (-ms-high-contrast:active),(-ms-high-contrast:none){*::-ms-backdrop,.triptypeselect .triptype button,*::-ms-backdrop,.cabin-picker button{padding:27px 0 4px 10px}
+*::-ms-backdrop,.paxbar .select-style select{padding:0 1px 0 14px}
+*::-ms-backdrop,.inputText{padding:27px 0 8px}
+}
+.flightsearchform .cabin-picker{border:0}
+.flightsearchform .cabin-custom-radio{border-top:1px solid #ccc;padding-left:5px;padding-right:5px;padding-top:20px !important}
+.flightsearchform .cabin-custom-radio .custom-radio .custom-radio-label{width:100%}
+.flightsearchform .paxbar .custom-control.custom-radio{padding-left:15px}
+.flightsearchform .paxbar .custom-control-label::before,.flightsearchform .paxbar .custom-control-label::after{right:0;left:unset !important;top:10px}
+.flightsearchform .cabin-custom-radio{padding:0}
+.multicityTrip .multycitycabinclass{display:inline-block;min-width:100%}
+.flightsearchform .passengers-drop{right:0}
+.flightsearchform .passLAbel,.cabinLAbel{font-size:15px;font-weight:600;color:#555;padding-bottom:10px;display:block}
+.flightsearchform .roundtripcabinclass{margin-bottom:0}
+.flightsearchform .confirmBtnBox{margin-top:0 !important}
+.flightsearchform .paxbar .custom-control.custom-radio,.cabinLAbel{padding-left:0;padding-right:0}
+.flightsearchform .roundtripcabinclass{margin:0}
+@media(min-width:769px){.passCabinSeperator{display:none}
+.multicityTrip .passengers-drop .passengers-arrow-show{left:16%}
+.paxbar .btn-white.minusbtn{line-height:35px !important}
+.multicityTrip .multicityPromocode{min-width:33.7%}
+}
+.multicityTrip .cabin-picker,.multicityTrip .passengers-picker,.multicityTrip .multicityPromocode{max-width:33.3%}
+@media(max-width:769px){.flightsearchform .cabin-picker{max-width:100%;margin:0}
+.flightsearchform .paxbar .custom-control.custom-radio{padding:0}
+.flightsearchform .passengers-picker{max-width:100%}
+.flightsearchform .cabin-custom-radio{border:0}
+.passCabinSeperator{margin-top:20px !important;width:107%;position:relative;left:-15px}
+.paxbar label{line-height:30px}
+.flightsearchform .confirmBtnBox{margin-top:20px !important}
+.flightsearchform .cabin-custom-radio{padding-top:10px !important}
+.flightsearchform .cabinLAbel{padding-bottom:20px}
+}
+@media screen and (min-width:1024px){.flightsearchform .triptypeselect,.cabin-picker{height:100%}
+}
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){#mulfiglightnew{max-width:33%}
+}
+@media only screen and (min-width:769px) and (max-width:1024px){.passengers-drop .passengers-arrow-show{left:51%}
+}
+.flighthotelschange{min-width:30%;max-width:30%}
+#flight-hotel .flightplushotelstitle{color:#333}
+#flight-hotel .flighthotelschange .passengers-drop{right:0;left:-36px}
+#flight-hotel .flighthotelschange .passengers-arrow-show{left:11%}
+#flight-hotel .cabin-picker{max-width:100%}
+#flight-hotel #swap-location{display:none}
+#flight-hotel .flightfrom input:focus ~ .floating-label,#flight-hotel .flightfrom input:not(:focus):valid ~ .floating-label{top:1px;left:-5px}
+#flight-hotel button#bw-fromFlightsHotel[disabled]{background:#ebebeb;padding-bottom:6px}
+#flight-hotel .flightto input:focus ~ .floating-label,#flight-hotel .flightto input:not(:focus):valid ~ .floating-label{top:1px;left:0}
+#flight-hotel .flightplushotelstitle,#flight-hotel .formopentext{font-size:15px}
+#flight-hotel .cabin-picker .cabintype #bw-fromFlightsHotel.hideArrow:after{display:none}
+.qr-datepicker-open #flight-hotel .qr-datepicker.active div.t-date-check-in{border:solid #6181ba;border-width:2px 0 2px 2px}
+.qr-datepicker-open #flight-hotel .qr-datepicker.active div.t-date-check-out{border:solid #6181ba;border-width:2px 2px 2px 0}
+#flight-hotel .qr-datepicker .t-check-in:focus,#flight-hotel .qr-datepicker .t-check-out:focus{outline:0}
+#flight-hotel .cabin-picker .ecomonytooltip,.cabin-picker .premiumtooltip{background-color:#efefef;padding:5px;font-size:12px;letter-spacing:0;padding:10px 13px;margin-bottom:15px;border-radius:6px;display:none}
+#flight-hotel .ecomonytooltip .removetooltip,.premiumtooltip .removetooltip{min-width:20px !important;width:20px !important}
+#flight-hotel .ecomonytooltip p,.premiumtooltip p{line-height:20px;color:#000;font-size:var(--font-xs);letter-spacing:0}
+#flight-hotel .cabin-picker .cabintype button::after{right:2%;top:31px}
+#flight-hotel .cabin-picker .dropdown-menu.show{right:0;left:auto !important}
+#flight-hotel .flightfrom.cabin-picker .dropdown-menu.show{min-width:100%}
+#flight-hotel .cabin-picker .dropdown-menu .input-group-append button{padding:0;margin:0}
+#flight-hotel .cabin-picker .dropdown-menu .dropdown-item{padding:10px 18px;display:inline-flex}
+#flight-hotel .cabin-picker .dropdown-menu.custom-select-list .dropdown-item.custom-select-item{width:100%}
+#flight-hotel .flightto .floating-label.active{left:9px}
+.flighthotelschange .room-list{position:relative}
+.flighthotelschange .delete-room{font-weight:500;position:absolute;right:10px;top:8px}
+.fh-cabintype .dropdown-menu.show .drop-arrow-top{top:-21px;right:73px;left:auto}
+@media(min-width:1024px){#flight-hotel .cabin-picker .dropdown-menu.show.custom-select-list{max-height:170px;overflow-y:scroll}
+#flight-hotel .flightto .floating-label{z-index:2}
+}
+@media(max-width:768px){#flight-hotel .flightplushotelstitle{display:block}
+.flightplushotels .t-datepicker.calendarblock{min-width:100% !important}
+.flightplushotels .flighthotelschange{max-width:100%;min-width:100%}
+.flightplushotels .flighthotelschange .passengers-picker{min-width:100%}
+.flightplushotels .flighthotelschange .cabin-picker{min-width:100%;border-radius:6px;border-left:1px solid #d7d7d7}
+.flightplushotels .t-dates.t-date-check-in{border-radius:6px 0 0 6px !important}
+#flight-hotel .flightfrom.autoComplete-open .floating-label.active{left:26px !important;top:14px !important}
+#flight-hotel .flightto.autoComplete-open .floating-label.active{left:22px !important;top:13px !important}
+#flight-hotel .flightfrom .dropdown-menu.custom-select-list{max-height:400px;overflow-y:scroll}
+#flight-hotel .flighthotelschange .passengers-drop{left:0}
+}
+.flightsearchformFlightsHotels .tt-menu{width:auto;min-width:100%;font-size:15px;color:#666;background:#fff;overflow:auto;box-shadow:0 2px 7px rgba(0,0,0,.25);max-height:210px}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion{min-width:563px;min-height:60px;display:block;font-weight:normal;font-size:15px;line-height:1.5;color:#000;padding:10px;border-bottom:1px solid #ebebeb;white-space:nowrap;cursor:pointer;margin:0;overflow:hidden;position:relative}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.active{color:#fff;transition:background .2s ease}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.active span{color:#f9f9f9 !important}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion strong{display:block;color:#333;font-weight:700}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion .airport{display:block;color:#999;float:left}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion .countrycode{color:#999;float:right;position:absolute;top:10px;right:10px}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion:focus strong,.flightsearchformFlightsHotels .tt-menu .tt-suggestion.active strong{color:#fff}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.nomatch-text{min-width:auto;min-height:auto;color:#999}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.nomatch-text:hover{color:#fff}
+.flightsearchformFlightsHotels .tt-menu .tt-cursor strong,.flightsearchformFlightsHotels .tt-menu .tt-cursor .airport,.flightsearchformFlightsHotels .tt-cursor .countrycode{color:#fff;transition:background .2s ease}
+.flightsearchformFlightsHotels .autocompleteHeader{display:none;font-size:var(--font-m);padding:15px;border-bottom:1px solid #ccc;margin:0 0 15px}
+.flightsearchformFlightsHotels .close-autocomplete{display:block;position:absolute;top:8px;right:5px;width:35px;height:35px;text-indent:-9999px;cursor:pointer}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.active{color:#fff;transition:background .2s ease}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion:hover,.flightsearchformFlightsHotels .tt-menu .tt-suggestion.tt-cursor{color:#fff !important;background:var(--primary1);transition:background .2s ease}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion:hover strong,.flightsearchformFlightsHotels .tt-menu .tt-suggestion:hover .airport,.flightsearchformFlightsHotels .tt-menu .tt-suggestion:hover .countrycode{color:#fff}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.tt-cursor strong,.flightsearchformFlightsHotels .tt-menu .tt-suggestion.tt-cursor .airport,.flightsearchformFlightsHotels .tt-menu .tt-suggestion.tt-cursor .countrycode{color:#fff}
+.flightsearchformFlightsHotels .bw-autocomplete .floating-label.active,.flightsearchformFlightsHotels .bw-autocomplete.filled .floating-label{height:26px;padding:5px 17px 0;font-size:10px;transition:all .2s ease;font-size:12px;color:#333 !important;font-weight:400}
+@media only screen and (max-width:767px){.flightsearchformFlightsHotels .tt-menu{min-width:96%;margin:10px 2%;box-shadow:none !important;max-height:100vh !important}
+.flightsearchformFlightsHotels .bw-autocomplete-suggestion{position:relative}
+.flightsearchformFlightsHotels .bw-autocomplete{position:static;transition-timing-function:cubic-bezier(0.4,0.0,0.2,1);transition:all .2s}
+.flightsearchformFlightsHotels .autoComplete-open.bw-autocomplete{position:fixed;z-index:50;top:0 !important;left:0;background:#fff;overflow:hidden;height:100vh}
+.flightsearchformFlightsHotels .autoComplete-open .autocompleteHeader{display:block}
+.flightsearchformFlightsHotels .autocomplete-typeahead input[type=text]{padding-top:27px;padding-bottom:15px}
+.flightsearchformFlightsHotels .autocomplete-typeahead .tt-menu{box-shadow:none;margin-top:20px;border:none !important;max-height:500px}
+.flightsearchformFlightsHotels .autocomplete-typeahead .tt-menu .tt-suggestion{min-width:100%}
+.flightsearchformFlightsHotels .autoComplete-open .bw-autocomplete-suggestion input[type=text],.flightsearchformFlightsHotels .autoComplete-open .input-base-elem{padding:15px 5px 0;font-size:15px}
+.flightsearchformFlightsHotels #multiFlightContainer .autoComplete-open{width:100%}
+.flightsearchformFlightsHotels .autoComplete-open .bw-autocomplete-suggestion,.flightsearchformFlightsHotels .autoComplete-open .flightsearchformFlightsHotels .autoComplete-open .bw-autocomplete-suggestion input[type=text]{height:62px}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion{min-width:auto !important}
+}
+.flightsearchformFlightsHotels .tt-menu{width:auto;min-width:100%;font-size:15px;color:#666;background:#fff;overflow:auto;box-shadow:0 2px 7px rgba(0,0,0,.25);max-height:210px}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion{min-width:563px;min-height:60px;display:block;font-weight:normal;font-size:15px;line-height:1.5;color:#000;padding:10px;border-bottom:1px solid #ebebeb;white-space:nowrap;cursor:pointer;margin:0;overflow:hidden;position:relative}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.active{color:#fff;transition:background .2s ease}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.active span{color:#f9f9f9 !important}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion strong{display:block;color:#333;font-weight:700}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion .airport{display:block;color:#999;float:left}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion .countrycode{color:#999;float:right;position:absolute;top:10px;right:10px}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion:focus strong,.flightsearchformFlightsHotels .tt-menu .tt-suggestion.active strong{color:#fff}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.nomatch-text{min-width:auto;min-height:auto;color:#999}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.nomatch-text:hover{color:#fff}
+.flightsearchformFlightsHotels .tt-menu .tt-cursor strong,.flightsearchformFlightsHotels .tt-menu .tt-cursor .airport,.flightsearchformFlightsHotels .tt-cursor .countrycode{color:#fff;transition:background .2s ease}
+.flightsearchformFlightsHotels .autocompleteHeader{display:none;font-size:var(--font-m);padding:15px;border-bottom:1px solid #ccc;margin:0 0 15px}
+.flightsearchformFlightsHotels .close-autocomplete{display:block;position:absolute;top:8px;right:5px;width:35px;height:35px;text-indent:-9999px;cursor:pointer}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.active{color:#fff;transition:background .2s ease}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion:hover,.flightsearchformFlightsHotels .tt-menu .tt-suggestion.tt-cursor{color:#fff !important;background:var(--primary1);transition:background .2s ease}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion:hover strong,.flightsearchformFlightsHotels .tt-menu .tt-suggestion:hover .airport,.flightsearchformFlightsHotels .tt-menu .tt-suggestion:hover .countrycode{color:#fff}
+.flightsearchformFlightsHotels .tt-menu .tt-suggestion.tt-cursor strong,.flightsearchformFlightsHotels .tt-menu .tt-suggestion.tt-cursor .airport,.flightsearchformFlightsHotels .tt-menu .tt-suggestion.tt-cursor .countrycode{color:#fff}
+@media only screen and (max-width:767px){.flightsearchformFlightsHotels .tt-menu{min-width:96%;margin:10px 2%;box-shadow:none !important;max-height:100vh !important}
+.flightsearchformFlightsHotels .bw-autocomplete-suggestion{position:relative}
+.flightsearchformFlightsHotels .bw-autocomplete{position:static;transition-timing-function:cubic-bezier(0.4,0.0,0.2,1);transition:all .2s}
+.flightsearchformFlightsHotels .autoComplete-open.bw-autocomplete{position:fixed;z-index:50;top:0 !important;left:0;background:#fff;overflow:hidden;height:100vh}
+}
+#flight-hotel .flightsearchformFlightsHotels .flightfrom.cabin-picker{border-radius:6px 0 0 6px;border-width:1px 1px 1px 1px}
+@media(min-width:1024px){#flight-hotel .flightsearchformFlightsHotels .multicitysearchbtn{display:flex;justify-content:flex-end;margin-right:5px !important}
+#flight-hotel .flightsearchformFlightsHotels .multicitysearchbtn .formsubmit{max-width:40%}
+}
+@media(max-width:768px){#flight-hotel .flightsearchformFlightsHotels .flightfrom{border-radius:6px 6px 0 0 !important;border-width:1px 1px 1px 1px;border-top:1px solid #d7d7d7}
+#flight-hotel .flightsearchformFlightsHotels .flightfrom #bw-fromFlightsHotel,#flight-hotel .flightsearchformFlightsHotels .flightto #bw-toFlightsHotel,#flight-hotel .flightsearchformFlightsHotels .cabin-picker #cabintype,#flight-hotel .flightsearchformFlightsHotels .flightfrom .passengers-picker{height:68px}
+#flight-hotel .flightsearchformFlightsHotels .datefrom .t-date-check-in{border-right:1px solid #d7d7d7}
+#flight-hotel .flightsearchformFlightsHotels .cabintype.show .responsivedropoverlay,#flight-hotel .flightsearchformFlightsHotels .fh-cabintype.show .responsivedropoverlay{display:inline-flex !important;z-index:13}
+#fh-passenger-picker .paxbar{max-height:85vh;overflow:auto}
+#fh-passenger-picker .paxbar .responsivepaxbartitle{display:flow-root !important;border-bottom:1px solid #ccc;position:fixed;width:96%;background-color:#fff;margin:-10px -7px 0 !important;border-radius:7px 7px 0 0;padding-top:7px;margin-top:-20px !important;z-index:34}
+#fh-passenger-picker .paxbar{width:100vw !important;position:absolute;max-height:85vh;bottom:0;overflow:auto;border-radius:7px 7px 0 0}
+.room-container{margin-top:43px}
+.flightplushotels .calendarblock{min-width:100% !important}
+}
+@media(max-width:736px){.flightsearchformFlightsHotels .flightfrom,.flightplushotels .flightfrom{margin-bottom:-1px !important}
+}
+.flightsearchformFlightsHotels{justify-content:start;margin-bottom:6px;display:flex;position:relative}
+.flightsearchformFlightsHotels .close-autocomplete,.closeCal{background:url(../../../flights/v1/flights-widget/clientlib/resources/closeIco.gif) no-repeat center center}
+@media only screen and (min-width:768px){.flightsearchformFlightsHotels.multicityTrip .triptype{padding-right:0}
+}
+.flightsearchformFlightsHotels .dropdown-toggle:focus{outline:2px solid #6181ba;height:57px}
+.flightsearchformFlightsHotels .btn:focus{box-shadow:none}
+.flightsearchformFlightsHotels .mulfiglightnew .addbutton{display:inline-block}
+.flightsearchformFlightsHotels{width:100%}
+#flight-hotel-qrh h6,#flight-hotel-qrh .formopentext{display:none}
+#flight-hotel-qrh .flightsearchformFlightsHotels .autoComplete-open .bw-autocomplete-suggestion input[type=text]{color:#1f212b}
+#bw-qrh-to{border-left:0}
+#flight-hotel-qrh .flightsearchformFlightsHotels .tt-menu{min-width:390px;border-radius:5px;max-height:348px}
+#flight-hotel-qrh .flightsearchformFlightsHotels .tt-menu .tt-suggestion{min-width:380px;min-height:38px;color:#4a525d;padding:10px 10px 10px 16px;border-bottom:1px solid #f2f3fa}
+#flight-hotel-qrh .flightsearchformFlightsHotels .tt-menu .tt-suggestion:hover,#flight-hotel-qrh .flightsearchformFlightsHotels .tt-menu .tt-suggestion.tt-cursor{color:#4a525d !important;background:#f2f3fa;transition:background .2s ease}
+#flight-hotel-qrh .formsubmit{margin-left:0;float:right;margin-right:0}
+#flight-hotel-qrh .hotel-check-container label{display:inline-grid;position:relative;top:-7px}
+#flight-hotel-qrh .hotel-check-container label input[type="checkbox"]{position:relative;top:16px;left:4px;opacity:0}
+#flight-hotel-qrh .hotel-check-container label input[type="checkbox"]+span{font-size:15px;color:#1f212b;font-weight:400;position:relative;z-index:9;display:inline-block;margin:0;line-height:17px;min-height:14px;min-width:14px;margin-right:5px;padding-left:30px;padding-top:2px}
+#flight-hotel-qrh .hotel-check-container .checkbox-label:before{content:'';position:absolute;top:0;width:20px;height:20px;border:1px solid #dbdee8;background-color:#fff;border-radius:4px;transition:background .2s ease}
+#flight-hotel-qrh .hotel-check-container .checkbox-label:after{content:'';position:absolute;top:0;font-family:icomoon !important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;font-size:var(--font-m);line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:var(--primary1);width:0;pointer-events:none;transition:all .2s ease;overflow:hidden/*!rtl:raw: right: 1px;*/}
+#flight-hotel-qrh .hotel-check-container label input[type="checkbox"]:checked+span:after{text-align:center;width:20px;height:20px;background-color:#413cb1;border-radius:4px;font-weight:100;margin-top:0;content:'\f00c';font-family:icomoon !important;font-size:12px;color:#fff;line-height:20px}
+#flight-hotel-qrh .hotel-check-container .checkbox-label:after,#flight-hotel-qrh .hotel-check-container .checkbox-label:before{left:0}
+.hotel-checkin-out.calendarblock{max-width:27%}
+.hotel-checkin-out .datefrom .t-date-check-in{margin-left:0}
+.hotel-checkin-out .t-check-in,.hotel-checkin-out .t-check-out,.hotel-checkin-out .t-check-in:hover,.hotel-checkin-out .t-check-out:hover{border-color:#dbdee8}
+.hotel-checkin-out .t-dates{border:1px solid #dbdee8}
+.hotel-checkin-out .t-dates.t-date-check-in{border-right:0;border-radius:8px 0 0 8px}
+.hotel-checkin-out .t-check-out .t-dates{border-left:0;border-radius:0 8px 8px 0}
+.hotel-checkin-out .dateRangePic input[type=text].t-day-check-in,.hotel-checkin-out .dateRangePic input[type=text].t-day-check-out{color:#1f212b}
+.hotel-checkin-out .t-check-in .t-date-info-title,.hotel-checkin-out .t-check-out .t-date-info-title{color:#4a525d}
+.hotel-checkin-out .dateRangePic input[type=text]{width:100% !important}
+.hotel-checkin-out .t-dates.t-date-check-in::after{content:''}
+.flightHotel-qrhsearch-btn::after{content:"\e99a";font-size:30px;color:#460c2e;display:inline-block;line-height:normal;vertical-align:top;font-family:'icomoon' !important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:26px;-webkit-font-smoothing:antialiased}
+#flight-hotel-qrh .qr-datepicker .t-day-check-in,#flight-hotel-qrh .qr-datepicker .t-day-check-out{padding-left:0 !important}
+#flight-hotel-qrh .t-dates.t-date-check-in,#flight-hotel-qrh .t-check-out .t-dates,#flight-hotel-qrh .cabin-picker{height:61px}
+#qrh-daterangepicker .t-date-check-out{border-right:0}
+#flight-hotel-qrh .flightto.autoComplete-open .floating-label.active{left:26px !important}
+#bw-qrh-to{text-indent:5px}
+@media only screen and (max-width:767px){#flight-hotel-qrh .flightsearchformFlightsHotels .autocompleteHeader{border-bottom:0;color:#1f212b}
+#flight-hotel-qrh .flightsearchformFlightsHotels .autoComplete-open .bw-autocomplete-suggestion input[type=text]{border:1px solid #4a525d !important;border-radius:8px !important}
+#flight-hotel-qrh .flightsearchformFlightsHotels .tt-menu{min-width:96%}
+#bw-qrh-from{border-right:1px solid #d7d7d7}
+#bw-qrh-to{border-left:1px solid #d7d7d7;padding-left:5px !important}
+#flight-hotel-qrh .flightto.autoComplete-open .floating-label,#flight-hotel-qrh .flightfrom.autoComplete-open .floating-label{top:15px}
+#flight-hotel-qrh .flightfrom.autoComplete-open .floating-label.active,#flight-hotel-qrh .flightto.autoComplete-open .floating-label.active{top:8px !important}
+#flight-hotel-qrh .flightsearchformFlightsHotels .tt-menu .tt-suggestion strong,#flight-hotel-qrh .flightsearchformFlightsHotels .tt-menu .tt-suggestion .countrycode{color:#1f212b;font-weight:600}
+#flight-hotel-qrh .flightsearchformFlightsHotels .tt-menu .tt-suggestion .airport{color:#4a525d;font-weight:normal}
+.hotel-check-container{margin-bottom:5px}
+#flight-hotel-qrh .t-dates.t-date-check-in,#flight-hotel-qrh .t-check-out .t-dates,#flight-hotel-qrh .cabin-picker{height:63px}
+#qrh-daterangepicker .t-date-check-out{border-right:1px solid #d7d7d7}
+#flight-hotel-qrh .passengers-picker .inputText{border-radius:6px !important}
+#bw-qrh-to{text-indent:11px}
+}
+.cartrecovery{margin:var(--gap-bw-components) 0;display:flex;flex-direction:column}
+.cartrecovery{margin-bottom:0}
+.cartrecovery .container{width:100%;max-width:1192px;margin:0 auto}
+.section-title{font-size:24px;font-weight:300;color:#333;padding-bottom:15px;letter-spacing:0;margin:0}
+.section-subtitle{font-size:15px;color:#555;padding:0;line-height:22px;letter-spacing:0;margin-bottom:24px}
+.cartcontainer{background-color:#fff;border:1px solid #e4e4e4;border-radius:5px;min-height:50px;display:flex;position:relative}
+.imagefullheight{width:13%;display:inline-flex;min-height:200px;border-radius:5px 0 0 5px}
+.imagefullheight img{border-radius:5px 0 0 5px;object-fit:cover}
+.cartdetails{display:inline-flex;width:87%}
+.cartdetails .seperatorline{border-bottom:1px solid #e4e4e4 !important}
+.cartdetails .bookingupcoming{margin:0;border:0;width:100%;display:inline;padding:20px 15px 22px 25px}
+.cartdetails .bookingdetails,.triptypewithpax,.completebooking{width:31%;display:inline-flex;flex-direction:column}
+.completebooking{width:25%;display:inline;float:right}
+.cartdetails .seperatorline{margin:10px 0}
+.cartdetails .tripdate{width:100%;font-size:15px}
+.triptypewithpax{text-align:center;color:#555;font-size:15px;width:42.9%}
+.cartdetails .tripdestinations .tripfrom,.cartdetails .tripdestinations .tripto{font-size:30px}
+.cartdetails .tripcountry .tripfrom,.cartdetails .tripcountry .tripto{font-size:15px;color:#555}
+.collapsesection{display:inline-flex;width:100%;margin-top:15px;transition:height 1s ease-in-out;min-height:32px}
+.flexibilty{width:33%;margin-right:4%}
+.collapsesection .flexibilty:last-child{margin-right:0}
+.flexibilty a{color:#333;font-size:15px}
+.flexibilty a img{width:32px}
+.flexibilty a span{padding-left:5px;font-size:15px;color:#333;padding-bottom:5px}
+.flexibilty span{font-size:13px;color:#555;display:inline-flex;padding-left:42px}
+.collapsesection .dropdown-toggle{position:relative;width:7%}
+.collapsemessage{float:right;display:inline-flex;margin-top:20px}
+.collapsemessage button{display:inline-flex;border:0 !important;background-color:transparent;padding:0}
+.collapsemessage button::after{position:static !important;color:#555 !important}
+.collapsemessage button:hover,.collapsemessage button:focus{background:transparent !important}
+.collapsemessage button::after{padding-top:1px;font-family:icomoon !important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;border:0;color:var(--primary1);background:0;font-size:9px;position:absolute;width:17px;z-index:9;right:13px;top:13px;content:'\e926' !important}
+.collapsemessage[aria-expanded=true] button::after{transform:rotate(180deg);transition:transform .5s ease-in-out}
+.collapsemessage[aria-expanded=false] button::after{transition:transform .5s ease-in-out}
+.collapsesection.collapse:not(.show){display:inline-flex;max-height:32px;overflow:hidden}
+.cartcontainer .close-upcoming-trip{position:absolute;top:20px;right:15px}
+.close-upcoming-trip button.close{background:url(clientlibs/resources/Close_icon.svg) no-repeat center center;opacity:1;background-size:17px;width:22px;height:22px;margin:0;display:inline}
+.triptypewithpax span{display:none}
+@media(max-width:768px){.close-upcoming-trip button.close{display:inline;width:32px;height:32px;background-color:#fff;border-radius:50%;background-size:12px}
+.cartdetails .bookingupcoming{padding:0}
+.cartcontainer{flex-direction:column}
+.imagefullheight{width:100%;min-height:150px;border-radius:5px 5px 0 0;display:inline}
+.imagefullheight img{border-radius:5px 5px 0 0}
+.collapsesection{flex-direction:column;margin-bottom:20px}
+.flexibilty:last-child{margin-bottom:0}
+.flexibilty,.cartdetails,.cartdetails .bookingdetails,.triptypewithpax,.completebooking{width:100%}
+.flexibilty{padding-left:15px;margin-bottom:30px}
+.flexibilty a span{font-size:15px;font-weight:500}
+.flexibilty span{font-size:13px;padding-right:30px}
+.triptypewithpax{text-align:left;padding:30px 0 30px 15px;display:flow-root}
+.completebooking{padding:0 15px;display:flex;float:none}
+.cartdetails .tripdate,.bookingdetails{padding:20px 15px 0 15px}
+.bookingdetails{padding:5px 15px 0 15px}
+.section-subtitle,.triptypewithpax br{display:none}
+.section-title{padding-bottom:20px}
+.cartdetails .tripdestinations .tripfrom,.cartdetails .tripdestinations .tripto{font-size:40px}
+.collapsemessage{position:absolute;width:17%;right:4%}
+.cartdetails .seperatorline{margin-top:20px}
+.triptypewithpax span{display:inline;padding:0 5px}
+}

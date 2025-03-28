@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whiteboard with Text Input</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        #whiteboard {
+            width: 800px;
+            height: 400px;
+            background-color: white;
+            border: 1px solid #000;
+            position: relative;
+        }
+
+        #whiteboard .canvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        #whiteboard .text {
+            position: absolute;
+            font-size: 20px;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="whiteboard">
+        <div class="canvas"></div>
+    </div>
+    <textarea id="textInput" placeholder="Type text here"></textarea>
+    <button id="addText">Add Text</button>
+
+    <script>
+        const canvas = document.querySelector('.canvas');
+        const textInput = document.getElementById('textInput');
+        const addTextButton = document.getElementById('addText');
+
+        addTextButton.addEventListener('click', () => {
+            const text = textInput.value;
+            if (text) {
+                const textElement = document.createElement('div');
+                textElement.className = 'text';
+                textElement.innerText = text;
+                canvas.appendChild(textElement);
+            }
+        });
+    </script>
+</body>
+</html>

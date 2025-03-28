@@ -1,0 +1,51 @@
+#w3{
+    width: 100%;
+    animation-name: car1;
+    animation-duration: 3s;
+    animation-timing-function: ease;
+    animation-play-state: running;
+ animation-iteration-count: infinite;
+ /* filter: drop-shadow(3px 3px 5px black); */
+ /* border-bottom: 4px solid #555; */
+
+
+}
+    @keyframes car1 {
+        0%{
+            transform: translate(89px);
+            
+        }
+        30%{
+            transform: translateX(60px);
+        }
+        /* 45%{
+            transition:cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        } */
+        /* 40%{
+            transform: translateX(900px);
+        } */
+        100%{
+            transform: translateX(1000px);
+        }
+    }
+.w4{
+    background-color: rgb(228, 168, 173);padding: 10px; border: 3px double black;border-radius: 13% ; 
+    transition: 2s; padding: 15px; box-shadow: 15px 15px 15px black; height: 500px; width: 40%;
+}
+.box{
+    height: 345px; width: 395px;
+    background-color: black; margin: auto; padding: 9px;
+}
+.child{
+    height: 340px; width: 390px;
+    background-color: red; margin:45px;
+    transition: 2s;
+}
+.child:hover{
+    /* transform: rotateX('80deg') */
+    /* transform: scale(3,2); */
+transform:skewY(-90deg);
+
+
+}
+

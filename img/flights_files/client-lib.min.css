@@ -1,0 +1,47 @@
+html,body{margin:0;font-size:100%;font-family:var(--jotia);color:var(--primary1);background-color:#fff}
+.pc-banner-component{margin-bottom:70px}
+.container{width:100%;max-width:1192px;margin:0 auto}
+.banner-container{width:100%;height:344px;background:transparent linear-gradient(270deg,#29293F00 0,#1f212a 100%) 0 0 no-repeat;position:relative;border-radius:20px}
+.banner-container img{width:100%;height:100%;border-radius:20px;object-fit:cover;object-position:top}
+.banner-container:before{width:100%;height:100%;content:'';position:absolute;background:transparent linear-gradient(270deg,#29293F00 0,#1f212a 100%) 0 0 no-repeat;border-radius:20px;left:0;top:0}
+.banner-container .banner-details{width:60%;color:#fff;position:absolute;left:0;top:0;padding:50px 0 50px 50px;display:table;height:100%}
+.banner-container .banner-details .banner-inner-details{display:table-cell;vertical-align:middle}
+.banner-container .banner-details h4{font-size:36px;font-weight:300;padding-bottom:10px;margin:0;color:#fff}
+.banner-container .banner-details p{font-size:16px;font-weight:300;line-height:24px;padding-bottom:30px;margin-bottom:0;letter-spacing:normal;color:#fff}
+.banner-container .banner-details a{font-size:16px;font-weight:500;border:1px solid #fff;border-radius:32px;padding:10px 32px;color:#fff;display:inline-block;text-align:center}
+.banner-container .banner-details a.trans_btn{margin-left:10px}
+.banner-container .banner-details a.trans_btn:hover{background:#fff;color:#5c0931}
+.banner-container .banner-details a.burgandy_btn{background:#8e2157;color:#fff;border:1px solid #8e2157}
+.banner-container .banner-details a.burgandy_btn:hover{background:#5c0931;color:#fff;border:1px solid #5c0931}
+.banner-container .banner-details a:hover{text-decoration:none}
+@media(max-width:768px){.banner-container{height:480px}
+.banner-container .banner-details{width:100%;left:0;top:0;padding:50px 30px;height:100%}
+.banner-container .banner-details .banner-inner-details{vertical-align:top}
+.banner-container .banner-details h5{font-size:32px}
+.banner-container .banner-details p{font-size:19px;line-height:28px}
+.btn-content{position:absolute;bottom:30px;left:0;padding:0 30px;width:100%}
+.btn-content a{width:100%;padding:15px 32px;font-size:21px}
+.banner-container .banner-details .btn-content a:last-child{margin-top:20px;margin-left:0}
+.pc-banner-component .mobile-none{display:none !important}
+}
+.inner-homepage .pc-generic-component .generic-title{font-size:var(--innerPage-font-h2);line-height:var(--ineerPage-lineHeight-h2);padding-bottom:16px}
+.inner-homepage .pc-generic-component p{font-size:var(--innerPage-font-p);line-height:var(--ineerPage-lineHeight-p)}
+.inner-homepage .banner-container .banner-details h4{padding-bottom:20px}
+.inner-homepage .banner-container .banner-details p{padding-bottom:48px}
+.inner-homepage .banner-container .banner-details a{padding:11px 32px}
+.inner-homepage .member-tier-benefit{margin-bottom:70px}
+.inner-homepage .pc-banner-component .banner-details .banner-inner-details{word-break:break-word}
+@media(max-width:768px){.inner-homepage .banner-container .banner-details p{font-size:14px;line-height:24px}
+.pc-banner-component .small-banner .banner-container{height:300px !important}
+.pc-banner-component .small-banner .banner-container .banner-details{padding:50px 30px !important}
+}
+.pc-banner-component+.section{display:block !important}
+.pc-banner-component{opacity:1 !important;transition:all .3s}
+.pc-banner-component .small-banner img{object-position:top right !important}
+.pc-banner-component .small-banner h4{display:none}
+.pc-banner-component .small-banner .banner-container:before{background:transparent linear-gradient(90deg,#000000fc 0,rgb(0 0 0 / 0) 50%) 0 0 no-repeat !important}
+.pc-banner-component .small-banner .banner-container{height:175px}
+.pc-banner-component .small-banner .banner-container .banner-details{padding:20px 0 20px 50px}
+.pc-banner-component .small-banner .banner-container .banner-details p{padding-bottom:30px}
+@media(min-width:768px){.pc-banner-component .desktop-none{display:none !important}
+}

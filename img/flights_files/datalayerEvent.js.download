@@ -1,0 +1,2205 @@
+function addEvetnInfo(eventLocation1,eventName1,eventAction1){
+
+    if(undefined != window.digitalData && undefined !=digitalData.event &&  "undefined" != typeof(_satellite) && digitalData.event.eventInfo != undefined){
+
+       digitalData.event.eventInfo.eventLocation=eventLocation1 != null ? eventLocation1.toLowerCase():"";
+       digitalData.event.eventInfo.eventName=eventName1 != null ? eventName1.toLowerCase():"";
+       digitalData.event.eventInfo.eventAction=eventAction1 != null ? eventAction1.toLowerCase():"";
+	   digitalData.event.eventInfo.eventPage = digitalData.page.pageInfo.pageName;
+       //_satellite.track('navigationclick');
+    } 
+    
+};
+
+function addComponentInfo(componentName,componentEvent,method,source){
+  
+    if(undefined != window.digitalData && undefined !=digitalData.component &&  "undefined" != typeof(_satellite)){
+	    if( source != '' && source != undefined  && source.indexOf(".html") != -1) {
+        source = source.replace('.html','');
+        }
+        digitalData.component.componentInfo.componentName=componentName != null ? componentName.toLowerCase():"";
+       	digitalData.component.componentInfo.componentEvent=componentEvent != null ? componentEvent.toLowerCase():"";
+       	digitalData.component.componentInfo.method=method != null ? method.toLowerCase():"";
+        digitalData.component.componentInfo.componentStartSource=source != null ? source.toLowerCase():"";
+		//_satellite.track('navigationclick');
+    }
+  
+};
+
+function getCurrentPageName(){
+    var currentPage = $('#current-page-path').val();
+    var pageName = '';
+    if(currentPage  !== undefined && currentPage !== ''){
+        pageName = currentPage.substr(currentPage.lastIndexOf('/') + 1);
+        pageName = pageName.replace('.html','');
+    }
+    return pageName;
+};
+
+
+function updateUserInfo(authState1,profileInfo1,qmilesOrQrewardsAvailable1,userType1){
+	
+	if(undefined != window.digitalData && undefined !=digitalData.page && undefined !=digitalData.page.userInfo){
+
+       digitalData.page.userInfo.authState=authState1 != null ? authState1.toLowerCase():"";
+       digitalData.page.userInfo.profileInfo=profileInfo1 != null ? profileInfo1.toLowerCase():"";
+       digitalData.page.userInfo.qmilesOrQrewardsAvailable=qmilesOrQrewardsAvailable1 != null ? qmilesOrQrewardsAvailable1.toLowerCase():"";
+	   digitalData.page.userInfo.userType=userType1 != null ? userType1.toLowerCase():"";
+    }
+	
+}
+ function formatDateddmmyyyy(date) {
+		var d = new Date(date),
+		month = '' + (d.getMonth() + 1);
+     	var dd = (d.getDate()).toString();
+     if (dd.length < 2) dd = '0' + dd;
+		if (month.length < 2) month = '0' + month;
+		return dd + "/" + month + "/" + d.getFullYear();
+	};
+
+function formatDateDiff(date1, date2) {
+	var date_diff = Math.floor((Date.UTC(date2.getFullYear(),date2.getMonth(),date2.getDate())-Date.UTC(date1.getFullYear(),date1.getMonth(),date1.getDate()) )/(1000*60*60*24));
+	return date_diff;
+}
+
+function formatDateOldBW(dateVal) {
+   	var d = new Date(formatDatefromArabBW(dateVal)),
+        month = '' + (d.getMonth() + 1),
+		day = '' + d.getDate();
+	if (month.length < 2) month = '0' + month;
+	if (day.length < 2) day = '0' + day;
+    return d.getFullYear() + "-" + month + "-" + day;
+}
+
+function formatDatefromArabBW(date){
+		
+			var langCode = $(document).find('#page-locale').val();
+			var newDate = new Date(date);
+			if(langCode != '' && langCode != 'en' && newDate == 'Invalid Date'){
+				if(date != undefined && date != ''){
+
+			Granite.I18n.setLocale(langCode);
+
+			var months = [
+				Granite.I18n.get('booking.month.january'),
+				Granite.I18n.get('booking.month.february'),
+				Granite.I18n.get('booking.month.march'),
+				Granite.I18n.get('booking.month.april'),
+				Granite.I18n.get('booking.month.may'),
+				Granite.I18n.get('booking.month.june'),
+				Granite.I18n.get('booking.month.july'),
+				Granite.I18n.get('booking.month.august'),
+				Granite.I18n.get('booking.month.september'),
+				Granite.I18n.get('booking.month.october'),
+				Granite.I18n.get('booking.month.november'),
+				Granite.I18n.get('booking.month.december')
+			];
+			
+			var monthNames = ["January", "February", "March", "April", "May", "June",
+		  "July", "August", "September", "October", "November", "December"
+			];
+		var getMonthName;	
+		var monthText;
+		 if(langCode =='ko' || langCode =='zh' || langCode =='ja' || langCode =='zh_HK' || langCode =='vi'){
+		monthText =date.split(' ')[1]; 
+		}else{
+		monthText = date.replace(/[0-9]/g,'').trim();
+		}
+		var d=date.split(monthText);
+		var dt = d[0].trim();
+		var yr = d[1].trim();
+		
+		$.each(months,function(index,value){
+			if(monthText == value){
+				getMonthName = monthNames[index].toLowerCase();
+			}
+		});
+		return [dt, getMonthName, yr].join(' ');
+				}		
+			}
+			else{
+				return date;
+			}
+		}
+
+//For flight_Status Date Format
+function flightStatusDateFormat(pDate) {
+  var dd = pDate.split("/")[0].padStart(2, "0");
+  var mm = pDate.split("/")[1].padStart(2, "0");
+  var yyyy = pDate.split("/")[2].split(" ")[0];
+  mm = (parseInt(mm) - 1).toString();
+  
+  return new Date(yyyy, mm, dd);
+} 
+
+//header search event
+function addEvetnInfoSearch(eventName1, eventLocation1, eventLinkName1, eventAction1) {
+    if (undefined != window.digitalData && undefined != digitalData.event && "undefined" != typeof(_satellite) && digitalData.event.eventInfo != undefined) {
+        digitalData.event.eventInfo.eventName = eventName1 != null ? eventName1.toLowerCase():"";
+        digitalData.event.eventInfo.eventLocation = eventLocation1 != null ? eventLocation1.toLowerCase():"";
+        digitalData.event.eventInfo.eventLinkName = eventLinkName1 != null ? eventLinkName1.toLowerCase():"";
+        digitalData.event.eventInfo.eventAction = eventAction1 != null ? eventAction1.toLowerCase():"";
+		digitalData.event.eventInfo.eventPage = digitalData.page.pageInfo.pageName;
+       //_satellite.track('navigationclick');
+    }
+   
+};
+
+//search CTA
+function addEvetnInfoSearchButton(eventName1, eventLocation1, searchTerm1, eventLinkName1, eventAction1) {
+    if (undefined != window.digitalData && undefined != digitalData.event && "undefined" != typeof(_satellite) && digitalData.event.eventInfo != undefined) {
+        digitalData.event.eventInfo.eventPage="";
+        digitalData.event.eventInfo.eventName = eventName1 != null ? eventName1.toLowerCase():"";
+        digitalData.event.eventInfo.eventLocation = eventLocation1 != null ? eventLocation1.toLowerCase():"";
+        digitalData.event.eventInfo.searchTerm = searchTerm1 != null ? searchTerm1.toLowerCase():"";
+        digitalData.event.eventInfo.eventLinkName = eventLinkName1 != null ? eventLinkName1.toLowerCase():"";
+        digitalData.event.eventInfo.eventAction = eventAction1 != null ? eventAction1.toLowerCase():"";
+        //_satellite.track('navigationclick');
+    }
+  
+};
+
+//popularsearch
+function addEventPopularSearch(searchTerm1, pageName1) {
+    if (undefined != window.digitalData && undefined != digitalData.event) {
+        //digitalData.page.internalSearch.searchResultNumber = "";
+        //digitalData.page.internalSearch.searchTerm = searchTerm1;
+        //digitalData.page.internalSearch.searchResultType = "from the popular searches";
+        digitalData.component.componentInfo.componentName = "internal-site-search";
+        digitalData.component.componentInfo.componentEvent = "internal site search result";
+        digitalData.component.componentInfo.componentStartSource = pageName1 != null ? pageName1.toLowerCase():"";
+    }
+
+}
+
+//localStorage values for previlege-club changes
+
+function addComponentPageEvent(componentName1,componentEvent1,method1,source1){
+	if (typeof(Storage) !== "undefined") {
+		
+		localStorage.setItem("componentName", componentName1);
+		localStorage.setItem("componentEvent", componentEvent1);
+		localStorage.setItem("method", method1);
+		localStorage.setItem("componentStartSource", source1);
+		
+	}
+}
+
+//Add Cart Product Info
+
+function addProductInfo(category1, productID1, travelDate1, sourceCity1, destinationCity1, numberOfUnits1, returnDate1, cabinCategory1, daysToTravel1){
+		
+	 if(undefined != window.digitalData && undefined !=digitalData.cart){
+			digitalData.cart.item.push(
+			{
+				productInfo: {
+					'category' : category1,
+					'productID' : productID1,
+					'travelDate' : travelDate1,
+					'sourceCity' : sourceCity1,
+					'destinationCity' : destinationCity1,
+					'numberOfUnits' : numberOfUnits1,
+					'returnDate' : returnDate1,
+					'cabinCategory' : cabinCategory1,
+					'daysToTravel'  : daysToTravel1
+				}			
+			});
+		}
+};
+
+//Add Book Now Product Info
+
+function addBookNowProductInfo(category1, productID1, sourceCity1, destinationCity1, operatedBy1 , destinationChecked1){
+		
+	 if(undefined != window.digitalData){
+		 digitalData["cart"] = {};
+		 digitalData.cart.item = [];
+		 digitalData.cart.item.push(
+		 {
+			productInfo: {
+				'category' : category1,
+				'productID' : productID1,
+				'sourceCity' : sourceCity1,
+				'destinationCity' : destinationCity1,
+				'operatedBy' : operatedBy1,
+				'destinationChecked'  : destinationChecked1
+			}
+		});	
+	}
+};
+
+// New Cart Booking Widget Info
+function addBookingCartInfo(bookingTrip2, bookingStopOverAvailable2, bookingBpgLogoAvailbale2, bookingPremiumOnlyChecked2, bookingStopOverDays2, bookingAddStop2, bookingDate2, bookingTravelDate2, bookingTimeTodeparture2, bookingNoOfAdult2, bookingNoOfChild2, bookingNoOfInfant2, bookingNoOfTeenager2, bookingNoOfRooms2, bookingNoOfOFW2, bookingPromoCode2, bookingCugName2, bookingCugType2, bookingBookingType2, bookingFlowLanguage2, isFlexibleDatechecked2){
+
+		if(undefined != window.digitalData){
+			if( digitalData["cart"] != undefined && bookingTrip2 != "multicity" ) {
+				digitalData.cart.item = [];
+			} else {
+				digitalData["cart"] =
+				{	
+				  'item' : [],
+				};
+			} 
+			digitalData["cart"]['bookingTrip'] = bookingTrip2;
+			digitalData["cart"]['bookingStopOverAvailable'] = bookingStopOverAvailable2;
+			digitalData["cart"]['bookingBpgLogoAvailbale'] =  bookingBpgLogoAvailbale2;
+			digitalData["cart"]['bookingPremiumOnlyChecked'] =  bookingPremiumOnlyChecked2;
+			digitalData["cart"]['bookingStopOverDays'] =  bookingStopOverDays2;
+			digitalData["cart"]['bookingAddStop'] =  bookingAddStop2;
+			digitalData["cart"]['bookingDate'] =  bookingDate2;
+			digitalData["cart"]['bookingTravelDate'] =  bookingTravelDate2;
+			digitalData["cart"]['bookingTimeTodeparture'] = bookingTimeTodeparture2;
+			digitalData["cart"]['bookingNoOfAdult'] =  bookingNoOfAdult2;
+			digitalData["cart"]['bookingNoOfChild'] = bookingNoOfChild2;
+			digitalData["cart"]['bookingNoOfInfant'] = bookingNoOfInfant2;
+			digitalData["cart"]['bookingNoOfTeenager'] =  bookingNoOfTeenager2;
+			digitalData["cart"]['bookingNoOfRooms'] =  bookingNoOfRooms2;
+			digitalData["cart"]['bookingNoOfOFW'] =  bookingNoOfOFW2;
+			digitalData["cart"]['bookingPromoCode'] =  bookingPromoCode2;	
+			digitalData["cart"]['bookingCugName'] =  bookingCugName2;	
+			digitalData["cart"]['bookingCugType'] =  bookingCugType2;
+			digitalData["cart"]['bookingSearchType']  = '';
+			digitalData["cart"]['bookingBookingType'] =  bookingBookingType2;
+			digitalData["cart"]['bookingFlowLanguage'] =  bookingFlowLanguage2;
+			digitalData["cart"]['bookingFlowNumofSearchResult']  = '';
+			digitalData["cart"]['bookingMultiCurrancySelected']  = '';
+			digitalData["cart"]['bookingDefaultCurrency']  = '';
+			digitalData["cart"]['bookingRedemptionMethodAvailable']  = '';
+			digitalData["cart"]['bookingRedemptionSearchAvailability']  = '';
+			digitalData["cart"]['bookingRedemptionMethodUsed']  = '';
+			digitalData["cart"]['bookingRedemptionPointUsed'] = '';
+			digitalData["cart"]['bookingRedemptionValueUsed']  = '';
+			digitalData["cart"]['bookingTotalAdultBasefare']  = '';
+			digitalData["cart"]['bookingTotalChildBaseFare']  = '';
+			digitalData["cart"]['bookingTotalInfantBaseFare'] = '';
+			digitalData["cart"]['bookingTotalTeenageBaseFare']  = '';
+			digitalData["cart"]['bookingTotalOFWBaseFare']  = '';
+			digitalData["cart"]['bookingYQTax']  = '';
+			digitalData["cart"]['bookingTotalBaseFare']  = '';
+			digitalData["cart"]['bookingTotalTax']  = '';
+			digitalData["cart"]['bookingBeyondBusinessMember']  = '';
+			digitalData["cart"]['bookingNewletterSubscription']  = '';
+			digitalData["cart"]['bookingFrequestFlierProgram']  = '';
+			digitalData["cart"]['bookingPNR'] = '';
+			digitalData["cart"]['bookingStatus'] = '';
+			digitalData["cart"]['bookingPNRDateTime'] = '';
+			digitalData["cart"]['bookingPaymentMethod'] = '';
+			digitalData["cart"]['bookingCardType'] = '';
+			digitalData["cart"]['bookingForSelf'] = '';
+			digitalData["cart"]['bookingPayStatus'] = '';
+			digitalData["cart"]['bookingTotalPaylaterCharges'] = '',
+			digitalData["cart"]['bookingTimeToLoadConfirmationPage'] = '';
+			digitalData["cart"]['bookingCarbonOffsetAmount'] = '';
+			digitalData["cart"]['bookingEACAmount'] = '';
+			digitalData["cart"]['bookingCurrency'] = '';
+			digitalData["cart"]['bookingUrgencyToBookDisplayed'] = '';
+			digitalData["cart"]['isFlexibleDatechecked'] =  isFlexibleDatechecked2;
+		
+		}
+	
+};
+//END of CART booking function
+
+/*DataLayer google analytics function START*/
+
+ function addDataLayerStopOverEvent( passengerCount, stopOverType, stopOverDays, originDestinationInfo, tripType, cabinType, departureDate, returnDate, countryCode){
+		
+	 if( undefined != window.dataLayer ){
+			dataLayer.push({
+				'paxcount': passengerCount,
+				'stopovertype' : stopOverType,
+				'stopoverdays': stopOverDays, 
+				'originDestinationCode': originDestinationInfo,
+				'varItineraryType': tripType, 
+				'searchFareClass': cabinType,
+				'startDate' : departureDate,
+				'endDate' : returnDate,
+				'countryOfOrigin' : countryCode,
+				'event': 'stopover-showflights'		
+			});
+		}
+  };
+
+function addDataLayerFlightsHotelEvent(passengerCount, numberOfRooms, originDestinationInfo, tripType, cabinType, departureDate, returnDate, countryCode){
+		
+	 if( undefined != window.dataLayer ){
+			dataLayer.push({
+				'paxcount': passengerCount,
+				'numberofrooms': numberOfRooms, 
+				'originDestinationCode': originDestinationInfo,
+				'varItineraryType': tripType, 
+				'searchFareClass': cabinType,
+				'startDate' : departureDate,
+				'endDate' : returnDate,
+				'countryOfOrigin' : countryCode,
+				'event': 'flights&hotels-showflights'		
+			});
+		}
+};
+/*DataLayer google analytics function END*/
+
+function getPageName(pageurl) {
+	var pathdata = '';
+	if(pageurl != undefined){
+		pathdata = pageurl.split("/");
+	}
+    var pagePath = "";
+    for (i = 2; i < pathdata.length; i++) {
+        if (i==pathdata.length - 1){
+			pagePath = pathdata[i];
+        }
+    }
+    var pageName = pagePath.split(".")[0];
+    return pageName;
+}
+
+function getPagePathData(url){
+	var pagePath = '';
+	if(url.indexOf('?') != - 1){
+		pagePath = url.substring(0, url.indexOf('?'))
+	} else {
+		pagePath = url;
+	}
+	return pagePath;
+}
+
+
+//Travel preference save
+$('#travelPreference_save').on('click',function(){
+  var holidayPreferences = '';
+  var noOfHolidayPreferences = $('.holiday-pref li.selected').length;
+	$( 'ul.holiday-pref li.selected' ).each(function( index ) {
+		holidayPreferences += $( this ).attr('data-title') + (index === (noOfHolidayPreferences - 1) ? ':' : '');
+	});
+ var mealPreference = $('#T52_2-select-preferred-meal-select-myTravelPreference').parent().find('.custom-select-dropdown ul li span.selected').text();
+ var seatPreference = $('#T52_2-select-preferred-seat-select-myTravelPreference').parent().find('.custom-select-dropdown ul li span.selected').text();
+ var preferences = '';
+ var noOfPreferences = $('#T52_2-my-profile-preferences-selection ul li input:checked').length;
+   $( '#T52_2-my-profile-preferences-selection ul li input' ).each(function( index ) {
+      preferences += $( this ).parent().find('label').text() + (index === (noOfPreferences - 1) ? ':' : '');
+   });
+ var originAirport = $('#select-preferred-airports').val().join(':');
+ var destinationAirport = $('#select-destinations').val().join(':');
+ 
+ var userPrefarance = originAirport +'|'+destinationAirport+'|'+mealPreference+'|'+seatPreference+'|'+ holidayPreferences+'|'+preferences;
+  if(undefined != window.digitalData && undefined !=digitalData.page && undefined !=digitalData.page.userInfo){
+       digitalData.page.userInfo.userPreferences=userPrefarance;
+    
+    }
+	//ACTION: SAVE TRAVEL PREFERENCES
+	var location = $('nav .tab-menu-item.active span:eq(2)').text();
+	var currentPage = $('#current-page-path').val();
+	var pageName = '';
+	if(currentPage  !== undefined && currentPage !== ''){
+		pageName = currentPage.substr(currentPage.lastIndexOf('/') + 1);
+		pageName = pageName.replace('.html','');
+	}
+	var eventName = $('#travelPreference_save').text().toLowerCase();
+	var eventType = 'clicked';
+	addEvetnInfo('myprofile-preferences','save changes',eventType);
+   
+
+});
+	//ACTION: DELETE ACCOUNT
+    $(document).on('click', '.delete-my-profile-btn', function(e) {
+        var location = $('nav .tab-menu-item.active span:eq(2)').text();
+        var currentPage = $('#current-page-path').val();
+        var pageName = '';
+        if(currentPage  !== undefined && currentPage !== ''){
+            pageName = currentPage.substr(currentPage.lastIndexOf('/') + 1);
+            pageName = pageName.replace('.html','');
+        }
+        var eventName = $('.delete-my-profile-btn').text().toLowerCase();
+        var eventType = 'clicked';
+        addEvetnInfo('myprofile-details',eventName,eventType);
+
+    });
+
+	//ACTION: CONFIRM DELETE ACCOUNT
+    $(document).on('click', '#delete-profile', function(e) {
+        var location = $('nav .tab-menu-item.active span:eq(2)').text();
+        var currentPage = $('#current-page-path').val();
+        var pageName = '';
+        if(currentPage  !== undefined && currentPage !== ''){
+            pageName = currentPage.substr(currentPage.lastIndexOf('/') + 1);
+            pageName = pageName.replace('.html','');
+        }
+        var eventName = $('#delete-profile').text().toLowerCase();
+        var eventType = 'clicked';
+        addEvetnInfo('myprofile-details',eventName,eventType);
+
+    });
+
+	//ACTION: SAVE COMMUNICATION PREFERENCES
+    $(document).on('click', '#saveCommunicationDetails', function(e) {
+        var location = $('nav .tab-menu-item.active span:eq(2)').text();
+        var currentPage = $('#current-page-path').val();
+        var pageName = '';
+        if(currentPage  !== undefined && currentPage !== ''){
+            pageName = currentPage.substr(currentPage.lastIndexOf('/') + 1);
+            pageName = pageName.replace('.html','');
+        }
+        var eventName = $('#saveCommunicationDetails').text().toLowerCase();
+        var eventType = 'clicked';
+        addEvetnInfo('myprofile-communication','save changes',eventType);
+		addComponentInfo('myprofile-communication','nl subscribed','',pageName);
+    });
+
+	//ACTION: CLICK ON ADD FAMILY MEMBER
+	$(document).on('click', '#addFamilyIcon .T52-add-card-icon', function(e) {
+        var location = 'myprofile-myfamily';
+        var currentPage = $('#current-page-path').val();
+        var pageName = '';
+        if(currentPage  !== undefined && currentPage !== ''){
+            pageName = currentPage.substr(currentPage.lastIndexOf('/') + 1);
+            pageName = pageName.replace('.html','');
+        }
+        var eventName = $('#addFamilyIcon .T52-add-card-icon').parent().find('h4').text();
+        var eventType = 'clicked';
+        addEvetnInfo(location,'add family member',eventType);
+    });
+
+	//ACTION: CLICK ON ADD CO-TRAVELLER MEMBER
+    $(document).on('click', '#T52_4-co-traveller_Section .T52-add-card-icon', function(e) {
+        var location = 'myprofile-myfamily';
+        var currentPage = $('#current-page-path').val();
+        var pageName = '';
+        if(currentPage  !== undefined && currentPage !== ''){
+            pageName = currentPage.substr(currentPage.lastIndexOf('/') + 1);
+            pageName = pageName.replace('.html','');
+        }
+        var eventName = $('#T52_4-co-traveller_Section .T52-add-card-icon').parent().find('h4').text();
+        var eventType = 'clicked';
+        addEvetnInfo(location,'add co-traveller',eventType);
+    });
+
+
+	//ACTION: ADD FAMILY MEMBER
+    $(document).on('click', '.myFamilyContainerFieldset .j-T52_4-save', function(e) {
+		if( $(this).closest('.myFamilyContainerFieldset').attr('data-customerid') == undefined ) {
+			var location = 'myprofile-addfamilymember', 	
+				eventName = 'save changes';
+
+			var currentPage = $('#current-page-path').val();
+			var pageName = '';
+			if(currentPage  !== undefined && currentPage !== ''){
+				pageName = currentPage.substr(currentPage.lastIndexOf('/') + 1);
+				pageName = pageName.replace('.html','');
+			}
+			var eventType = 'clicked';
+			addEvetnInfo(location,eventName,eventType);
+		}
+    });
+
+	//ACTION: ADD CO-TRAVELLER MEMBER
+    $(document).on('click', '.myCoTravelerContainerFieldset .j-T52_4-save', function(e) {
+
+		if( $(this).closest('.myCoTravelerContainerFieldset').attr('data-cotravellerid') == undefined ) {
+			var location = 'myprofile-addco-traveller';
+			var currentPage = $('#current-page-path').val();
+			var pageName = '';
+			if(currentPage  !== undefined && currentPage !== ''){
+				pageName = currentPage.substr(currentPage.lastIndexOf('/') + 1);
+				pageName = pageName.replace('.html','');
+			}
+			var eventName = $(this).text().toLowerCase();
+			var eventType = 'clicked';
+			addEvetnInfo(location,eventName,eventType);
+		}
+
+    });
+
+    //Qhelp Accordion Click
+    $(document).on("click", ".help-accordion .cmp-accordion__button", function (e) {
+        $accordionButton = $(this);
+        if (
+            $accordionButton.hasClass("cmp-accordion__button--expanded") &&
+            $accordionButton.closest(".cmp-accordion__item").find(".find-us").length
+        ) {
+            var currentPage = $("#current-page-path").val();
+            var name = "find us & our offices";
+            var url = getPagePathData(currentPage);
+            var eventLocation = "help";
+            buttonClickAction(url, name, eventLocation);
+        }
+    });
+
+/* Booking Cart Data*/
+function bookingCartData(validationCheck){
+	var bookingTrip2;
+	var bookingStopOverAvailable2 = "";
+	var bookingBpgLogoAvailbale2 = "no";
+	var bookingPremiumOnlyChecked2 = "";
+	var bookingStopOverDays2 = "";
+	var bookingAddStop2 = ''; var bookingDate2 = "";  var bookingTravelDate2; var bookingTimeTodeparture2 = "",daysToTravel1 = "";
+	var bookingNoOfAdult2 = 0;
+	var bookingNoOfChild2 = 0;
+	var bookingNoOfInfant2 = 0;
+	var bookingNoOfTeenager2 = 0;
+	var bookingNoOfRooms2 = "";
+	var bookingNoOfOFW2 = 0;
+	var bookingPromoCode2 = $("#promo.inputText:visible").val();
+    var bookingCugName2 = "";
+    var bookingCugType2 = "";
+    var bookingBookingType2 = "revenue";
+    var bookingFlowLanguage2 = $('#page-locale').val();
+	var isFlexibleDatechecked2 = "", awardCheckBoxAvailable = "";
+
+	var category1 = "showflights";
+	var	productID1 = "", travelDate1 = "", sourceCity1 = "", destinationCity1 = "", numberOfUnits1 = 0, returnDate1 = "",
+	cabinCategory1 = "", originDestinationInfo = "", countryCodeInfo = "";
+
+	var flightStopInDoha = $('.bookingwizard').find('.nav.inner-tabs li.active').find('.stop-in-doha-tab');
+	var stopInQatarDataCheck = disabledCountries(window.stopInQatarData);
+	var flightBookingUrl  = '',flightBookingName = '', eveLocation = '', keyword = '', stopInDohaUrl = '' , returnDateInfo = '', departDateInfo = '';
+	var pageURL1 = $('#current-page-path').val();
+	var pageLocation = getPageName(pageURL1);
+	eveLocation = pageLocation +'-bookingwidget';
+	countryCodeInfo = $('#countryCodeVal').val();
+	flightBookingName = $('.flightsearh-btn').text().trim().toLowerCase();
+
+	if (navigator.userAgent.indexOf("Mobile") != -1) {
+		 if( getUserBasicInfoField('programCode') === 'QRBB' ) {
+			flightBookingUrl = $('#BookingFlowUrl').attr('smeMobileBookingLink');
+		 } else {
+			flightBookingUrl = $('#BookingFlowUrl').attr('mobileBookingFlowUrl');
+		 }
+		if($('.redemption-flow-content').html() != undefined && $('.redemption-flow-content.mobi-redemption-flow').css("display") == "block"){
+			if($('.redemption-flow-content.mobi-redemption-flow').css('display') == 'block' && $('#award-ticket-mobile').prop('checked') == true){
+				awardCheckBoxAvailable = "yes|yes";
+			} else if($('.redemption-flow-content.mobi-redemption-flow').css('display') == 'block' && $('#award-ticket-mobile').prop('checked') == false){
+				awardCheckBoxAvailable = "yes|no";
+			} else {
+				awardCheckBoxAvailable = "no|no";
+			}
+		}
+	} else {
+		 if(getUserBasicInfoField('programCode') === 'QRBB' ) {
+			flightBookingUrl = $("#smeDesktopBookingLink").val();
+		 } else {
+			flightBookingUrl = $('#BookingFlowUrl').attr('desktopBookingFlowUrl');
+		 }
+		if($('.redemption-flow-content').html() != undefined && $('.redemption-flow-dektop.redemption-flow-content').css("display") == "block"){
+			if($('.redemption-flow-dektop.redemption-flow-content').css('display') == 'block' && $('#award-ticket').prop('checked') == true){
+				awardCheckBoxAvailable = "yes|yes";
+			} else if($('.redemption-flow-dektop.redemption-flow-content').css('display') == 'block' && $('#award-ticket').prop('checked') == false){
+				awardCheckBoxAvailable = "yes|no";
+			} else {
+				awardCheckBoxAvailable = "no|no";
+			}
+		}
+	}
+	stopInDohaUrl = $('#BookingFlowUrl').attr('stopoverbookingflowurl');
+
+	if($('.bookingwizard').length != 0){
+		if($("#tripType").attr("data-value") == "roundTrip") {
+			bookingTrip2 = $("#tripType").attr("data-value").toLowerCase();
+		} else if($("#tripType").attr("data-value") == "onewayTrip") {
+			bookingTrip2 = "oneway";
+		} else if($("#tripType").attr("data-value") == "multicityTrip"){
+			bookingTrip2 = "multicity";
+		}
+
+		if($("#tripType").attr("data-value") == "multicityTrip"){
+			if ($('#mcabintype').val() == 'mbusiness') {
+				cabinCategory1 = "business";
+			} else if($('#mcabintype').val() == 'mfirst') {
+				cabinCategory1 = "first";
+			} else {
+				cabinCategory1 = "economy";
+			}
+		} else {
+			if($('#cabintype').val() == 'premium'){
+				bookingPremiumOnlyChecked2 = "yes";
+				cabinCategory1 = "premium";
+			} else {
+				bookingPremiumOnlyChecked2 = "no";
+				cabinCategory1 = "economy";
+			}
+		}
+
+		bookingNoOfAdult2 = parseInt($("#adult").val());
+		if($('#child').val() != undefined){
+			bookingNoOfChild2 = parseInt($("#child").val());
+		}
+		if($('#infant').val() != undefined){
+			bookingNoOfInfant2 = parseInt($("#infant").val());
+		}
+		if($('#teenager').val() != null && $('#teenager').val() != undefined){
+			bookingNoOfTeenager2 = parseInt($('#teenager').val());
+		}
+		if($("#ofw").val() != null && $('#ofw').val() != undefined) {
+			bookingNoOfOFW2 = parseInt($("#ofw").val());
+		}
+
+		numberOfUnits1 = bookingNoOfAdult2 + bookingNoOfTeenager2 + bookingNoOfChild2 + bookingNoOfInfant2 + bookingNoOfOFW2;
+
+		if(bookingPromoCode2 == null ||  bookingPromoCode2 == undefined){
+		   bookingPromoCode2 = '';
+		} if( bookingNoOfTeenager2 == undefined || bookingNoOfTeenager2 == 0){
+		   bookingNoOfTeenager2 = '';
+		} if(bookingNoOfChild2 == undefined || bookingNoOfChild2 == 0){
+			bookingNoOfChild2 = '';
+		} if(bookingNoOfInfant2 == undefined || bookingNoOfInfant2 == 0){
+			bookingNoOfInfant2 = '';
+		} if(bookingNoOfOFW2 == undefined || bookingNoOfOFW2 == 0){
+			bookingNoOfOFW2 = '';
+		}
+
+		var departureData = $(".flightfrom .inputText").val();
+		var departureDataStation = departureData.substring(departureData.lastIndexOf(' ') + 1).trim().toLowerCase();
+		var arrivalData =  $(".flightto .inputText").val();
+		var arrivalDataStation = arrivalData.substring(arrivalData.lastIndexOf(' ') + 1).trim().toLowerCase();
+
+		originDestinationInfo = departureDataStation+'-'+arrivalDataStation;
+		productID1  = departureDataStation+':'+arrivalDataStation;
+		sourceCity1 = departureDataStation;
+		destinationCity1 = arrivalDataStation;
+
+		isFlexibleDatechecked2 = $('#flexibleDates').attr('value') == 'true' ? 'yes' : 'no';
+
+		var departingDate= $('.t-input-check-in').val();
+		var returningDate = $('.t-input-check-out').val();
+		if (bookingTrip2 == "roundtrip") {
+			returnDateInfo = returningDate;
+			departDateInfo = departingDate;
+		} else {
+			returnDateInfo = '';
+			departDateInfo = departingDate;
+		}
+		var departDateFormat = new Date(departingDate);
+		var td1 = "", td2 = "";
+		var fromStationMulti = "", toStationMulti = "", departingMulti = "",departingMultiInfo = "", fromValueData = "", toValueData = "";
+		var todayDate = new Date();
+		if(bookingFlowLanguage2 =="ar"){
+			bookingDate2 = formatDateddmmyyyy(formatDatefromArabBW(todayDate));
+		} else {
+			bookingDate2 = formatDateddmmyyyy(todayDate);
+		}
+		if (bookingTrip2 == "roundtrip") {
+			daysToTravel1 = formatDateDiff(todayDate,departDateFormat);
+			if(bookingFlowLanguage2 =="ar"){
+				td1 = formatDateddmmyyyy(formatDatefromArabBW(departingDate));
+				td2 = formatDateddmmyyyy(formatDatefromArabBW(returningDate));
+				bookingTravelDate2 = td1 +"|"+td2;
+				travelDate1 = formatDateddmmyyyy(formatDatefromArabBW(departingDate));
+				returnDate1 = formatDateddmmyyyy(formatDatefromArabBW(returningDate));
+			}else{
+				td1 = formatDateddmmyyyy(departingDate);
+				td2 = formatDateddmmyyyy(returningDate);
+				bookingTravelDate2 = td1 +"|"+td2;
+				travelDate1 = formatDateddmmyyyy(departingDate);
+				returnDate1 = formatDateddmmyyyy(returningDate);
+			}
+		} else if (bookingTrip2 == "oneway") {
+			 daysToTravel1 = formatDateDiff(todayDate,departDateFormat);
+			 if(bookingFlowLanguage2 =="ar"){
+				 bookingTravelDate2 = formatDateddmmyyyy(formatDatefromArabBW(departingDate));
+				 travelDate1 = formatDateddmmyyyy(formatDatefromArabBW(departingDate));
+			 }else{
+				 bookingTravelDate2 = formatDateddmmyyyy(departingDate);
+				 travelDate1 = formatDateddmmyyyy(departingDate);
+			 }
+		}
+		if (bookingTrip2 == "multicity"){
+			daysToTravel1 = formatDateDiff(todayDate,departDateFormat);
+			productID1 = departureDataStation+':'+arrivalDataStation;
+			if(bookingFlowLanguage2 =="ar"){
+				travelDate1 = formatDateddmmyyyy(formatDatefromArabBW(departingDate));
+				bookingTravelDate2 = formatDateddmmyyyy(formatDatefromArabBW(departingDate));
+			} else {
+				travelDate1 = formatDateddmmyyyy(departingDate);
+				bookingTravelDate2 = formatDateddmmyyyy(departingDate);
+			}
+			var k = 1;
+			 for (var t = 1; t <= $('#multiflightNewContainer').find('.multiflight').length; t++) {
+				 var departValueMultiInfo = $("#multicity-datepicker-" + (k+1)).val();
+				 if(bookingFlowLanguage2 =="ar"){
+				   departingMultiInfo = formatDateddmmyyyy(formatDatefromArabBW(departValueMultiInfo));
+				 } else {
+				   departingMultiInfo = formatDateddmmyyyy(departValueMultiInfo);
+				 }
+				 bookingTravelDate2 = bookingTravelDate2 + '|' + departingMultiInfo;
+
+			 k++;
+		  }
+		}
+		if(validationCheck){
+			if(flightStopInDoha.hasClass('active') && $('.stopindohapreferences').is(':visible') && stopInQatarDataCheck){
+			   bookingStopOverAvailable2 = "yes";
+			   bookingStopOverDays2 = parseInt($('[name="days"]').val());
+			   bookingAddStop2 = $('[name="customRadio"]:checked').val();
+			   addDataLayerStopOverEvent( numberOfUnits1, bookingAddStop2, bookingStopOverDays2, originDestinationInfo, bookingTrip2, cabinCategory1, departDateInfo, returnDateInfo, countryCodeInfo);
+			   bookingCalltoActionClick(stopInDohaUrl,'show flights-qrh stopover');
+			} else if(flightStopInDoha.hasClass('active') && $('.stopindohapreferences').is(':visible') && !stopInQatarDataCheck) {
+				bookingStopOverAvailable2 = "yes";
+			    bookingStopOverDays2 = parseInt($('[name="days"]').val());
+			    bookingAddStop2 = $('[name="customRadio"]:checked').val();
+				bookingCalltoActionClick(flightBookingUrl,'show flights-nsp stopover');
+			} else if(flightStopInDoha.hasClass('active') && $('.stopindohapreferences').css('display') == "none" && !stopInQatarDataCheck){
+				bookingCalltoActionClick(flightBookingUrl,'show flights-nsp');
+			} else {
+				bookingCalltoActionClick(flightBookingUrl,flightBookingName);
+			}
+			addBookingCartInfo(bookingTrip2, bookingStopOverAvailable2, bookingBpgLogoAvailbale2, bookingPremiumOnlyChecked2, bookingStopOverDays2, bookingAddStop2, bookingDate2, bookingTravelDate2, bookingTimeTodeparture2, bookingNoOfAdult2, bookingNoOfChild2, bookingNoOfInfant2, bookingNoOfTeenager2, bookingNoOfRooms2, bookingNoOfOFW2, bookingPromoCode2, bookingCugName2, bookingCugType2, bookingBookingType2, bookingFlowLanguage2, isFlexibleDatechecked2);
+			if(digitalData.cart != undefined && !flightStopInDoha.hasClass('active') ){
+			   digitalData.cart['bookingawardticket'] = awardCheckBoxAvailable;
+			}
+			addProductInfo(category1, productID1, travelDate1, sourceCity1, destinationCity1, numberOfUnits1, returnDate1, cabinCategory1,daysToTravel1.toString());
+		}
+		if (bookingTrip2 == "multicity"){
+		 var j = 1;
+		 for (var i = 1; i <= $('#multiflightNewContainer').find('.multiflight').length; i++) {
+		   var fromValueMultiData = $("#bw-frommultiflight_" + (j+1)).val(),
+			   toValueMultiData = $("#bw-tomultiflight_" + (j+1)).val(),
+			   departValueMultiData = $("#multicity-datepicker-" + (j+1)).val();
+		   var departMultiFormatData = new Date(departValueMultiData);
+		   if (fromValueMultiData.length > 0 && toValueMultiData.length > 0){
+			   fromValueData = fromValueMultiData.split(' ');
+			   toValueData = toValueMultiData.split(' ');
+			   fromStationMulti = fromValueData[fromValueData.length - 1].trim().toLowerCase();
+			   toStationMulti = toValueData[toValueData.length - 1].trim().toLowerCase();
+			   daysToTravel1 = formatDateDiff(todayDate,departMultiFormatData);
+
+			   if(bookingFlowLanguage2 =="ar"){
+				  departingMulti = formatDateddmmyyyy(formatDatefromArabBW(departValueMultiData));
+			   } else {
+				  departingMulti = formatDateddmmyyyy(departValueMultiData);
+			   }
+			   productID1 =  fromStationMulti + ':' + toStationMulti;
+			   travelDate1 = departingMulti;
+			   sourceCity1 =  fromStationMulti;
+			   destinationCity1 = toStationMulti;
+		   }
+		   j++;
+		   addProductInfo(category1, productID1, travelDate1, sourceCity1, destinationCity1, numberOfUnits1, returnDate1, cabinCategory1,daysToTravel1.toString());
+		 }
+	   }
+	}
+
+	if(validationCheck){
+		componentInfoOnPageLoad(pageLocation+'-book',pageLocation);
+	} else {
+		bookingNewErrorClick(flightBookingUrl, flightBookingName, eveLocation);
+	}
+};
+/* Booking Cart Data END*/
+
+/*Booking CART Error CLick START*/
+function bookingNewErrorClick(flightBookingUrl, flightBookingName, eveLocation){
+	if($('.booktabcontent .errorvalidationmessage').is(':visible')) {
+		var counter = 0 , keyword = "";
+		$('#flights-search-from .errorview').each(function() {
+			if( $(this).attr('data-title') != undefined && $('.multiflightnew .multiflight').length < 2) {
+				if($(this).is(':visible') && counter == 0) {
+					keyword = $(this).attr('data-title');
+				} else if($(this).is(':visible') && counter != 0){
+					keyword = keyword + '|' + $(this).attr('data-title');
+				}
+				counter ++;
+			} else {
+				keyword = 'all';
+			}
+		});
+		var count = 0;
+		$('.booktabcontent .errorvalidationmessage').find('li').each(function() {
+			if($(this).is(':visible') && count == 0){
+				errorCode =  'bw' + $(this).attr('data-errorcode');
+				count ++;
+			} else if($(this).is(':visible') && count != 0){
+				errorCode = errorCode + '|bw'+ $(this).attr('data-errorcode');
+				count ++;
+			}
+		});
+	}
+	if(undefined != window.digitalData && undefined !=digitalData.page && $('.booktabcontent .errorvalidationmessage').is(':visible')){
+		digitalData.page.pageInfo.pageType = errorCode;
+	}
+	errorClick(flightBookingUrl, flightBookingName, eveLocation, keyword);
+};
+
+/*Booking CART Error click END*/
+
+//component Info On-Load
+
+function componentInfoOnPageLoad(cmpName, cmpEvent){
+	var pageURL1 = '';
+	if(cmpEvent == '' || cmpEvent == undefined || cmpEvent == null){
+		pageURL1 = $('#current-page-path').val();
+		cmpEvent = getPageName(pageURL1);
+	}
+	var cmpsource = '';
+	if(undefined != window.digitalData && undefined !=digitalData.page){
+		cmpsource = digitalData.page.pageInfo.pageName;
+    }
+	addComponentInfo(cmpName,cmpEvent,'',cmpsource);
+};
+
+// Button click
+
+function buttonClickAction(url, name, evelocation){
+	var ev = {};
+	if(typeof qr != "undefined"){
+		ev.eventInfo = {
+			'type' : qr.trackEvent,
+			'eventAction' : qr.buttonclick,
+			'eventLabel' : url,
+			'eventName' : name,
+			'eventLocation' : evelocation
+		};
+		digitalData.event.push(ev);
+	}
+};
+
+// Link Click Event
+function linkEventClickAction(url, name, evelocation){
+	var ev = {};
+	if(typeof qr != "undefined"){
+		ev.eventInfo = {
+			'type' : qr.trackEvent,
+			'eventAction' : qr.linkclick,
+			'eventLabel' : url,
+			'eventName' : name,
+			'eventLocation' : evelocation
+		};
+		digitalData.event.push(ev);
+	}
+};
+//Login Success
+function loginSuccessEvent(eventLabel, eventName, eventLocation){
+	var ev = {};
+	if(typeof qr != "undefined"){
+		ev.eventInfo={
+			'type': qr.trackEvent,
+			'eventAction': qr.login,
+			'eventLabel': eventLabel,
+			'eventName': eventName,
+			'eventLocation': eventLocation
+		};
+		digitalData.event.push(ev);
+	}
+}
+
+// call-to-action click
+function bookingCalltoActionClick(url, name){
+	var ev = {};
+	var pageURL1 = $('#current-page-path').val();
+	var pageLocation = getPageName(pageURL1);
+	var eveLocation = pageLocation +'-bookingwidget';
+	if(typeof qr != "undefined"){
+		ev.eventInfo = {
+			'type' : qr.trackEvent,
+			'eventAction' : qr.clicktoaction,
+			'eventLabel' : url,
+			'eventName' : name,
+			'eventLocation' : eveLocation
+		};
+		digitalData.event.push(ev);
+	}
+};
+
+// Navigation click
+
+function linkNavigationClick(url,name,evelocation){
+	var ev = {};
+	if(typeof qr != "undefined"){
+		ev.eventInfo = {
+			'type': qr.trackEvent,
+			'eventAction': qr.navigationclick,
+			'eventLabel': url,
+			'eventName': name,
+			'eventLocation' : evelocation
+		};
+		digitalData.event.push(ev);
+	}
+};
+
+//Footer click
+function footerLinkNavigation(url,name,evelocation){
+	var ev = {};
+	if(typeof qr != "undefined"){
+		ev.eventInfo = {
+			'type': qr.trackEvent,
+			'eventAction': qr.footerclick,
+			'eventLabel': url,
+			'eventName': name,
+			'eventLocation' : evelocation
+		};
+		digitalData.event.push(ev);
+	}
+};
+
+// Footer Social navigation clicks
+
+function footerSocialNavigation(url,name,evelocation){
+	var ev = {};
+	if(typeof qr != "undefined"){
+		ev.eventInfo = {
+			'type': qr.trackEvent,
+			'eventAction': qr.social,
+			'eventLabel': url,
+			'eventName': name,
+			'eventLocation' : evelocation
+		};
+		digitalData.event.push(ev);
+	}
+};
+
+// Header Search Navigation clicks
+
+function headerSearchClick(url,name,keyword){
+	var ev = {};
+	if(typeof qr != "undefined"){
+		ev.eventInfo = {
+			'type': qr.trackEvent,
+			'eventAction': qr.search,
+			'eventLabel': url,
+			'eventName': name,
+			'eventLocation': "search widget",
+			'keyword': keyword
+		 };
+		digitalData.event.push(ev);
+	}
+};
+
+// Book Now Click
+
+function bookNowClick(url,name){
+	var ev = {};
+	if(typeof qr != "undefined"){
+		ev.eventInfo={
+			'type': qr.trackEvent,
+			'eventAction': qr.booknow,
+			'eventLabel': url,
+			'eventName': name,
+			'eventLocation': "homepage"
+		};
+		digitalData.event.push(ev);
+	}
+};
+
+function errorClick(url, name, eveLocation, keyword){
+	var ev = {};
+	if(typeof qr != "undefined"){
+		ev.eventInfo={
+			'type': qr.trackEvent,
+			'eventAction': qr.errorclick,
+			'eventLabel': url,
+			'eventName': name,
+			'eventLocation': eveLocation,
+			'keyword': keyword
+		};
+		digitalData.event.push(ev);
+	}
+};
+ //Hero-Image CTA click
+ var $heroImageButton = $('.hero-image-new .hero-image-teaser a');
+ $heroImageButton.on('click',function(e){
+	 var name = $(this).text().trim().toLowerCase();
+	 var url = getPagePathData($(this).attr('href'));
+	 var eventLocation = 'homepage-heroimage';
+	 buttonClickAction(url,name,eventLocation);
+ });
+
+//Flights-Hotels CART Data and ProductInfo START
+function flightsHotelBookingCartData(validationCheckflightsHotel){
+	var bookingTrip2 = 'roundtrip';
+	var bookingStopOverAvailable2 = "";
+	var bookingBpgLogoAvailbale2 = "";
+	var bookingPremiumOnlyChecked2 = '';
+	var bookingStopOverDays2 = '';
+	var bookingAddStop2 = ''; var bookingDate2 = "";  var bookingTravelDate2; var bookingTimeTodeparture2 = "", daysToTravel1="";
+	var bookingNoOfAdult2 = 0;
+	var bookingNoOfChild2 = 0;
+	var bookingNoOfInfant2 = 0;
+	var bookingNoOfTeenager2 = '';
+	var bookingNoOfRooms2 = '';
+	var bookingNoOfOFW2 = '';
+	var bookingPromoCode2 = '';
+    var bookingBookingType2 = "revenue";
+    var bookingFlowLanguage2 = $('#page-locale').val();
+	var bookingCugName2 = "";
+    var bookingCugType2 = "";
+	var isFlexibleDatechecked2 = "";
+
+	var category1 = "flights&hotels-search flight";
+	var	productID1 = "", travelDate1 = "", sourceCity1 = "", destinationCity1 = "", numberOfUnits1 = "", returnDate1 = "",
+	cabinCategory1 = "", originDestinationInfo = "", countryCodeInfo = "", travelDateInfo = "", returnDateInfo = "";
+
+	var tdate1 = '', tdate2 = '', flightHotelBookingCTA = '', flightHotelBookingURL = '', eveLocation = '', keyword = '';
+
+	flightHotelBookingCTA =  'flights&hotels-search flight';
+	flightHotelBookingURL = 'https://www.qatarairwaysholidays.com/qa-contact/search.php';
+	var pageURL = $('#current-page-path').val();
+	var pageLocation = getPageName(pageURL);
+	eveLocation = pageLocation +'-bookingwidget';
+	countryCodeInfo = $('#countryCodeVal').val();
+
+	if($('.bookingwizard').length != 0){
+		var hotelFrom = $('#flight-hotel #bw-fromFlightsHotel').val();
+		var hotelTo = $('#flight-hotel #bw-toFlightsHotel').val();
+		var hoteldeparture = $('.flightsearchformFlightsHotels .t-day-check-in').val();
+		var hotelarrival = $('.flightsearchformFlightsHotels .t-day-check-out').val();
+		var hotelpassengers = $("#flight-hotel .inputText.fh-passenger").val();
+		var hotelFromVal = hotelFrom.substring(hotelFrom.lastIndexOf(' ') + 1).trim().toLowerCase();
+		var hotelToVal = hotelTo.substring(hotelTo.lastIndexOf(' ') + 1).trim().toLowerCase();
+		bookingNoOfRooms2 = parseInt(hotelpassengers.split(',')[1].slice(0,2).trim());
+		var hotelDepartFormat = new Date(hoteldeparture);
+		travelDateInfo =  $('.flightsearchformFlightsHotels .t-input-check-in').val();
+		returnDateInfo =  $('.flightsearchformFlightsHotels .t-input-check-out').val();
+
+		if ($('.fh-cabintype #cabintype').val() == 'premium') {
+			bookingPremiumOnlyChecked2 = "yes";
+			cabinCategory1 = "premium";
+		} else {
+			bookingPremiumOnlyChecked2 = "no";
+			cabinCategory1 = "economy";
+		}
+
+		originDestinationInfo = hotelFromVal+'-'+hotelToVal;
+		productID1  = hotelFromVal+':'+hotelToVal;
+		sourceCity1 = hotelFromVal;
+		destinationCity1 = hotelToVal;
+		var todayDate1 = new Date();
+		if(bookingFlowLanguage2 =="ar"){
+			bookingDate2 = formatDateddmmyyyy(formatDatefromArabBW(todayDate1));
+		} else {
+			bookingDate2 = formatDateddmmyyyy(todayDate1);
+		}
+		daysToTravel1 = formatDateDiff(todayDate1,hotelDepartFormat);
+
+		if(bookingFlowLanguage2 =="ar"){
+			tdate1 = formatDateddmmyyyy(formatDatefromArabBW(hoteldeparture));
+			tdate2 = formatDateddmmyyyy(formatDatefromArabBW(hotelarrival));
+			bookingTravelDate2 = tdate1 +"|"+tdate2;
+			travelDate1 = formatDateddmmyyyy(formatDatefromArabBW(hoteldeparture));
+			returnDate1 = formatDateddmmyyyy(formatDatefromArabBW(hotelarrival));
+		}else{
+			tdate1 = formatDateddmmyyyy(hoteldeparture);
+			tdate2 = formatDateddmmyyyy(hotelarrival);
+			bookingTravelDate2 = tdate1 +"|"+tdate2;
+			travelDate1 = formatDateddmmyyyy(hoteldeparture);
+			returnDate1 = formatDateddmmyyyy(hotelarrival);
+		}
+		$('#fh-passenger-picker .room-container').find('.room-list').each(function(i,v){
+			i=i+1;
+			bookingNoOfAdult2 += parseInt($('#fh-adult-'+i).val());
+			bookingNoOfChild2 += parseInt($('#fh-child-'+i).val());
+			bookingNoOfInfant2 += parseInt($('#fh-infant-'+i).val());
+		});
+		numberOfUnits1 = bookingNoOfAdult2 + bookingNoOfChild2 + bookingNoOfInfant2;
+		if(bookingNoOfAdult2 == 0){
+			bookingNoOfAdult2 = '';
+		} if(bookingNoOfChild2 == 0){
+			bookingNoOfChild2 = '';
+		} if(bookingNoOfInfant2 == 0){
+			bookingNoOfInfant2 == '';
+		}
+	}
+	if(validationCheckflightsHotel){
+		addBookingCartInfo(bookingTrip2, bookingStopOverAvailable2, bookingBpgLogoAvailbale2, bookingPremiumOnlyChecked2, bookingStopOverDays2, bookingAddStop2, bookingDate2, bookingTravelDate2, bookingTimeTodeparture2, bookingNoOfAdult2, bookingNoOfChild2, bookingNoOfInfant2, bookingNoOfTeenager2, bookingNoOfRooms2, bookingNoOfOFW2, bookingPromoCode2, bookingCugName2, bookingCugType2, bookingBookingType2, bookingFlowLanguage2, isFlexibleDatechecked2);
+
+		addProductInfo(category1, productID1, travelDate1, sourceCity1, destinationCity1, numberOfUnits1, returnDate1, cabinCategory1,daysToTravel1.toString());
+		bookingCalltoActionClick(flightHotelBookingURL,flightHotelBookingCTA);
+		addDataLayerFlightsHotelEvent(numberOfUnits1, bookingNoOfRooms2, originDestinationInfo, bookingTrip2, cabinCategory1, travelDateInfo, returnDateInfo, countryCodeInfo);
+		componentInfoOnPageLoad(pageLocation+'-flightsHotels','');
+	} else {
+		if($('.flightplushotels .errorvalidationmessage').is(':visible')) {
+			var counter = 0 ;
+			$('.flightsearchformFlightsHotels .errorview').each(function() {
+				if(counter == 0) {
+					keyword = $(this).attr('data-title');
+				} else {
+					keyword = keyword + '|' + $(this).attr('data-title');
+				}
+				counter ++;
+			});
+			var count = 0;
+			$('.flightplushotels .errorvalidationmessage').find('li').each(function() {
+				if($(this).is(':visible') && count == 0){
+					errorCode =  'bw' + $(this).attr('data-errorcode');
+					count ++;
+				} else if($(this).is(':visible') && count != 0){
+					errorCode = errorCode + '|bw'+ $(this).attr('data-errorcode');
+					count ++;
+				}
+			});
+		}
+		if(undefined != window.digitalData && undefined !=digitalData.page){
+			digitalData.page.pageInfo.pageType = errorCode;
+		}
+		errorClick(flightHotelBookingURL, flightHotelBookingCTA, eveLocation, keyword);
+	}
+};
+//Flight-Hotels CART Data and Product Info End
+
+
+//DataLayer Event for flights+hotel QRH deepLink START
+function flightHotelQRHDataLayerEvent(validationCheckflightsHotelQRH,fromStation,toStation,bookingNoOfAdult2,bookingNoOfChild2,bookingNoOfInfant2,bookingNoOfRooms2,needHotelonlychecked) {
+	var bookingDate2 = "";  var bookingTravelDate2, daysToTravel1="";
+    var bookingFlowLanguage2 = $('#page-locale').val();
+
+	var category1 = "flights&hotels-search flight";
+	var	productID1 = "", travelDate1 = "", sourceCity1 = "", destinationCity1 = "", numberOfUnits1 = "", returnDate1 = "",
+	cabinCategory1 = "", originDestinationInfo = "", countryCodeInfo = "", travelDateInfo = "", returnDateInfo = "";
+
+	var tdate1 = '', tdate2 = '', flightHotelBookingCTA = '', flightHotelBookingURL = '', eveLocation = '', keyword = '';
+	var qrhFlightsHotelLink = $('.bookingwizard').find('.nav.inner-tabs li').find('.flightsHotelTab.qrhtab');
+
+	flightHotelBookingCTA =  'flights&hotels-search flight';
+	flightHotelBookingURL = $('#BookingFlowUrl').attr('qrhBookingFlowUrl');
+	
+	var pageURL = $('#current-page-path').val();
+	var pageLocation = getPageName(pageURL);
+	eveLocation = pageLocation +'-bookingwidget';
+	countryCodeInfo = $('#countryCodeVal').val();
+
+	if($('.bookingwizard').length != 0){
+		var hoteldeparture = $($('#flight-hotel-qrh .t-day-check-in')[0]).val();
+		var hotelarrival = $($('#flight-hotel-qrh .t-day-check-out')[0]).val();
+		var hotelFromVal = fromStation.trim().toLowerCase();
+		var hotelToVal = toStation.trim().toLowerCase();
+		var hotelDepartFormat = new Date(hoteldeparture);
+
+		if ($('#flight-hotel-qrh #cabintype').val() == 'first') {
+			cabinCategory1 = "first";
+			bookingPremiumOnlyChecked2 = "yes";
+		} else if($('#flight-hotel-qrh #cabintype').val() == 'business') {
+			cabinCategory1 = "business";
+			bookingPremiumOnlyChecked2 = "yes";
+		} else {
+			cabinCategory1 = "economy";
+			bookingPremiumOnlyChecked2 = "no";
+		}
+
+		originDestinationInfo = hotelFromVal+'-'+hotelToVal;
+		productID1  = hotelFromVal+':'+hotelToVal;
+		sourceCity1 = hotelFromVal;
+		destinationCity1 = hotelToVal;
+		var todayDate1 = new Date();
+		if(bookingFlowLanguage2 =="ar"){
+			bookingDate2 = formatDateddmmyyyy(formatDatefromArabBW(todayDate1));
+		} else {
+			bookingDate2 = formatDateddmmyyyy(todayDate1);
+		}
+		daysToTravel1 = formatDateDiff(todayDate1,hotelDepartFormat);
+
+		if(bookingFlowLanguage2 =="ar"){
+			tdate1 = formatDateddmmyyyy(formatDatefromArabBW(hoteldeparture));
+			tdate2 = formatDateddmmyyyy(formatDatefromArabBW(hotelarrival));
+			bookingTravelDate2 = tdate1 +"|"+tdate2;
+			travelDate1 = formatDateddmmyyyy(formatDatefromArabBW(hoteldeparture));
+			returnDate1 = formatDateddmmyyyy(formatDatefromArabBW(hotelarrival));
+		}else{
+			tdate1 = formatDateddmmyyyy(hoteldeparture);
+			tdate2 = formatDateddmmyyyy(hotelarrival);
+			bookingTravelDate2 = tdate1 +"|"+tdate2;
+			travelDate1 = formatDateddmmyyyy(hoteldeparture);
+			returnDate1 = formatDateddmmyyyy(hotelarrival);
+		}
+		numberOfUnits1 = bookingNoOfAdult2 + bookingNoOfChild2 + bookingNoOfInfant2;
+		if(bookingNoOfAdult2 == 0){
+			bookingNoOfAdult2 = '';
+		} if(bookingNoOfChild2 == 0){
+			bookingNoOfChild2 = '';
+		} if(bookingNoOfInfant2 == 0){
+			bookingNoOfInfant2 == '';
+		}
+	}
+	if(validationCheckflightsHotelQRH){
+		addBookingCartInfo("roundtrip", "", "", bookingPremiumOnlyChecked2, "", "", bookingDate2, bookingTravelDate2, "", bookingNoOfAdult2, bookingNoOfChild2, bookingNoOfInfant2, "", bookingNoOfRooms2, "", "", "", "", "revenue", bookingFlowLanguage2, "");
+		if(digitalData.cart != undefined){
+		   digitalData.cart['needHotelonlychecked'] = needHotelonlychecked;
+		}
+		addProductInfo(category1, productID1, travelDate1, sourceCity1, destinationCity1, numberOfUnits1, returnDate1, cabinCategory1,daysToTravel1.toString());
+		bookingCalltoActionClick(flightHotelBookingURL,flightHotelBookingCTA);
+		componentInfoOnPageLoad(pageLocation+'-flightsHotels','');
+	} else {
+		if($('.flightplushotels .errorvalidationmessage').is(':visible')) {
+			var counter = 0 ;
+			$('.flightsearchformFlightsHotels .errorview').each(function() {
+				if(counter == 0) {
+					keyword = $(this).attr('data-title');
+				} else {
+					keyword = keyword + '|' + $(this).attr('data-title');
+				}
+				counter ++;
+			});
+		}
+		errorClick(flightHotelBookingURL, flightHotelBookingCTA, eveLocation, keyword);
+	}
+}
+//DataLayer Event for flights+hotel QRH deepLink END
+
+//FLight Status Product Info and cart Item START
+function addCartFlightStatus(origin,destination,findFlightValue,fSUrl,fSName){
+	var bookingTrip2 = "", bookingStopOverAvailable2 = "", bookingBpgLogoAvailbale2 = "", bookingPremiumOnlyChecked2 = '';
+	var bookingStopOverDays2 = '', bookingAddStop2 = '', bookingDate2 = "";
+	var bookingTravelDate2; var bookingTimeTodeparture2 = "", daysToTravel1="", bookingNoOfAdult2 = '', bookingNoOfChild2 = '';
+	var bookingNoOfInfant2 = '', bookingNoOfTeenager2 = '',bookingNoOfRooms2 = '',bookingNoOfOFW2 = '', bookingPromoCode2 = '';
+    var bookingBookingType2 = "revenue";
+    var bookingFlowLanguage2 = $("#localePageName").val();
+	var bookingCugName2 = "", bookingCugType2 = "", isFlexibleDatechecked2 = "";
+
+	var formatTravelDateFS = flightStatusDateFormat($("#flightDateRange").val());
+
+	var category1 = "showflights";
+	var	productID1 = "", travelDate1 = "", sourceCity1 = "", destinationCity1 = "", numberOfUnits1 = "", returnDate1 = "",
+	cabinCategory1 = "";
+
+	if($('.bookingwizard').length != 0){
+		if(bookingFlowLanguage2 =="ar"){
+			travelDate1 = formatDateddmmyyyy(formatDatefromArabBW(formatTravelDateFS));
+		} else {
+			travelDate1 = formatDateddmmyyyy(formatTravelDateFS);
+		}
+		if(origin == '' || destination == ''){
+			productID1 = findFlightValue;
+		} else{
+			productID1 = origin.toLowerCase()+':'+destination.toLowerCase();
+			sourceCity1 = origin.toLowerCase();
+			destinationCity1 = destination.toLowerCase();
+		}
+		var todayDate = new Date();
+		if(bookingFlowLanguage2 =="ar"){
+			bookingDate2 = formatDateddmmyyyy(formatDatefromArabBW(todayDate));
+		} else {
+			bookingDate2 = formatDateddmmyyyy(todayDate);
+		}
+		daysToTravel1 = formatDateDiff(todayDate,formatTravelDateFS);
+	}
+
+	addBookingCartInfo(bookingTrip2, bookingStopOverAvailable2, bookingBpgLogoAvailbale2, bookingPremiumOnlyChecked2, bookingStopOverDays2, bookingAddStop2, bookingDate2, bookingTravelDate2, bookingTimeTodeparture2, bookingNoOfAdult2, bookingNoOfChild2, bookingNoOfInfant2, bookingNoOfTeenager2, bookingNoOfRooms2, bookingNoOfOFW2, bookingPromoCode2, bookingCugName2, bookingCugType2, bookingBookingType2, bookingFlowLanguage2, isFlexibleDatechecked2);
+
+	addProductInfo(category1, productID1, travelDate1, sourceCity1, destinationCity1, numberOfUnits1, returnDate1, cabinCategory1,daysToTravel1.toString());
+
+	bookingCalltoActionClick(fSUrl,fSName);
+
+	componentInfoOnPageLoad('homepage-flightstatus','');
+};
+
+// Flight Status Cart Item END
+
+// OLD Booking Widget Cart
+
+function bookingOldCartData(){
+    //console.log("in booking widget click");
+    var eventName1 = "showflights";
+    var eventLocation1 = "";
+	var eventPage1;
+	var eventAction1 = "clicked";
+	var bookingTrip1;
+	var bookingStopOverAvailable1 = $('#stopover-container').attr('hidden');
+	var bookingBpgLogoAvailbale1 = $('#showallbpg').val();
+	var bookingPremiumOnlyChecked1 = $('#premiumOnly').attr('checked');
+	var bookingStopOverDays1 = $('#noofDays').val();
+	var bookingAddStop1;
+	var bookingNoOfAdult1 = $("#adults").val();
+	var bookingNoOfChild1 = $("#child").val();
+	var bookingNoOfInfant1 = $("#infant").val();
+	var bookingNoOfTeenager1 = $("#teenagers").val();
+	var bookingNoOfRooms1 = "";
+	var bookingNoOfOFW1 = $('#ofw').val();
+	var bookingPromoCode1 = $("#T7-promo").val();
+    var bookingCugName1 = "";
+    var bookingCugType1 = "";
+    var bookingSearchType1 = "";
+    var bookingBookingType1 = "revenue";
+    var bookingFlowLanguage1 = $("#localePageName").val();
+	var bookingCabinClass1 = $('#premiumOnlydrop').val();
+	var bookingSearchSource1="";
+	var bookingSearchDestination1="";
+	var bookingTravelDate1;
+	var bookingTravelDate2;
+	var bookingDate1 = "",bookingTimeTodeparture1 = "",isFlexibleDatechecked1 = "";
+
+	var category2 = "showflights";
+	var	productID2 = "", travelDate2 = "", sourceCity2 = "", destinationCity2 = "", numberOfUnits2 = 0, returnDate2 = "",
+	cabinCategory2 = "",daysToTravel2 = "";
+
+	var flightBookingUrl  = '',flightBookingName = '', eveLocation = '';
+	var fromValue = '', fromStation  = '', toValue = '',toStation = '';
+	var pageURL1 = $('#current-page-path').val();
+	var pageLocation = getPageName(pageURL1);
+	eveLocation = pageLocation +'-bookingwidget';
+	flightBookingName = 'show flights';
+	if (navigator.userAgent.indexOf("Mobile") != -1) {
+		 if( getUserBasicInfoField('programCode') === 'QRBB' ) {
+			flightBookingUrl = $('#smeMobileBookLink').val();
+		 } else {
+			if($('#stopover-container').length && $('.stopover-content').is(':visible')) {
+				flightBookingUrl = $("#desktopBookingUrl").val();
+			} else {
+				flightBookingUrl = $("#mobileBookingUrl").val();
+			}
+		 }
+	} else {
+		 if(getUserBasicInfoField('programCode') === 'QRBB' ) {
+			flightBookingUrl = $("#smeDesktopBookLink").val();
+		 } else {
+			flightBookingUrl = $("#desktopBookingUrl").val();
+		 }
+	}
+
+	var todayDate1 = new Date();
+	var departing = formatDateddmmyyyy(formatDateOldBW($('#T7-departure_1').val()));
+	var arrival = formatDateddmmyyyy(formatDateOldBW($('#T7-arrival_1').val()));
+	var departDateFormat1 = new Date(formatDateOldBW($('#T7-departure_1').val()));
+	bookingDate1 = formatDateddmmyyyy(formatDateOldBW(todayDate1));
+
+		if($('#T7-book-flight').length == 1){
+		if ($('input[name=bookingType][value=0]', '#bookingwidgt').is(':checked')) {
+			bookingTrip1 = 'roundtrip';
+		} else if ($('input[name=bookingType][value=1]', '#bookingwidgt').is(':checked')) {
+			bookingTrip1 = 'oneway';
+		} else if ($('input[name=bookingType][value=2]', '#bookingwidgt').is(':checked')){
+			bookingTrip1 = 'multicity';
+		} else if ($('input[name=bookingType][value=3]', '#bookingwidgt').is(':checked')){
+			bookingTrip1 = "rail and fly"
+		}
+		 if(bookingStopOverAvailable1 == "hidden" || bookingStopOverAvailable1 == undefined){
+			bookingStopOverAvailable1 = "no";
+		}else{
+			if($('.stopover-content').css('display') == "none"){
+				bookingStopOverAvailable1 = "no";
+			}else if ($('.stopover-content').css('display') == "block"){
+				bookingStopOverAvailable1 = "yes";
+			}
+		}
+		if (bookingBpgLogoAvailbale1 == "true") {
+			bookingBpgLogoAvailbale1 = "yes";
+		} else {
+			bookingBpgLogoAvailbale1 = "no";
+		}
+		if(bookingPremiumOnlyChecked1 == undefined){
+			bookingPremiumOnlyChecked1 = "no";
+            bookingCabinClass1 = "economy";
+			cabinCategory2 = "economy";
+		}else if(bookingPremiumOnlyChecked1 == "checked"){
+			bookingPremiumOnlyChecked1 = "yes";
+            bookingCabinClass1 = "premium";
+			cabinCategory2 = "premium";
+		}
+		if (bookingStopOverDays1 == undefined){
+				bookingStopOverDays1 = "";
+		}
+		if(bookingStopOverAvailable1 == "no"){
+			bookingStopOverAvailable1 = "";
+		}
+
+		if (bookingStopOverAvailable1 == "yes"){
+		if ($('[name="bookingTypeBound"]:checked').val() == "outbound") {
+			bookingAddStop1 = "departure";
+		} else if ($('[name="bookingTypeBound"]:checked').val() == "inbound") {
+			bookingAddStop1 = "return";
+		}
+		}else {
+			bookingAddStop1 = "";
+		}
+		if (bookingNoOfChild1 == null || bookingNoOfChild1 == undefined) {
+				bookingNoOfChild1 = "0";
+		}
+		if (bookingNoOfInfant1 == null || bookingNoOfInfant1 == undefined) {
+				bookingNoOfInfant1 = "0";
+		}
+		if (bookingNoOfTeenager1 == null || bookingNoOfTeenager1 == undefined) {
+				bookingNoOfTeenager1 = "0";
+		}
+		if (bookingNoOfOFW1 == null || bookingNoOfOFW1 == undefined) {
+				bookingNoOfOFW1 = "0";
+		}
+
+		numberOfUnits2 = parseInt(bookingNoOfAdult1) + parseInt(bookingNoOfTeenager1) + parseInt(bookingNoOfChild1) + parseInt(bookingNoOfInfant1) + parseInt(bookingNoOfOFW1);
+
+		if( bookingNoOfTeenager1 == undefined || bookingNoOfTeenager1 == 0){
+		   bookingNoOfTeenager1 = '';
+		}
+		if(bookingNoOfChild1 == undefined || bookingNoOfChild1 == 0){
+			bookingNoOfChild1 = '';
+		}
+		if(bookingNoOfInfant1 == undefined || bookingNoOfInfant1 == 0){
+			bookingNoOfInfant1 = '';
+		}
+		if(bookingNoOfOFW1 == undefined || bookingNoOfOFW1 == 0){
+			bookingNoOfOFW1 = '';
+		}
+
+		if (bookingTrip1 == "multicity"){
+		 bookingCabinClass1 = $('#premiumOnlydrop').val();
+		if (bookingCabinClass1 == "E") {
+				bookingCabinClass1 = "economy";
+				cabinCategory2 = "economy";
+			} else if (bookingCabinClass1 == "B") {
+				bookingCabinClass1 = "Business";
+				cabinCategory2 = "premium";
+			} else if (bookingCabinClass1 == "F") {
+				bookingCabinClass1 = "First";
+				cabinCategory2 = "first";
+			}
+		}
+
+		if (bookingTrip1 == "roundtrip" || bookingTrip1 == "rail and fly") {
+                bookingTravelDate1 = departing;
+				bookingTravelDate2 = arrival;
+				bookingTravelDate1 = bookingTravelDate1 +"|"+bookingTravelDate2;
+				travelDate2 = departing;
+				returnDate2 = arrival;
+				daysToTravel2 = formatDateDiff(todayDate1,departDateFormat1);
+			} else if (bookingTrip1 == "oneway") {
+				 bookingTravelDate1 = departing;
+				 travelDate2 = bookingTravelDate1;
+				 daysToTravel2 = formatDateDiff(todayDate1,departDateFormat1);
+			}
+
+		$('.multi-flight-row').each(function(index) {
+			fromValue = $("#T7-from").val().split("(");
+			fromStation = fromValue[1].substr(0, 3).trim().toLowerCase();
+			toValue = $("#T7-to").val().split("(");
+			toStation = toValue[1].substr(0, 3).trim().toLowerCase();
+			productID2  = fromStation+':'+toStation;
+			sourceCity2 = fromStation;
+			destinationCity2 = toStation;
+			var departDateFormat2 = new Date(formatDateOldBW($('.multi-flight-row').find('.multi-field .T7-calendar-field .input-base-elem').val()));
+			if (bookingTrip1 == "multicity"){
+				if (index == 0) {
+					bookingTravelDate1 = formatDateddmmyyyy(formatDateOldBW($('.multi-flight-row').find('.multi-field .T7-calendar-field .input-base-elem').val()));
+					travelDate2 = bookingTravelDate1;
+					daysToTravel2 = formatDateDiff(todayDate1,departDateFormat2);
+				} else {
+                    bookingTravelDate1 = bookingTravelDate1 + "|" + formatDateddmmyyyy(formatDateOldBW($(this).find('.T7-calendar-field .input-base-elem').val()));
+				}
+			}
+			addBookingCartInfo(bookingTrip1, bookingStopOverAvailable1, bookingBpgLogoAvailbale1, bookingPremiumOnlyChecked1, bookingStopOverDays1, bookingAddStop1, bookingDate1, bookingTravelDate1, bookingTimeTodeparture1, bookingNoOfAdult1, bookingNoOfChild1, bookingNoOfInfant1, bookingNoOfTeenager1, bookingNoOfRooms1, bookingNoOfOFW1, bookingPromoCode1, bookingCugName1, bookingCugType1, bookingBookingType1, bookingFlowLanguage1, isFlexibleDatechecked1);
+
+			if( index == 0 ) {
+				addProductInfo(category2, productID2, travelDate2, sourceCity2, destinationCity2, numberOfUnits2, returnDate2, cabinCategory2,daysToTravel2.toString());
+			}
+
+			if (bookingTrip1 == "multicity"){
+				if (index != 0) {
+                    travelDate2 = formatDateddmmyyyy(formatDateOldBW($(this).find('.T7-calendar-field .input-base-elem').val()));
+					var departFormatData = new Date(formatDateOldBW($(this).find('.T7-calendar-field .input-base-elem').val()));
+					var fromFullName1 = $(this).find('.twitter-typeahead .input-base-elem').eq(0).val();
+					var fromStationMulti = fromFullName1.substring(fromFullName1.lastIndexOf("(") + 1,fromFullName1.lastIndexOf(")")).toLowerCase();
+					var toFullName1 = $(this).find('.twitter-typeahead .input-base-elem').eq(1).val();
+					var toStationMulti =  toFullName1.substring(toFullName1.lastIndexOf("(") + 1,toFullName1.lastIndexOf(")")).toLowerCase();
+					productID2 =  fromStationMulti + ':' + toStationMulti;
+					sourceCity2 = fromStationMulti;
+					destinationCity2 = toStationMulti;
+					daysToTravel2 = formatDateDiff(todayDate1,departFormatData);
+
+					addProductInfo(category2, productID2, travelDate2, sourceCity2, destinationCity2, numberOfUnits2, returnDate2, cabinCategory2,daysToTravel2.toString());
+				}
+			}
+			});
+
+    }else if($('#advanceBooking-container').length == 1){
+        	if (bookingNoOfTeenager1 == null || bookingNoOfTeenager1 == undefined) {
+				bookingNoOfTeenager1 = "0";
+			}
+			if (bookingNoOfOFW1 == null || bookingNoOfOFW1 == undefined) {
+				bookingNoOfOFW1 = "0";
+			}
+			if (bookingNoOfChild1 == null || bookingNoOfChild1 == undefined) {
+				bookingNoOfChild1 = "0";
+			}
+			if (bookingNoOfInfant1 == null || bookingNoOfInfant1 == undefined) {
+					bookingNoOfInfant1 = "0";
+			}
+			numberOfUnits2 = parseInt(bookingNoOfAdult1) + parseInt(bookingNoOfTeenager1) + parseInt(bookingNoOfChild1) + parseInt(bookingNoOfInfant1) + parseInt(bookingNoOfOFW1);
+
+			if ($('input[name=bookingType][value=1]', '#advanceBookingwidgt').is(':checked')) {
+			bookingTrip1 = 'oneway';
+			} else if ($('input[name=bookingType][value=0]', '#advanceBookingwidgt').is(':checked')) {
+			bookingTrip1 = 'roundtrip';
+			} else if($('input[name=bookingType][value=2]', '#advanceBookingwidgt').is(':checked')) {
+			bookingTrip1 = 'multicity';
+            }else if($('input[name=bookingType][value=3]', '#advanceBookingwidgt').is(':checked')) {
+			bookingTrip1 = 'rail and fly';
+            }
+			if (bookingBpgLogoAvailbale1 == "true") {
+				bookingBpgLogoAvailbale1 = "yes";
+			} else {
+				bookingBpgLogoAvailbale1 = "";
+			}
+			if (bookingStopOverDays1 == undefined){
+				bookingStopOverDays1 = "";
+			}
+			if ($('[name="bookingTypeBound"]:checked').val() == "outbound") {
+				bookingAddStop1 = "departure";
+			} else if ($('[name="bookingTypeBound"]:checked').val() == "inbound") {
+				bookingAddStop1 = "return";
+			} else {
+				bookingAddStop1 = "";
+			}
+			if(bookingStopOverAvailable1 == "hidden" || bookingStopOverAvailable1 == undefined ){
+				bookingStopOverAvailable1 = "";
+			}else{
+				bookingStopOverAvailable1 = "yes";
+			}
+			if(bookingPremiumOnlyChecked1 == undefined){
+				bookingPremiumOnlyChecked1 = "no";
+				bookingCabinClass1 = "economy";
+				cabinCategory2 = "economy";
+			}else if(bookingPremiumOnlyChecked1 == "checked"){
+				bookingPremiumOnlyChecked1 = "yes";
+				bookingCabinClass1 = "premium"
+				cabinCategory2 = "premium";
+			}
+			if (bookingTrip1 == "multicity"){
+				bookingCabinClass1 = $('#premiumOnlydrop').val();
+				if (bookingCabinClass1 == "E") {
+						bookingCabinClass1 = "economy";
+						cabinCategory2 = "economy";
+					} else if (bookingCabinClass1 == "B") {
+						bookingCabinClass1 = "premium";
+						cabinCategory2 = "premium";
+					} else if (bookingCabinClass1 == "F") {
+						bookingCabinClass1 = "first";
+						cabinCategory2 = "first";
+					}
+				}
+            if(bookingTrip1 == "roundtrip" || bookingTrip1 == "rail and fly") {
+                    bookingTravelDate1 = departing;
+					bookingTravelDate2 = arrival;
+					bookingTravelDate1 = bookingTravelDate1 +"|"+bookingTravelDate2;
+					travelDate2 = departing;
+					returnDate2 = arrival;
+					daysToTravel2 = formatDateDiff(todayDate1,departDateFormat1);
+			} else if (bookingTrip1 == "oneway") {
+                    bookingTravelDate1 = departing;
+					travelDate2 = bookingTravelDate1;
+					daysToTravel2 = formatDateDiff(todayDate1,departDateFormat1);
+			}
+
+			$('.multi-flight-row').each(function(index) {
+			fromValue = $("#T7-from").val().split("(");
+			fromStation = fromValue[1].substr(0, 3).trim().toLowerCase();
+			toValue = $("#T7-to").val().split("(");
+			toStation = toValue[1].substr(0, 3).trim().toLowerCase();
+			productID2  = fromStation+':'+toStation;
+			sourceCity2 = fromStation;
+			destinationCity2 = toStation;
+			var departDateFormat2 = new Date(formatDateOldBW($('.multi-flight-row').find('.multi-field .T7-calendar-field .input-base-elem').val()));
+			if (bookingTrip1 == "multicity"){
+				if (index == 0){
+					bookingTravelDate1 = formatDateddmmyyyy(formatDateOldBW($('.multi-flight-row').find('.multi-field .T7-calendar-field .input-base-elem').val()));
+					travelDate2 = bookingTravelDate1;
+					daysToTravel2 = formatDateDiff(todayDate1,departDateFormat2);
+				} else {
+					bookingTravelDate1 = bookingTravelDate1 + "|" + formatDateddmmyyyy(formatDateOldBW($(this).find('.T7-calendar-field .input-base-elem').val()));
+				}
+			}
+			addBookingCartInfo(bookingTrip1, bookingStopOverAvailable1, bookingBpgLogoAvailbale1, bookingPremiumOnlyChecked1, bookingStopOverDays1, bookingAddStop1, bookingDate1, bookingTravelDate1, bookingTimeTodeparture1, bookingNoOfAdult1, bookingNoOfChild1, bookingNoOfInfant1, bookingNoOfTeenager1, bookingNoOfRooms1, bookingNoOfOFW1, bookingPromoCode1, bookingCugName1, bookingCugType1, bookingBookingType1, bookingFlowLanguage1, isFlexibleDatechecked1);
+			if( index == 0 ) {
+				addProductInfo(category2, productID2, travelDate2, sourceCity2, destinationCity2, numberOfUnits2, returnDate2, cabinCategory2,daysToTravel2.toString());
+			}
+			if (bookingTrip1 == "multicity"){
+				if (index != 0) {
+					travelDate2 = formatDateddmmyyyy(formatDateOldBW($(this).find('.T7-calendar-field .input-base-elem').val()));
+					var departFormatData = new Date(formatDateOldBW($(this).find('.T7-calendar-field .input-base-elem').val()));
+					var fromFullName1 = $(this).find('.twitter-typeahead .input-base-elem').eq(0).val();
+					var fromStationMulti = fromFullName1.substring(fromFullName1.lastIndexOf("(") + 1,fromFullName1.lastIndexOf(")")).toLowerCase();
+					var toFullName1 = $(this).find('.twitter-typeahead .input-base-elem').eq(1).val();
+					var toStationMulti =  toFullName1.substring(toFullName1.lastIndexOf("(") + 1,toFullName1.lastIndexOf(")")).toLowerCase();
+					productID2 = fromStationMulti + ':' + toStationMulti;
+					sourceCity2 = fromStationMulti;
+					destinationCity2 = toStationMulti;
+					daysToTravel2 = formatDateDiff(todayDate1,departFormatData);
+
+					addProductInfo(category2, productID2, travelDate2, sourceCity2, destinationCity2, numberOfUnits2, returnDate2, cabinCategory2,daysToTravel2.toString());
+				}
+			}
+			});
+    }
+
+	bookingCalltoActionClick(flightBookingUrl,flightBookingName);
+	componentInfoOnPageLoad(pageLocation+'-book',pageLocation);
+
+};
+// OLD Booking CART END
+
+//OLD Booking error Capture
+function bookingOldErrorClick(){
+
+	var keyword = '', errorCode = '',flightBookingUrl  = '',flightBookingName = '', eveLocation = '', pageLocale1 = $('#page-locale').val();
+	var tripType1 = '';
+	if ($('input[name=bookingType][value=2]').is(':checked')){
+		tripType1 = 'multicity';
+	}
+	var pageURL1 = $('#current-page-path').val();
+	var pageLocation = getPageName(pageURL1);
+	eveLocation = pageLocation +'-bookingwidget';
+	flightBookingName = $('#T7-search').text().trim().toLowerCase();
+
+	if (navigator.userAgent.indexOf("Mobile") != -1) {
+		 if( getUserBasicInfoField('programCode') === 'QRBB' ) {
+			flightBookingUrl = $('#smeMobileBookLink').val();
+		 } else {
+			if($('#stopover-container').length && $('.stopover-content').is(':visible')) {
+				flightBookingUrl = $("#desktopBookingUrl").val();
+			} else { flightBookingUrl = $("#mobileBookingUrl").val(); }
+		 }
+	} else {
+		 if(getUserBasicInfoField('programCode') === 'QRBB' ) {
+			flightBookingUrl = $("#smeDesktopBookLink").val();
+		 } else {
+			flightBookingUrl = $("#desktopBookingUrl").val();
+		 }
+	}
+	if($('#bookingWidgetErrorBlock .input-base-msg-box li').is(':visible')){
+		var counter = 0 ;
+		$('#bookingWidgetErrorBlock .input-base-msg-box').find('li').each(function() {
+			if($(this).is(':visible') && $(this).attr('data-title') != undefined && tripType1 != 'multicity') {
+				if(counter == 0) {  keyword = $(this).attr('data-title');
+				} else if($(this).is(':visible') && counter != 0){ keyword = keyword + '|' + $(this).attr('data-title');
+				}
+				counter ++;
+			} else if($(this).is(':visible') && $(this).attr('data-title') != undefined && $('#multiFlightContainer .multi-flight-row').length < 2 ){
+				if(counter == 0) {  keyword = $(this).attr('data-title');
+				} else if(counter != 0){  keyword = keyword + '|' + $(this).attr('data-title');
+				}
+				counter ++;
+			} else if($(this).is(':visible')){
+				keyword = 'all';
+			}
+		});
+		var count = 0;
+		$('#bookingWidgetErrorBlock .input-base-msg-box').find('li').each(function() {
+			if($(this).is(':visible') && count == 0){
+				errorCode =  'bw' + $(this).attr('data-errorcode');
+				count ++;
+			} else if($(this).is(':visible') && count != 0){
+				errorCode = errorCode + '|bw'+ $(this).attr('data-errorcode');
+				count ++;
+			}
+		});
+	}
+	if(undefined != window.digitalData && undefined !=digitalData.page){
+		digitalData.page.pageInfo.pageType = errorCode;
+	}
+	errorClick(flightBookingUrl, flightBookingName, eveLocation, keyword);
+
+};
+//OLD booking error capture END
+
+//UserDevice Capture Changes
+if(undefined != window.digitalData && undefined !=digitalData.page && undefined != digitalData.page.siteInfo  ){
+	if (navigator.userAgent.indexOf("Mobile") != -1) {
+		digitalData.page.userInfo.userDevice = "mobile";
+		digitalData.page.siteInfo.platform = "mobile website";
+	} else {
+		digitalData.page.userInfo.userDevice = "desktop";
+		digitalData.page.siteInfo.platform = "desktop website";
+	}
+	if(/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(navigator.userAgent.toLowerCase())){
+		digitalData.page.userInfo.userDevice = "tablet";
+	}
+
+}
+
+// UserInfo update
+$(document).ready(function() {
+
+//localStorage values for header-footer clicks
+
+if(undefined != window.digitalData && undefined !=digitalData.event && digitalData.event.eventInfo != undefined){
+	var eveAction = localStorage.getItem('eventAction') ==null ? '':  localStorage.getItem('eventAction');
+	localStorage.removeItem('eventAction');
+	var eveLocation =  localStorage.getItem('eventLocation') ==null ? '':  localStorage.getItem('eventLocation');
+	localStorage.removeItem('eventLocation');
+	var eveName =  localStorage.getItem('eventName') ==null ? '':  localStorage.getItem('eventName');
+	localStorage.removeItem('eventName');
+	 var evePage = localStorage.getItem('eventPage') ==null ? '':  localStorage.getItem('eventPage');
+	 	localStorage.removeItem('eventPage');
+    if( digitalData.event.eventInfo != undefined ) {
+	 digitalData.event.eventInfo.eventLocation=eveLocation != null ? eveLocation.toLowerCase():"";
+     digitalData.event.eventInfo.eventName=eveName != null ? eveName.toLowerCase():"";
+     digitalData.event.eventInfo.eventAction=eveAction != null ? eveAction.toLowerCase():"";
+	 digitalData.event.eventInfo.eventPage=evePage != null ? evePage.toLowerCase():"";
+    }
+}
+
+//localStorage values for componentEvent clicks
+
+if(undefined != window.digitalData && undefined !=digitalData.component  ){
+
+	var compName =  localStorage.getItem('componentName') ==null ? '':  localStorage.getItem('componentName');
+	localStorage.removeItem('componentName');
+	var compEvent = localStorage.getItem('componentEvent') ==null ? '':  localStorage.getItem('componentEvent');
+	localStorage.removeItem('componentEvent');
+	var compMethod =  localStorage.getItem('method') ==null ? '':  localStorage.getItem('method');
+	localStorage.removeItem('method');
+	var compSource = localStorage.getItem('componentStartSource') ==null ? '':  localStorage.getItem('componentStartSource');
+	localStorage.removeItem('componentStartSource');
+	 digitalData.component.componentInfo.componentName=compName != null ? compName.toLowerCase():"";
+	 digitalData.component.componentInfo.componentEvent=compEvent != null ? compEvent.toLowerCase():"";
+	 digitalData.component.componentInfo.method=compMethod != null ? compMethod.toLowerCase():"";
+     digitalData.component.componentInfo.componentStartSource=compSource != null ? compSource.toLowerCase():"";
+
+}
+
+if(null != getFFPCookieValue('QRTOKEN')){
+	var programCode = getUserBasicInfoField('programCode');
+	var category = getUserBasicInfoField('category');
+	var qMilesAmount  = getUserBasicInfoField('qmilesAmount');
+	var qRewardsAmount = getUserBasicInfoField('qrewardsAmount');
+	var qCreditsAmount = getUserBasicInfoField('qcreditsAmount');
+	var qPointsAmount = getUserBasicInfoField('qpointsAmount');
+	var authState1 = 'logged in';
+	var ffpNumberId = "";
+	//var  emailId =encryptUserData(getUserBasicInfoField('emailId'));
+	//var customerId = getUserBasicInfoField('customerProfileId');
+	if("PORTAL" != programCode) {
+	   ffpNumberId = getUserBasicInfoField('ffpNumber');
+	} else {
+		ffpNumberId = "";
+	}
+	var profileInfo1 = ffpNumberId;
+    var qmilesOrQrewardsAvailable1 = "";
+	if(qMilesAmount == undefined || qMilesAmount == 0){
+	   qMilesAmount = '';
+	}
+	if(qRewardsAmount == undefined || qRewardsAmount == 0){
+	   qRewardsAmount = '';
+	}
+	if(qCreditsAmount == undefined || qCreditsAmount == 0){
+	   qCreditsAmount = '';
+	}
+	if(qPointsAmount == undefined || qPointsAmount == 0){
+	   qPointsAmount = '';
+	}
+    if(qMilesAmount != undefined && qRewardsAmount != undefined && qCreditsAmount != undefined && qPointsAmount != undefined){
+    	qmilesOrQrewardsAvailable1 = qMilesAmount+"|"+qRewardsAmount+"|"+qPointsAmount+"|"+qCreditsAmount;
+    }else{
+    	qmilesOrQrewardsAvailable1 = qMilesAmount+"|"+""+"|"+qPointsAmount+"|"+qCreditsAmount;
+    }
+	var tier = getUserBasicInfoField('tier');
+	var userType1 = "";
+	if (tier != "" && tier != undefined){
+		tier = tier.toLowerCase();
+	}
+	if("PORTAL" === programCode){
+		userType1 = "basic user|basic user";
+	}else if("QRPC" === programCode && "NORMAL" === category){
+		userType1 = "privilege club|"+tier;
+	} else if("QRPC" === programCode && "STUDENT" === category){
+		userType1 = "Student club|"+tier;
+	}else if("QRBB" === programCode){
+		userType1 = "beyond business|"+tier;
+    } else if("NCP" === programCode){
+		userType1 = "ncp|"+tier;
+	}
+
+	updateUserInfo(authState1,profileInfo1,qmilesOrQrewardsAvailable1,userType1);
+
+}else{
+	var authState1 = 'logged out';
+	var userType1= "guest|guest";
+	updateUserInfo(authState1,'','',userType1);
+}
+
+
+// Redeem On Partner Airlines
+$("#T7-searchFlight").on('click', function() {
+    var eventLocation = 'postlogin-redeemqmiles';
+    var    eventPage = '';
+    var    eventName = 'redeem on partner airlines';
+    var    eventAction = 'clicked';
+        addEvetnInfo(eventLocation,eventName,eventAction);
+});
+//upgrade on qatarairways
+$("#T7-upgrade-retrieve-details").on('click', function() {
+    var eventLocation = 'postlogin-redeemqmiles';
+    var    eventPage = '';
+    var    eventName = 'upgrade on qatarairways';
+    var    eventAction = 'clicked';
+        addEvetnInfo(eventLocation,eventName,eventAction);
+});
+
+ function getQueryParams(urlParams) {
+ var queryParamMap  = {};
+ var decode = function (s) { return decodeURIComponent(s.replace(/\+/g, " ")); };
+ for (var i in urlParams) {
+	 var param = urlParams[i].split("=");
+	 if (param.length > 1) {
+		 queryParamMap[decode(param[0])] =decode(param[1]);
+	 }
+ }
+ return queryParamMap;
+ }
+
+
+$('.portal-user-upgrade-btn-change').on('click', function() {
+	var source = document.referrer;
+	if( source === '' || source === undefined ) {
+		source = window.location.href;
+	}
+	if( source != '' && source != undefined ) {
+		var queryIndex = source.indexOf('?');
+		if(queryIndex !== -1) {
+			source = source.substr(0,queryIndex)
+		}
+		source = source.replace('.html','').split('/');
+		source = source[source.length  - 1];
+	}
+	var method = 'flyout';
+	if( $(this).parent().find('#upgrade').length != 0 ) {
+		method = 'dashboard';
+	}
+	addComponentPageEvent("upgrade-to-privilege-club",'upgrade-start',method,source);
+});
+
+
+// Component Info on load
+var pageURL = window.location.href;
+var cmpName1 = getPageName(pageURL);
+var cmpEvent1 = cmpName1;
+componentInfoOnPageLoad(cmpName1,cmpEvent1);
+var homepageUrl = getPagePathData(pageURL);
+
+//referrer URL re-direction
+var sourceReferringURL = document.referrer;
+if( sourceReferringURL != '' && sourceReferringURL != undefined ) {
+	var queryString = sourceReferringURL.indexOf('?');
+	if(queryString !== -1) {
+		sourceReferringURL = sourceReferringURL.substr(0,queryString)
+	}
+} else {
+	sourceReferringURL = '';
+}
+if(undefined != window.digitalData && undefined !=digitalData.page && undefined !=digitalData.page.pageInfo ){
+	digitalData.page.pageInfo.referringUrl = sourceReferringURL;
+}
+//referrer URL re-direction END
+
+//Booking Widget Tab Button Event Push
+$("#myTab a[role='tab']").on('click',function(){
+
+   var tabpanid= $(this).attr("aria-controls");
+   var tabTitle = $(this).text().replace(/ +/g, "").trim().toLowerCase();
+   var titleattr = tabTitle + '-tab';
+   var hreflink = getPagePathData(pageURL);
+    if (tabpanid == "book") {
+		buttonClickAction(hreflink,titleattr,'homepage-bookingwidget');
+	}
+	if (tabpanid == "checkin") {
+		buttonClickAction(hreflink,titleattr,'homepage-bookingwidget');
+	}
+	if (tabpanid == "managebooking") {
+		buttonClickAction(hreflink,titleattr,'homepage-bookingwidget');
+	}
+	if (tabpanid == "flightstatus") {
+		buttonClickAction(hreflink,titleattr,'homepage-bookingwidget');
+	}
+
+});
+//Book FLight link inner Tabs click
+if($('#book .inner-tabs li').length != 0){
+
+	var hreflink1 = getPagePathData(pageURL);
+	$('#book .inner-tabs li').on('click',function(){
+	 var tablinkid = $(this).find('a').attr('href');
+	 var titleattr1 = $(this).find('a').text().trim().toLowerCase();
+	 if(tablinkid == '#book-flight'){
+		linkEventClickAction(hreflink1, titleattr1, 'homepage-bookingwidget');
+	 }
+	 if($(this).find('a').hasClass('stop-in-doha-tab')){
+		dataLayer.push({
+			'event' : 'stopover'
+		});
+	 }
+	 if(tablinkid == '#flight-hotel' && $(this).find('a').hasClass('flightsHotelTab')){
+		linkEventClickAction(hreflink1, titleattr1, 'homepage-bookingwidget');
+		dataLayer.push({
+			'event' : 'flights&hotels'
+		});
+	 }
+	 if($(this).find('a').hasClass('holiday-link')){
+		linkEventClickAction(hreflink1, 'holiday packages', 'homepage-bookingwidget');
+	 }
+	 if(tablinkid == '#flight-hotel-qrh' && $(this).find('a').hasClass('flightsHotelTab qrhtab')){
+		 linkEventClickAction(hreflink1, titleattr1, 'homepage-bookingwidget');
+	 }
+	});
+}
+//Small-Teaser link event push click
+if($('.tripcomponent').length != 0){
+	$('.tripcomponent .item .description a').on('click',function(){
+		var linkhref = getPagePathData($(this).attr('href'));
+		var textData = $(this).text().trim().toLowerCase();
+		if($(this).attr('href').indexOf('qatarairways.com') >-1  || $(this).attr('href').indexOf('/content') > -1){
+			linkEventClickAction(linkhref, textData, 'homepage-smallteaser');
+		}
+	});
+}
+
+//Block-teaser link event push click
+if($('#beinspired-component').length != 0){
+	$('#beinspired-component .large-image .image-description a').on('click', function(){
+		var ctahref = getPagePathData($(this).attr('href'));
+		var textInfo = $(this).text().trim().toLowerCase();
+		if($(this).attr('href').indexOf('qatarairways.com') >-1  || $(this).attr('href').indexOf('/content') > -1){
+			buttonClickAction(ctahref, textInfo, 'homepage-blockteaser');
+		}
+	});
+	$('#beinspired-component .small-image .image-description a').on('click', function(){
+		var linkhref = getPagePathData($(this).attr('href'));
+		var textData = $(this).text().trim().toLowerCase();
+		if($(this).attr('href').indexOf('qatarairways.com') >-1  || $(this).attr('href').indexOf('/content') > -1){
+			linkEventClickAction(linkhref, textData, 'homepage-blockteaser');
+		}
+	});
+
+}
+
+//Tab carousel click event push
+if($('#newTabComponent').length != 0){
+	$('#newTabComponent .carousel-item .carousel-caption a').on('click', function(){
+		var carouselCTA = getPagePathData($(this).attr('href'));
+		var textInfo = $(this).text().trim().toLowerCase();
+		if($(this).attr('href').indexOf('qatarairways.com') >-1  || $(this).attr('href').indexOf('/content') > -1){
+			buttonClickAction(carouselCTA, textInfo, 'homepage-carousel');
+		}
+	});
+	$('#newTabComponent .carouselwrap li').on('click', function(){
+		var carouselCTAText = getPagePathData(pageURL);
+		var textData = $(this).text().trim().toLowerCase();
+		linkEventClickAction(carouselCTAText, textData, 'homepage-carousel');
+	});
+}
+
+//Header Navigation Event Push
+
+if($('.header-inner.container').length != 0) {
+	var pageLink = getPageName(pageURL);
+	var pageLocation = pageLink +'-headermenu';
+	$('.header-nav-container .menu-click-event .dropdown-menu li a').on('click',function(){
+		var textInfo = '', headerlink = '';
+		if(!($(this).hasClass('go-back')) && !($(this).hasClass('privilege-btn')) && $(this).attr('href') != '#'){
+			    headerlink = getPagePathData($(this).attr('href'));
+			if($(this).find('span').length != 0) {
+				textInfo = $(this).find('span').text().trim().toLowerCase();
+			} else {
+				textInfo =  $(this).text().trim().toLowerCase();
+			}
+			if($(this).find('span').length != 0 && $(this).hasClass('headerlogin-pc-link')){
+				textInfo =  $(this).text().trim().toLowerCase();
+			}
+			if($(this).attr('href').indexOf('qatarairways.com') >-1 || $(this).attr('href').indexOf('/content') > -1){
+				linkNavigationClick(headerlink,textInfo,pageLocation);
+			}
+		} else if($(this).hasClass('privilege-btn')){
+			headerlink = getPagePathData($(this).attr('href'));
+			textInfo =  $(this).text().trim().toLowerCase();
+			buttonClickAction(headerlink,textInfo,pageLocation);
+		}
+	});
+	var qalogo = 'qatarairways logo',pclogo = 'privilegeclub logo',oWLogo = 'oneworld logo';
+	$('.header-nav-container a.brand-qartarAirLogo').on('click',function(){
+		linkNavigationClick(homepageUrl,qalogo,pageLocation);
+	});
+	$('.header-nav-container a.privClubLogo').on('click',function(){
+		linkNavigationClick(homepageUrl,pclogo,pageLocation);
+	});
+	$('.header-nav-container a.brand-oneworld').on('click',function(){
+		linkNavigationClick(homepageUrl,oWLogo,pageLocation);
+	});
+
+	 var searchLabel = '', url = '', name = '';
+	$('.search-input .btn.search-btn').on('click',function(){
+		 url = $("#searchResultPage").text().trim();
+		 url = url.replace('.html','');
+		 url = url.replace('.mobile','');
+		 searchLabel = $("#search-input-text").val().trim().toLowerCase();
+         headerSearchClick(url,'search',searchLabel);
+    });
+	$('.col-sm-12 .popular-searches li a').on('click',function(){
+		 url = $(this).attr('href').trim();
+		 var btnLabel =  $(this).text().trim().toLowerCase();
+		 headerSearchClick(url,'search-recommended',btnLabel);
+	});
+	$('.nav-item.helpLink a').on('click',function(){
+		url = getPagePathData($(this).attr('href'));
+		name =  $(this).text().trim().toLowerCase();
+		linkEventClickAction(url, name, pageLocation);
+	});
+	$('.chooseregionmobile .countysections li a').on('click',function(){
+		url = getPagePathData($(this).attr('href').trim());
+		var text1 =  $(this).text().trim().toLowerCase();
+		name  = "language selector-"+text1;
+		linkEventClickAction(url, name, pageLocation);
+	});
+	$('.loginprofile #login-container a').on('click',function(){
+		var loginText = 'login signup';
+		buttonClickAction(homepageUrl,loginText,pageLocation);
+	});
+	$('.loginprofile #loginScreen .profileflyout a').on('click',function(){
+		if($(this).hasClass('signoutLink')){
+			url = homepageUrl;
+		} else {
+			url = getPagePathData($(this).attr('href').trim());
+		}
+		var flyoutText =  $(this).text().trim().toLowerCase();
+		buttonClickAction(url,flyoutText,pageLocation);
+	});
+}
+
+// New Footer Event Push
+if($('.customFooter .footernavlinks').length != 0){
+	var pageLinkFooter = getPageName(pageURL);
+	var pageLocationData = pageLinkFooter +'-footer';
+	var footerLink = '', footerText = '';
+	$('.footernavlinks .responsive-sub-nav li a').on('click',function(){
+		footerLink = getPagePathData($(this).attr('href'));
+		footerText = $(this).text().trim().toLowerCase();
+		if($(this).attr('href').indexOf('qatarairways.com') >-1 || $(this).attr('href').indexOf('/content') > -1){
+			footerLinkNavigation(footerLink, footerText,pageLocationData);
+		}
+	});
+	$('.policyinfo  .policy-links li a').on('click',function(){
+		footerLink = getPagePathData($(this).attr('href'));
+		footerText = $(this).text().trim().toLowerCase();
+		if($(this).attr('href').indexOf('qatarairways.com') >-1 || $(this).attr('href').indexOf('/content') > -1){
+			footerLinkNavigation(footerLink, footerText,pageLocationData);
+		}
+	});
+	$('.footernavlinks .qaawards li').on('click',function(){
+		footerLink = getPagePathData($(this).find('a').attr('href'));
+		footerText = $(this).find('span').text().trim().toLowerCase();
+		if($(this).find('a').attr('href').indexOf('qatarairways.com') >-1 || $(this).find('a').attr('href').indexOf('/content') > -1){
+		   footerLinkNavigation(footerLink, footerText,pageLocationData);
+		}
+	});
+}
+
+//Footer social icon event push
+if($('.customFooter .footernavlinks').length != 0){
+	var pageLinkFooter = getPageName(pageURL);
+	var pageLocationData = pageLinkFooter +'-footer';
+	$('.footernavlinks .qasocial li a').on('click',function(){
+		var socialLink = getPagePathData($(this).attr('href'));
+		var socialText = $(this).attr('aria-label').trim().toLowerCase();
+		footerSocialNavigation(socialLink, socialText,pageLocationData);
+	});
+}
+
+//Destination Price Book Now Event and ProductPush
+if($('.destinationpricecomponent').length != 0){
+	var bookNowLabel = $('#destinationPrice-details').attr('data-dp-booknowlabel').trim().toLowerCase(),
+		exploreLabel = $('#destinationPrice-details').attr('data-dp-explorelabel').trim().toLowerCase();
+	var category = 'book now';
+	var	productID = '', sourceCity = '', destinationCity = '', operatedBy = 'qatar airways', destinationChecked = '';
+	var dpLink = '', linkData = '';
+	$(document).on('click', '.dpccards .componentcards a.offer-button-book', function(e) {
+		dpLink = $(this).attr('href');
+		var urlLink = dpLink.split('&');
+		var jsonArr = {};
+		for (var i=0; i < urlLink.length; i++) {
+			linkData = urlLink[i].split('=');
+			jsonArr[linkData[0]] = linkData[1];
+		}
+		sourceCity = jsonArr['fromStation'].trim().toLowerCase();
+		destinationCity = jsonArr['toStation'].trim().toLowerCase();
+		productID = sourceCity+':'+destinationCity;
+		addBookNowProductInfo(category, productID, sourceCity, destinationCity, operatedBy , destinationChecked);
+		bookNowClick(getPagePathData(dpLink),bookNowLabel);
+	});
+	$(document).on('click', '.dpccards .componentcards a.offer-button-discover', function(e) {
+		var discoverLink = getPagePathData($(this).attr('href'));
+		buttonClickAction(discoverLink,exploreLabel,'homepage-destinationprice');
+	});
+	$('.dpccards .view-morelink a').on('click',function(){
+		var viewMoreLink = getPagePathData($(this).attr('href'));
+		var viewMoreText = $(this).text().trim().toLowerCase();
+		buttonClickAction(viewMoreLink,viewMoreText,'homepage-destinationprice');
+	});
+
+}
+
+//Upcoming trips in BW event tracking
+
+if($('.manage-booking .upcoming-trips-content').length != 0) {
+	$('.trip-submit .submitbutton').each(function(){
+		$(this).on('click',function(){
+			var ctaName = $(this).attr('data-title'), ctaURL = '';
+			ctaURL = getPagePathData($(this).attr('href'));
+			buttonClickAction(ctaURL,ctaName,'homepage-bookingwidget');
+		});
+	});
+	var linkURL = getPagePathData(pageURL);
+	$('.manage-another-booking .retrive-booking').each(function(){
+		$(this).on('click',function(){
+			var linkName = $(this).text().toLowerCase().trim();
+			linkEventClickAction(linkURL, linkName, 'homepage-bookingwidget');
+		});
+	});
+	$('.show-upcoming-trips').each(function(){
+		$(this).on('click',function(){
+			var linkName = $(this).text().toLowerCase().trim();
+			linkEventClickAction(linkURL, linkName, 'homepage-bookingwidget');
+		});
+	});
+	$('.trip-upgrade .trip-link').each(function(){
+		$(this).on('click',function(){
+			var tripName = $(this).attr('aria-label').toLowerCase().trim(), tripURL = getPagePathData($(this).attr('href'));
+			if($(this).attr('href').indexOf('qatarairways.com') >-1  || $(this).attr('href').indexOf('/content') > -1){
+				linkEventClickAction(tripURL, tripName, 'homepage-bookingwidget');
+			}
+		});
+	});
+}
+//NL event track
+if($('.newsletter #subscribeNewsLetterProfile').length != 0){
+	$('.btn-newsletter-subscribe').on('click',function(){
+		var buttonText = $(this).text().trim().toLowerCase();
+		buttonClickAction(homepageUrl,buttonText,'homepage-newsletter');
+	});
+	$('.btn-subscribeUpdate').on('click',function(){
+		linkEventClickAction(homepageUrl, 'change newsletter preferences', 'homepage-newsletter');
+	});
+}
+//travel requirements pop
+if($('.covidInfolink').length != 0){
+	$('.covidInfolink').each(function(){
+		$(this).on('click',function(){
+			var ctaText = $(this).text().trim().toLowerCase();
+			linkEventClickAction(homepageUrl,ctaText,'homepage-bookingwidget');
+		});
+	});
+}
+// Join PC Banner PopUp
+if($('.privilege-club-banner').length != 0){
+	$('.btn-join-pc').on('click',function(){
+		var bannerCtaText = $(this).text().trim().toLowerCase();
+		var bannerURL = getPagePathData($(this).attr('href').toLowerCase());
+		buttonClickAction(bannerURL,bannerCtaText,'homepage-joinpcbanner');
+	});
+}
+
+//cookie-popup click
+if($('#cookieContainer').length != 0) {
+	var cookiePageLink = getPagePathData(pageURL);
+	$('#cookie-notification p').find('a').each(function(){
+		$(this).on('click',function(){
+			linkEventClickAction(cookiePageLink,'cookiepolicy','cookiebanner');
+		});
+     });
+ }
+
+//triple-teaser button-click
+if($('.triple-teaser').length != 0 || $('#triple-teaser').length != 0){
+	var ctaText = '', teaserUrl = '';
+	var pageLink = getPageName(pageURL);
+	var eventLocation = pageLink +'-tripleteaser';
+	$('.preview-block-content').find('a').each(function(){
+		if($(this).attr('href').indexOf('carrentals') >-1){
+			$(this).on('click',function(){
+				ctaText = $(this).text().trim().toLowerCase();
+				teaserUrl = getPagePathData($(this).attr('href'));
+				buttonClickAction(teaserUrl,ctaText,eventLocation);
+			});
+		}
+	});
+}
+});
